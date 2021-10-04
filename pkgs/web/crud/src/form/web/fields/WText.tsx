@@ -75,7 +75,15 @@ export const WText = ({ name, internalChange, ctx }: IBaseFieldProps) => {
             })
 
           if (value && ['number', 'money'].indexOf(state.type) >= 0) {
-            set(form.db.data, name, value.replace(/\D/g, ''))
+            let cols = Number(value.replace(/\D/g, ''))
+            set(form.db.data, name, cols)
+          }
+
+          if (value && ['decimal'].indexOf(state.type) >= 0) {
+            // let cols = value.replace(/[^\d,-]/g, '')
+            let cols = value.replace(',', '.').replace(/[^\d\.]/g, "").replace(/\./, "x").replace(/\./g, "").replace(/x/, ".")
+            set(form.db.data, name, cols) 
+            // console.log(cols, 'masuk', typeof res, cols === value)
           }
           internalChange(value)
         }}
