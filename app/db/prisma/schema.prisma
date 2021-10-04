@@ -1,0 +1,24 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["orderByRelation"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://magang:magang123$%^@db.plansys.co:5432/magang3?schema=public"
+}
+
+model email_verifications {
+  id    Int    @id @default(autoincrement())
+  email String @db.VarChar(50)
+}
+
+model karyawan {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(50)
+}
+
+model users {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(50)
+}
