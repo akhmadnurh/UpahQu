@@ -32,12 +32,12 @@ export const initHmr = () => {
         break
       case 'hmr-reload-all':
         if (location.pathname !== '/dev') {
-          location.reload()
+          // location.reload()
         }
         break
       case 'component-reload':
         localStorage[`ccx-${msg.id}`] = msg.html
-        window.cms_components[msg.id].loaded = false;
+        window.cms_components[msg.id].loaded = false
         window.liveReloadPage()
         break
     }

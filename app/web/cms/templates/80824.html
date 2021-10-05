@@ -1,11 +1,15 @@
 <>
   <effect meta={{}} run={async () => {}} />
   <>
-    <div class="flex flex-1 self-stretch items-center justify-center p-24 bg-indigo-500">
-      <div class="flex flex-1 self-stretch items-center justify-center shadow rounded-2xl">
+    <div
+      class={`flex flex-1 self-stretch items-center justify-center p-24 bg-indigo-500`}
+    >
+      <div
+        class={`flex flex-1 self-stretch items-center justify-center shadow rounded-2xl flex-col lg:flex-row`}
+      >
         <div
-          class="flex flex-1 self-stretch flex-col space-y-24 items-center justify-center p-8 rounded-tl-2xl rounded-bl-2xl"
-          style="background-image: url('/fimgs/bg-638530deb7fed74f740e6e857a0ca12f1a553845');background-size:100% 100%;background-repeat:no-repeat;"
+          class={`flex flex-1 self-stretch flex-col space-y-24 items-center justify-center p-8 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none lg:rounded-br-none lg:rounded-tl-2xl lg:rounded-bl-2xl`}
+          style={`background-image: url('/fimgs/bg-638530deb7fed74f740e6e857a0ca12f1a553845');background-size:100% 100%;background-repeat:no-repeat;`}
         >
           <div />
           <img
@@ -21,7 +25,9 @@
           </div>
           <div />
         </div>
-        <div class="flex flex-1 self-stretch flex-col space-y-8 items-center justify-center px-24 py-2.5 bg-white rounded-tr-2xl rounded-br-2xl">
+        <div
+          class={`flex flex-1 self-stretch flex-col space-y-8 items-center justify-center px-24 py-2.5 bg-white rounded-bl-2xl rounded-br-2xl pt-10 pb-10 lg:pt-0 lg:pb-0 lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-tl-none lg:rounded-bl-none`}
+        >
           <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
             <div class="text-base font-medium text-center text-indigo-500">
               Username
