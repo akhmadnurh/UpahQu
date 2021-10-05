@@ -26,4 +26,6 @@ export default {
     import("./components/sample-component"),
     { c: "", s: "", h: "" },
   ],
+  navbar: () => [import("./components/navbar"), { c: "", s: "", h: "" }],
+  sidebar: () => [import("./components/sidebar"), { c: "", s: "", h: "" }],
 };
