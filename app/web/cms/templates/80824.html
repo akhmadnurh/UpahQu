@@ -1,5 +1,40 @@
 <>
-  <effect meta={{}} run={async () => {}} />
+  <effect
+    meta={{
+      username: "",
+      password: "",
+      action: {},
+    }}
+    run={async () => {
+      meta.action = {
+        changeUsername: (e) => {
+          runInAction(() => {
+            meta.username = e.target.value;
+          });
+        },
+        changePassword: (e) => {
+          runInAction(() => {
+            meta.password = e.target.value;
+            console.log(meta.password);
+          });
+        },
+        login: () => {
+          runInAction(() => {
+            api("/api/login", {
+              username: meta.username,
+              password: meta.password,
+            }).then((res) => {
+              if (res.status == "success") {
+                navigate("/tambah-karyawan");
+              } else {
+                console.log("Error");
+              }
+            });
+          });
+        },
+      };
+    }}
+  />
   <>
     <div
       class={`flex flex-1 self-stretch items-center justify-center p-24 bg-indigo-500`}
@@ -35,6 +70,9 @@
             <input
               type="text"
               class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}
+              onChange={(e) => {
+                meta.action.changeUsername(e);
+              }}
             />
           </div>
           <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
@@ -44,11 +82,17 @@
             <input
               type="password"
               class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}
+              onChange={(e) => {
+                meta.action.changePassword(e);
+              }}
             />
           </div>
           <div class="flex flex-col items-center justify-center rounded-lg">
             <button
               class={`flex self-stretch flex-col items-center justify-center px-14 py-1 bg-indigo-500 hover:bg-indigo-700 rounded-xl`}
+              onClick={() => {
+                meta.action.login();
+              }}
             >
               <div class="flex self-stretch items-center justify-center">
                 <div class="text-lg font-semibold text-center text-white">

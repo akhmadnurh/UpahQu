@@ -5,34 +5,21 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://magang:magang123$%^@db.plansys.co:5432/magang4?schema=public"
+  url      = "postgresql://magang:magang123$%^@db.plansys.co:5432/magang3?schema=public"
 }
 
-model albums {
-  AlbumId  Int     @id @default(autoincrement())
-  Title    String
-  ArtistId Int
-  artists  artists @relation(fields: [ArtistId], references: [ArtistId])
-  songs    songs[]
-}
-
-model artists {
-  ArtistId   Int        @id @default(autoincrement())
-  Name       String
-  CoutriesId Int?
-  countries  countries? @relation(fields: [CoutriesId], references: [id])
-  albums     albums[]
-}
-
-model countries {
-  id      Int       @id @default(autoincrement())
-  name    String    @db.VarChar(45)
-  artists artists[]
-}
-
-model songs {
+model admin {
   id       Int    @id @default(autoincrement())
-  song     String @db.VarChar(45)
-  albumsId Int
-  albums   albums @relation(fields: [albumsId], references: [AlbumId])
+  username String @db.VarChar(10)
+  password String @db.VarChar
+}
+
+model email_verifications {
+  id    Int    @id @default(autoincrement())
+  email String @db.VarChar(50)
+}
+
+model users {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(50)
 }

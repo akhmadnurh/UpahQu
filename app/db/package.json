@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {},
   "dependencies": {
-    "@prisma/client": "^2.29.1"
+    "@prisma/client": "^2.29.1",
+    "md5": "^2.3.0"
   },
   "types": "./src/index.ts",
   "devDependencies": {
