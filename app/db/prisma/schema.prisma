@@ -8,18 +8,98 @@ datasource db {
   url      = "postgresql://magang:magang123$%^@db.plansys.co:5432/magang3?schema=public"
 }
 
-model admin {
-  id       Int    @id @default(autoincrement())
-  username String @db.VarChar(10)
-  password String @db.VarChar
-}
-
 model email_verifications {
   id    Int    @id @default(autoincrement())
   email String @db.VarChar(50)
 }
 
-model users {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(50)
+model absen {
+  id_absen  Int      @id @default(autoincrement())
+  waktu     DateTime @db.Time(6)
+  tanggal   DateTime @db.Date
+  id_status Int
+}
+
+model custom_kategori {
+  id_custom_kategori Int    @id @default(autoincrement())
+  nama_kategori      String @db.VarChar(100)
+  jenis_kategori     String @db.VarChar
+  gaji               gaji   @relation(fields: [id_custom_kategori], references: [id_gaji])
+}
+
+model departemen {
+  id_departemen   Int      @id @default(autoincrement())
+  nama_departemen String   @db.VarChar(100)
+  pengguna        pengguna @relation(fields: [id_departemen], references: [id_pengguna])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model detail_absen {
+  jenis_absen      Int
+  alasan           String
+  status_pengajuan Int
+  id_absen         Int      @db.SmallInt
+  waktu            DateTime @db.Time(6)
+  tanggal          DateTime @db.Date
+
+  @@ignore
+}
+
+model gaji {
+  id_gaji         Int              @id @default(autoincrement())
+  nominal         Decimal          @db.Money
+  custom_kategori custom_kategori?
+  pengguna        pengguna?
+}
+
+model jabatan {
+  id_jabatan   Int      @id @default(autoincrement())
+  nama_jabatan String   @db.VarChar(100)
+  pengguna     pengguna @relation(fields: [id_jabatan], references: [id_pengguna])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model jenis_absen {
+  id_jenis   Int
+  nama_jenis String @db.VarChar(30)
+
+  @@ignore
+}
+
+model pengguna {
+  id_pengguna   Int         @id @default(autoincrement())
+  nama_pengguna String      @db.VarChar(100)
+  email         String      @db.VarChar(100)
+  nomor_hp      Decimal     @db.Decimal(15, 0)
+  password      String      @db.VarChar(100)
+  id_role       Int
+  id_jabatan    Int
+  id_departemen Int
+  gaji          gaji        @relation(fields: [id_pengguna], references: [id_gaji])
+  departemen    departemen?
+  jabatan       jabatan?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model role {
+  id_role Int
+  role    String @db.VarChar(30)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model status_absen {
+  id_status Int    @db.SmallInt
+  status    String @db.VarChar(15)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model status_pengajuan {
+  id_pengajuan Int
+  pengajuan    String @db.VarChar(30)
+
+  @@ignore
 }
