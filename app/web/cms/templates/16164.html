@@ -2,44 +2,57 @@
   <effect meta={{}} run={async () => {}} />
   <>
     <navbar />
-    <div class="flex flex-row">
+    <div class="flex flex-row w-full">
       <div>
         <sidebar />
       </div>
-      <div class="pl-20">
-        <div class="flex flex-1 self-stretch flex-col items-center justify-center px-24 py-10 bg-white rounded-2xl">
-          <div class="flex flex-col space-y-8 items-center justify-center">
-            <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
-              <div class="text-sm font-medium text-indigo-500">
-                Masukkan Divisi Karyawan
-              </div>
-              <input
-                type="email"
-                class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}
-              />
-            </div>
-            <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
-              <div class="text-sm font-medium text-indigo-500">
-                Masukkan Jabatan Karyawan
-              </div>
-              <input
-                type="password"
-                class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}
-              />
-              <div class="text-sm font-bold text-gray-400">*Optional</div>
-            </div>
-            <div class="flex flex-col items-center justify-center rounded-lg">
-              <button
-                class={`flex self-stretch flex-col items-center justify-center px-14 py-2.5 bg-indigo-500 hover:bg-indigo-700 rounded-xl`}
-              >
-                <div class="flex self-stretch items-center justify-center">
-                  <div class="text-sm font-semibold text-center text-white">
-                    Buat Akun
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
+      <div class="w-full">
+        <div class="p-10 w-full filter drop-shadow-lg">
+          <datatable
+            title={"Data Karyawan"}
+            column={[
+              {
+                name: "No",
+                selector: "no",
+                sortable: true,
+              },
+              {
+                name: "Nama Karyawan",
+                selector: "nama",
+                sortable: true,
+              },
+              {
+                name: "No.Hp",
+                selector: "hp",
+                sortable: true,
+              },
+              {
+                name: "Email",
+                selector: "email",
+                sortable: true,
+              },
+              {
+                name: "Divisi",
+                selector: "divisi",
+                sortable: true,
+              },
+              {
+                name: "Jabatan",
+                selector: "jabatan",
+                sortable: true,
+              },
+            ]}
+            data={[
+              {
+                no: 1,
+                nama: "Bejo",
+                hp: "09809128391",
+                email: "bejo@gmail.com",
+                divisi: "Divisi IT",
+                jabatan: "Developer",
+              },
+            ]}
+          />
         </div>
       </div>
     </div>
