@@ -28,4 +28,5 @@ export default {
   ],
   navbar: () => [import("./components/navbar"), { c: "", s: "", h: "" }],
   sidebar: () => [import("./components/sidebar"), { c: "", s: "", h: "" }],
+  datatable: () => [import("./components/datatable"), { c: "", s: "", h: "" }],
 };
