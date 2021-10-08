@@ -60,7 +60,7 @@
           </div>
           <div />
         </div>
-        <div
+        <form
           class={`flex flex-1 self-stretch flex-col space-y-8 items-center justify-center px-24 py-2.5 bg-white rounded-tr-2xl rounded-br-2xl pt-10 pb-10 lg:pt-0 lg:pb-0 lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-tl-none lg:rounded-bl-none`}
         >
           <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
@@ -71,6 +71,7 @@
               onChange={(e) => {
                 meta.action.changeUsername(e);
               }}
+              required
             />
           </div>
           <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
@@ -81,6 +82,7 @@
               onChange={(e) => {
                 meta.action.changePassword(e);
               }}
+              required
             />
           </div>
           <div class="flex flex-col items-center justify-center rounded-lg">
@@ -97,7 +99,7 @@
               </div>
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </>
