@@ -1,12 +1,28 @@
 <>
-  <effect meta={{}} run={async () => {}} />
+  <effect
+    meta={{
+      action: {},
+    }}
+    run={async () => {
+      meta.action = {
+        tambah: () => {
+          runInAction(() => {
+            document.getElementById("modal-id").classList.toggle("hidden");
+            document
+              .getElementById("modal-id-backdrop")
+              .classList.toggle("hidden");
+          });
+        },
+      };
+    }}
+  />
   <>
     <div class="flex self-stretch flex-col items-start justify-start">
       <navbar
         class={`flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-indigo-900 shadow`}
       />
     </div>
-    <div class="flex flex-1 self-stretch items-end justify-end bg-white">
+    <div class={`flex flex-1 self-stretch items-end justify-end bg-white z-10`}>
       <div class={`flex self-stretch items-center justify-center`}>
         <sidebar
           class={`flex flex-1 self-stretch items-start justify-start rounded-2xl`}
@@ -15,7 +31,12 @@
       <div
         class={`flex flex-1 self-stretch flex-col items-center justify-start pt-5 bg-white`}
       >
-        <div class="flex space-x-2.5 items-center justify-center px-4 py-2 bg-indigo-900 shadow rounded-lg">
+        <button
+          class={`flex space-x-2.5 items-center justify-center px-4 py-2 bg-indigo-900 shadow rounded-lg hover:bg-indigo-800`}
+          onClick={() => {
+            meta.action.tambah();
+          }}
+        >
           <div class="flex self-stretch items-center justify-center">
             <div class="text-2xl font-semibold text-center text-white">+</div>
           </div>
@@ -24,7 +45,7 @@
               Tambah Karyawan
             </div>
           </div>
-        </div>
+        </button>
         <div class="p-10 w-full filter drop-shadow-lg">
           <datatable
             title={"Data Karyawan"}
@@ -74,5 +95,85 @@
         </div>
       </div>
     </div>
+    <div
+      class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+      id="modal-id"
+    >
+      <div class="relative w-auto my-6 mx-auto max-w-xl">
+        <div class="flex justify-end">
+          <button
+            class="rounded-full h-16 w-24 flex items-center justify-center bg-white absolute top-0 right-0"
+            onClick={() => {
+              meta.action.tambah();
+            }}
+          >
+            <h1 class="font-bold">X</h1>
+          </button>
+        </div>
+        {/*start modal*/}
+        <div
+          class={`flex flex-col space-y-10 items-center justify-center px-16 py-10 bg-white shadow rounded-2xl`}
+        >
+          <div class="text-lg font-semibold text-center text-indigo-500">
+            Tambah Akun Karyawan
+          </div>
+          <div class="flex flex-col space-y-8 items-center justify-center p-6 bg-white border rounded-lg border-indigo-200">
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-base font-medium text-indigo-500">Nama</div>
+              <input
+                type="text"
+                class={`border-2 border-indigo-300 py-1.5 px-3 rounded-xl`}
+              />
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-base font-medium text-indigo-500">No.Hp</div>
+              <input
+                type="text"
+                class={`border-2 border-indigo-300 py-1.5 px-3 rounded-xl`}
+              />
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-base font-medium text-indigo-500">Email</div>
+              <input
+                type="text"
+                class={`border-2 border-indigo-300 py-1.5 px-3 rounded-xl`}
+              />
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-base font-medium text-indigo-500">
+                Divisi Karyawan
+              </div>
+              <input
+                type="text"
+                class={`border-2 border-indigo-300 py-1.5 px-3 rounded-xl`}
+              />
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-base font-medium text-indigo-500">
+                Jabatan Karyawan
+              </div>
+              <input
+                type="text"
+                class={`border-2 border-indigo-300 py-1.5 px-3 rounded-xl`}
+              />
+            </div>
+            <button
+              class={`flex flex-col items-center justify-center px-6 py-1 bg-indigo-500 rounded-lg rounded-xl hover:bg-indigo-900`}
+            >
+              <div class="flex self-stretch items-center justify-center">
+                <div class="text-lg font-semibold text-center text-white">
+                  Buat Akun
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+        {/*end modal*/}
+      </div>
+    </div>
+    <div
+      class="hidden opacity-25 fixed inset-0 z-40 bg-black"
+      id="modal-id-backdrop"
+    ></div>
   </>
 </>
