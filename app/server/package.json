@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {},
   "dependencies": {
-    "crypto-js": "^4.1.1"
+    "crypto-js": "^4.1.1",
+    "md5": "^2.3.0"
   },
   "types": "./src/index.ts",
   "main": "./build/index.js"
