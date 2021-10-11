@@ -64,8 +64,13 @@
           </div>
           <div />
         </div>
-        <div
+        <form
           class={`flex flex-1 self-stretch flex-col space-y-8 items-center justify-center px-24 py-2.5 bg-white rounded-tr-2xl rounded-br-2xl pt-10 pb-10 lg:pt-0 lg:pb-0 lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-tl-none lg:rounded-bl-none`}
+          method="POST"
+          onSubmit={(e) => {
+            meta.action.login();
+            e.preventDefault();
+          }}
         >
           <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
             <div class="text-base font-medium text-indigo-900">Email</div>
@@ -92,9 +97,6 @@
           <div class="flex flex-col items-center justify-center rounded-lg">
             <button
               class={`flex self-stretch flex-col items-center justify-center px-14 py-1 bg-indigo-900 hover:bg-indigo-700 rounded-xl`}
-              onClick={() => {
-                meta.action.login();
-              }}
             >
               <div class="flex self-stretch items-center justify-center">
                 <div class="text-lg font-semibold text-center text-white">
@@ -103,7 +105,7 @@
               </div>
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </>

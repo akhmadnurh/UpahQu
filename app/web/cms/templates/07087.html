@@ -3,10 +3,10 @@
     meta={{}}
     run={async () => {
       const check = () => {
-        if (window.user.role !== "guest") {
-          navigate("/data-karyawan");
-        } else {
-          console.log("Sudah login");
+        // If user has not logged in
+        if (window.user.role == "guest" || window.user.role == 2) {
+          //Navigate to login page
+          navigate("/login");
         }
       };
       check();

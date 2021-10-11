@@ -6,7 +6,7 @@ import { useComponent } from "web.utils/component";
 
 export default ({ children }) => {
   const logout = () => {
-    user.user = {};
+    window.user = {};
     navigate('/login')
   }
   const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout});
