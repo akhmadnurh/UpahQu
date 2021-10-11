@@ -21,16 +21,16 @@ model absen {
 }
 
 model custom_kategori {
-  id_custom_kategori Int    @id @default(autoincrement())
+  id_custom_kategori Int    @id(map: "kategori_pkey") @default(autoincrement())
   nama_kategori      String @db.VarChar(100)
   jenis_kategori     String @db.VarChar
-  gaji               gaji   @relation(fields: [id_custom_kategori], references: [id_gaji])
+  gaji               gaji   @relation(fields: [id_custom_kategori], references: [id_gaji], onDelete: Cascade)
 }
 
 model departemen {
   id_departemen   Int      @id @default(autoincrement())
   nama_departemen String   @db.VarChar(100)
-  pengguna        pengguna @relation(fields: [id_departemen], references: [id_pengguna])
+  pengguna        pengguna @relation(fields: [id_departemen], references: [id_pengguna], onDelete: Cascade)
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -49,13 +49,12 @@ model gaji {
   id_gaji         Int              @id @default(autoincrement())
   nominal         Decimal          @db.Money
   custom_kategori custom_kategori?
-  pengguna        pengguna?
 }
 
 model jabatan {
   id_jabatan   Int      @id @default(autoincrement())
   nama_jabatan String   @db.VarChar(100)
-  pengguna     pengguna @relation(fields: [id_jabatan], references: [id_pengguna])
+  pengguna     pengguna @relation(fields: [id_jabatan], references: [id_pengguna], onDelete: Cascade)
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -67,15 +66,15 @@ model jenis_absen {
 }
 
 model pengguna {
-  id_pengguna   Int         @id @default(autoincrement())
+  id_pengguna   Int         @id(map: "karyawan_pkey") @default(autoincrement())
   nama_pengguna String      @db.VarChar(100)
   email         String      @db.VarChar(100)
-  nomor_hp      Decimal     @db.Decimal(15, 0)
+  nomor_hp      String      @db.VarChar(15)
   password      String      @db.VarChar(100)
   id_role       Int
   id_jabatan    Int
   id_departemen Int
-  gaji          gaji        @relation(fields: [id_pengguna], references: [id_gaji])
+  foto          Bytes?
   departemen    departemen?
   jabatan       jabatan?
 }
