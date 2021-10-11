@@ -2,7 +2,13 @@
 import { jsx } from "@emotion/react";
 import { useComponent } from "web.utils/component";
 
+
+
 export default ({ children }) => {
-  const _component = useComponent("sidebar","/app/web/src/components/sidebar",{});
+  const logout = () => {
+    user.user = {};
+    navigate('/login')
+  }
+  const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout});
   return eval(_component.render)
 }
