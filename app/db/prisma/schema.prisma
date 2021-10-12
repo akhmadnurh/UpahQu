@@ -74,7 +74,7 @@ model pengguna {
   id_role       Int
   id_jabatan    Int
   id_departemen Int
-  foto          Bytes?
+  foto          String?     @db.VarChar(30)
   departemen    departemen?
   jabatan       jabatan?
 }
