@@ -2,7 +2,7 @@
   <effect
     meta={{
       action: {},
-      datakaryawan: [],
+      datakaryawan: "",
     }}
     run={async () => {
       if (location.pathname === "/data-karyawan") {
@@ -33,10 +33,9 @@
         }
       };
       accordion();
-      const datakaryawan = () => {
+      const datakaryawan = async () => {
         api("/api/r-karyawan", {}).then((res) => {
-          meta.datakaryawan = res.karyawan[0].nama_pengguna;
-          console.log(meta.datakaryawan);
+          meta.datakaryawan = res.karyawan;
         });
       };
       datakaryawan();
@@ -147,20 +146,20 @@
           <datatable
             title={"Data Karyawan"}
             column={[
-              {
-                name: "No",
-                selector: "no",
-                sortable: true,
-              },
+              // {
+              //   name: "No",
+              //   selector: "no",
+              //   sortable: true,
+              // },
               {
                 name: "Nama Karyawan",
-                selector: "nama",
+                selector: "nama_pengguna",
                 sortable: true,
                 // const user = await prisma.user({ nama }),
               },
               {
                 name: "No.Hp",
-                selector: "hp",
+                selector: "nomor_hp",
                 sortable: true,
               },
               {
@@ -170,26 +169,16 @@
               },
               {
                 name: "Divisi",
-                selector: "divisi",
+                selector: "id_departemen",
                 sortable: true,
               },
               {
                 name: "Jabatan",
-                selector: "jabatan",
+                selector: "id_jabatan",
                 sortable: true,
               },
             ]}
-            data={[
-              {
-                //nama: { nama },
-                // no: 1,
-                // nama: "Bejo",
-                // hp: "09809128391",
-                // email: "bejo@gmail.com",
-                // divisi: "Divisi IT",
-                // jabatan: "Developer",
-              },
-            ]}
+            data={meta.datakaryawan}
           />
         </div>
       </div>

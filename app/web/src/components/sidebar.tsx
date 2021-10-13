@@ -11,11 +11,11 @@ export default ({ children }) => {
   }
 
   const dashboard = () => {
-    navigate('/dashboard')
+    navigate('/admin/dashboard')
   }
 
   const dataKaryawan = () => {
-    navigate('/data-karyawan')
+    navigate('/admin/data-karyawan')
   }
   
   const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout, dashboard, dataKaryawan});
