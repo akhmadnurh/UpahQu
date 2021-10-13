@@ -1,32 +1,31 @@
 <div class={`flex flex-1 self-stretch items-start justify-start rounded-2xl`}>
   <div
-    class={`flex flex-1 self-stretch flex-col space-y-3 items-start justify-start p-8 bg-white shadow lg:block md:hidden shadow`}
+    class={`flex flex-1 self-stretch flex-col space-y-3 items-start justify-start p-8 bg-white shadow lg:block md:hidden`}
   >
-    <div class="flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg">
-      <div class="text-sm font-bold text-gray-800">Dashboard</div>
-    </div>
-    <div class="flex self-stretch flex-col space-y-2.5 items-start justify-center rounded-lg">
-      <div class="flex self-stretch items-center justify-center px-5 py-2.5 bg-indigo-500 rounded-lg">
+    <button class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" id="dashboard" onClick={() => { dashboard() }}>
+      <div class="text-sm font-bold" id="text-dashboard">Dashboard</div>
+    </button>
+    <div class="flex self-stretch flex-col items-start justify-center rounded-lg">
+      <button class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" id="karyawan">
         <div class="flex flex-1 self-stretch flex-col items-start justify-center">
-          <div class="text-sm font-bold text-white">Karyawan</div>
+          <div class="text-sm font-bold" id="text-karyawan">Karyawan</div>
         </div>
-        <div />
-      </div>
-      <div class="flex self-stretch flex-col space-y-4 items-start justify-center py-2.5 pl-5 pr-10">
-        <div class="flex self-stretch flex-col items-start justify-center">
-          <div class="text-sm font-bold text-indigo-500">Daftar Karyawan</div>
-        </div>
-        <div class="flex self-stretch flex-col items-start justify-center">
-          <div class="text-sm font-semibold text-gray-600">
+      </button>
+      <div class="items-start justify-center pl-5 pr-10 content">
+        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 mt-4 transition duration-300" onClick={() => { dataKaryawan() }}>
+          <div class="text-sm font-semibold" id="text-data-karyawan">Data Karyawan</div>
+        </button>
+        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 mt-4 transition duration-300">
+          <div class="text-sm font-semibold">
             Parameter Penggajian
           </div>
-        </div>
-        <div class="flex self-stretch flex-col items-start justify-center">
-          <div class="text-sm font-semibold text-blueGray-600">Jabatan</div>
-        </div>
+        </button>
+        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 mt-4 transition duration-300">
+          <div class="text-sm font-semibold">Jabatan</div>
+        </button>
       </div>
     </div>
-    <div class="flex self-stretch flex-col space-y-2.5 items-start justify-center rounded-lg">
+    <!-- <div class="flex self-stretch flex-col space-y-2.5 items-start justify-center rounded-lg">
       <div class="flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded-lg">
         <div class="flex flex-1 self-stretch flex-col items-start justify-center">
           <div class="text-sm font-bold text-gray-800">Gaji</div>
@@ -44,9 +43,9 @@
     </div>
     <div class="flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg">
       <div class="text-sm font-bold text-gray-800">Grafik</div>
-    </div>
-    <div class="flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg">
-      <button class="text-sm font-bold text-gray-800" onClick={() => { logout() }}>Logout</button>
-    </div>
+    </div> -->
+    <button class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" onClick={() => { logout() }}>
+      <div class="text-sm font-bold">Logout</div>
+    </button>
   </div>
 </div>

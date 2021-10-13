@@ -9,6 +9,15 @@ export default ({ children }) => {
     window.user = {};
     navigate('/login')
   }
-  const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout});
+
+  const dashboard = () => {
+    navigate('/coba-dashboard')
+  }
+
+  const dataKaryawan = () => {
+    navigate('/data-karyawan')
+  }
+  
+  const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout, dashboard, dataKaryawan});
   return eval(_component.render)
 }

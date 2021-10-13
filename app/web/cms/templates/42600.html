@@ -4,6 +4,34 @@
       action: {},
     }}
     run={async () => {
+      if (location.pathname === "/data-karyawan") {
+        document.getElementById("karyawan").classList.toggle("bg-indigo-500");
+        document.getElementById("karyawan").classList.toggle("active");
+        document.getElementById("text-karyawan").classList.toggle("text-white");
+        document
+          .getElementById("text-data-karyawan")
+          .classList.toggle("text-indigo-500");
+        var content = document.getElementById("karyawan").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+
+      const accordion = () => {
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+      };
+      accordion();
       meta.action = {
         tambah: () => {
           runInAction(() => {
