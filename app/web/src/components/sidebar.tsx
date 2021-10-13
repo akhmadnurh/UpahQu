@@ -11,7 +11,7 @@ export default ({ children }) => {
   }
 
   const dashboard = () => {
-    navigate('/coba-dashboard')
+    navigate('/dashboard')
   }
 
   const dataKaryawan = () => {

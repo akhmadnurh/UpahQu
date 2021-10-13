@@ -17,7 +17,7 @@ body,
   width: 100%;
 }
 
-.collapsible:after {
+/* .collapsible:after {
   content: '\002B';
   font-weight: bold;
   float: right;
@@ -26,10 +26,14 @@ body,
 
 .active:after {
   content: "\2212";
-}
+} */
 
 .content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
+}
+
+.dropdown-profile:hover .list-dropdown-profile {
+  display: block;
 }

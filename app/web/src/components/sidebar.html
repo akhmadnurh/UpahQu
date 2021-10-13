@@ -2,25 +2,28 @@
   <div
     class={`flex flex-1 self-stretch flex-col space-y-3 items-start justify-start p-8 bg-white shadow lg:block md:hidden`}
   >
-    <button class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" id="dashboard" onClick={() => { dashboard() }}>
+    <button class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-200 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" id="dashboard" onClick={() => { dashboard() }}>
       <div class="text-sm font-bold" id="text-dashboard">Dashboard</div>
     </button>
     <div class="flex self-stretch flex-col items-start justify-center rounded-lg">
-      <button class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" id="karyawan">
+      <button class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-200 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" id="karyawan">
         <div class="flex flex-1 self-stretch flex-col items-start justify-center">
           <div class="text-sm font-bold" id="text-karyawan">Karyawan</div>
         </div>
+        <!-- <div class="flex flex-1 self-stretch flex-col items-end justify-center">
+          <div class="text-sm font-bold"><faicon id="text-karyawan" iconName="ArrowDown" class="down"/></div>
+        </div> -->
       </button>
-      <div class="items-start justify-center pl-5 pr-10 content">
-        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 mt-4 transition duration-300" onClick={() => { dataKaryawan() }}>
+      <div class="items-start justify-center ml-5 pr-10 content w-full">
+        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 py-2 transition duration-300 border-l-2 border-gray-200 pl-4 hover:border-indigo-500 mt-2.5" id="btn-data-karyawan" onClick={() => { dataKaryawan() }}>
           <div class="text-sm font-semibold" id="text-data-karyawan">Data Karyawan</div>
         </button>
-        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 mt-4 transition duration-300">
+        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 py-2 transition duration-300 border-l-2 border-gray-200 pl-4 hover:border-indigo-500">
           <div class="text-sm font-semibold">
             Parameter Penggajian
           </div>
         </button>
-        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 mt-4 transition duration-300">
+        <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-500 py-2 transition duration-300 border-l-2 border-gray-200 pl-4 hover:border-indigo-500">
           <div class="text-sm font-semibold">Jabatan</div>
         </button>
       </div>
@@ -44,7 +47,7 @@
     <div class="flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg">
       <div class="text-sm font-bold text-gray-800">Grafik</div>
     </div> -->
-    <button class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" onClick={() => { logout() }}>
+    <button class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-200 rounded-lg hover:bg-indigo-500 text-gray-800 hover:text-white transition duration-300" onClick={() => { logout() }}>
       <div class="text-sm font-bold">Logout</div>
     </button>
   </div>

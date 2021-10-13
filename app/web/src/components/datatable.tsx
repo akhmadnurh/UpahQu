@@ -8,8 +8,6 @@ export default ({ title, column, data }) => {
       columns={column}
       data={data}
       pagination
-      highlightOnHover
-      pointerOnHover
     />
   )
 }
