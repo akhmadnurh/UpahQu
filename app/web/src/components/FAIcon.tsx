@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 registerIcons({
   icons: {
     Home: <FontAwesomeIcon icon={faHome} />,
     ArrowDown : <FontAwesomeIcon icon={faSortDown} />
     ,
-    ArrowUp : <FontAwesomeIcon icon={faSortUp} />
+    ArrowUp : <FontAwesomeIcon icon={faSortUp} />,
+    Plus : <FontAwesomeIcon icon={faPlus} />
   }
 });
 

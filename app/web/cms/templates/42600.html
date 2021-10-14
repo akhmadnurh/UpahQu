@@ -5,10 +5,13 @@
       datakaryawan: "",
     }}
     run={async () => {
-      if (location.pathname === "/data-karyawan") {
+      if (location.pathname === "/admin/data-karyawan") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-500");
         document.getElementById("karyawan").classList.toggle("active");
         document.getElementById("text-karyawan").classList.toggle("text-white");
+        document
+          .getElementById("btn-data-karyawan")
+          .classList.toggle("border-indigo-500");
         document
           .getElementById("text-data-karyawan")
           .classList.toggle("text-indigo-500");
@@ -82,30 +85,26 @@
     <div
       class={`flex flex-1 self-stretch items-center justify-center bg-white z-10`}
     >
-      <div class={`flex self-stretch flex-col items-center justify-center`}>
+      <div
+        class={`flex self-stretch flex-col items-center justify-center filter drop-shadow-md`}
+      >
         <sidebar
           class={`flex flex-1 self-stretch items-start justify-start rounded-2xl`}
         />
       </div>
       <div
-        class={`flex flex-1 self-stretch flex-col items-center justify-start pt-8 bg-white`}
+        class={`flex flex-1 self-stretch flex-col items-start justify-start pt-8 px-8 bg-white`}
       >
         <button
-          class={`flex space-x-2.5 items-center justify-center px-4 py-2 bg-indigo-900 shadow rounded-lg hover:bg-indigo-800`}
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md"
           onClick={() => {
             meta.action.tambah();
           }}
         >
-          <div class="flex self-stretch items-center justify-center">
-            <div class="text-2xl font-semibold text-center text-white">+</div>
-          </div>
-          <div class="flex flex-1 self-stretch flex-col items-center justify-center rounded-tl-lg rounded-tr-lg">
-            <div class="text-sm font-bold text-center text-white">
-              Tambah Karyawan
-            </div>
-          </div>
+          <faicon iconName="Plus" class="mr-3" />
+          <span>Tambah Karyawan</span>
         </button>
-        <div class="p-10 w-full filter drop-shadow-lg">
+        <div class="py-5 w-full filter drop-shadow-md">
           {/*<div*/}
           {/*class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"*/}
           {/*role="alert"*/}
@@ -180,6 +179,8 @@
             ]}
             data={meta.datakaryawan}
           />
+
+          {/*<datatable />*/}
         </div>
       </div>
     </div>

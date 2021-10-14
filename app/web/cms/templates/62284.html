@@ -2,7 +2,7 @@
   <effect
     meta={{}}
     run={async () => {
-      if (location.pathname === "/dashboard") {
+      if (location.pathname === "/admin/dashboard") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-500");
         document
           .getElementById("text-dashboard")
@@ -38,7 +38,9 @@
     <div
       class={`flex flex-1 self-stretch items-center justify-center bg-white z-10`}
     >
-      <div class={`flex self-stretch flex-col items-center justify-center`}>
+      <div
+        class={`flex self-stretch flex-col items-center justify-center filter drop-shadow-md`}
+      >
         <sidebar
           class={`flex flex-1 self-stretch items-start justify-start rounded-2xl`}
         />
