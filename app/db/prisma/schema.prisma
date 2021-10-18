@@ -19,13 +19,12 @@ model custom_kategori {
   id_custom_kategori Int    @id @default(autoincrement())
   nama_kategori      String @db.VarChar(100)
   jenis_kategori     String @db.VarChar
-  gaji               gaji   @relation(fields: [id_custom_kategori], references: [id_gaji])
 }
 
 model departemen {
-  id_departemen   Int      @id @default(autoincrement())
-  nama_departemen String   @db.VarChar(100)
-  pengguna        pengguna @relation(fields: [id_departemen], references: [id_pengguna])
+  id_departemen   Int       @id @default(autoincrement())
+  nama_departemen String    @db.VarChar(100)
+  jabatan         jabatan[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -46,15 +45,16 @@ model email_verifications {
 }
 
 model gaji {
-  id_gaji         Int              @id @default(autoincrement())
-  nominal         Decimal          @db.Money
-  custom_kategori custom_kategori?
+  id_gaji Int     @id @default(autoincrement())
+  nominal Decimal @db.Money
 }
 
 model jabatan {
-  id_jabatan   Int      @id @default(autoincrement())
-  nama_jabatan String   @db.VarChar(100)
-  pengguna     pengguna @relation(fields: [id_jabatan], references: [id_pengguna])
+  id_jabatan    Int        @id @default(autoincrement())
+  nama_jabatan  String     @db.VarChar(100)
+  id_departemen Int
+  departemen    departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+  pengguna      pengguna[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -66,25 +66,23 @@ model jenis_absen {
 }
 
 model pengguna {
-  id_pengguna     Int         @id @default(autoincrement())
-  nama_pengguna   String      @db.VarChar(100)
-  email           String      @db.VarChar(100)
-  nomor_hp        String      @db.VarChar(15)
-  password        String      @db.VarChar(100)
+  id_pengguna     Int     @id @default(autoincrement())
+  nama_pengguna   String  @db.VarChar(100)
+  email           String  @db.VarChar(100)
+  nomor_hp        String  @db.VarChar(15)
+  password        String  @db.VarChar(100)
   id_role         Int
   id_jabatan      Int
-  id_departemen   Int
   status_pengguna Int?
-  departemen      departemen?
-  jabatan         jabatan?
+  jabatan         jabatan @relation(fields: [id_jabatan], references: [id_jabatan], onDelete: SetNull)
+  role            role    @relation(fields: [id_role], references: [id_role], onDelete: NoAction)
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model role {
-  id_role Int
-  role    String @db.VarChar(30)
-
-  @@ignore
+  id_role  Int        @id(map: "role_id_role")
+  role     String     @db.VarChar(30)
+  pengguna pengguna[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
