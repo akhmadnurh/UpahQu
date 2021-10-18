@@ -73,7 +73,7 @@ model pengguna {
   password        String  @db.VarChar(100)
   id_role         Int
   id_jabatan      Int
-  status_pengguna Int?
+  status_pengguna String  @db.VarChar(10)
   jabatan         jabatan @relation(fields: [id_jabatan], references: [id_jabatan])
   role            role    @relation(fields: [id_role], references: [id_role])
 }
