@@ -53,7 +53,7 @@ model jabatan {
   id_jabatan    Int        @id @default(autoincrement())
   nama_jabatan  String     @db.VarChar(100)
   id_departemen Int
-  departemen    departemen @relation(fields: [id_departemen], references: [id_departemen], onDelete: Cascade)
+  departemen    departemen @relation(fields: [id_departemen], references: [id_departemen])
   pengguna      pengguna[]
 }
 
@@ -74,14 +74,13 @@ model pengguna {
   id_role         Int
   id_jabatan      Int
   status_pengguna Int?
-  jabatan         jabatan @relation(fields: [id_jabatan], references: [id_jabatan], onDelete: SetNull)
-  role            role    @relation(fields: [id_role], references: [id_role], onDelete: NoAction)
+  jabatan         jabatan @relation(fields: [id_jabatan], references: [id_jabatan])
+  role            role    @relation(fields: [id_role], references: [id_role])
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model role {
-  id_role  Int        @id(map: "role_id_role")
-  role     String     @db.VarChar(30)
+  id_role  Int        @id @default(autoincrement())
+  role     String?    @db.VarChar(10)
   pengguna pengguna[]
 }
 
