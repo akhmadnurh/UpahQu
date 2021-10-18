@@ -39,6 +39,7 @@
       const datakaryawan = async () => {
         api("/api/r-karyawan", {}).then((res) => {
           meta.datakaryawan = res.karyawan;
+          console.log(meta.datakaryawan);
         });
       };
       datakaryawan();
@@ -168,12 +169,12 @@
               },
               {
                 name: "Divisi",
-                selector: "id_departemen",
+                selector: "jabatan.departemen.nama_departemen",
                 sortable: true,
               },
               {
                 name: "Jabatan",
-                selector: "id_jabatan",
+                selector: "jabatan.nama_jabatan",
                 sortable: true,
               },
             ]}
