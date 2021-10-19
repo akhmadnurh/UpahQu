@@ -17,6 +17,11 @@ export const api = async (
   }
 
   if (body) {
+    // fix bug save on /dev
+    if("__meta" in body){
+      delete body["__meta"];
+    }
+    // fix bug save on /dev
     options.body = JSON.stringify(body)
   }
 

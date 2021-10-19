@@ -18,6 +18,8 @@ export default ({ children }) => {
     navigate('/admin/data-karyawan')
   }
   
-  const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout, dashboard, dataKaryawan});
-  return eval(_component.render)
+  const _component = useComponent("sidebar","/app/web/src/components/sidebar",{logout,
+dashboard,
+dataKaryawan});
+  return eval(_component.render);
 }
