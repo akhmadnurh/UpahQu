@@ -147,11 +147,11 @@
           <datatable
             title={"Data Karyawan"}
             column={[
-              // {
-              //   name: "No",
-              //   selector: "no",
-              //   sortable: true,
-              // },
+              {
+                name: "No",
+                selector: (row, index) => ++index,
+                sortable: true,
+              },
               {
                 name: "Nama Karyawan",
                 selector: "nama_pengguna",
@@ -178,11 +178,11 @@
                 selector: "jabatan.nama_jabatan",
                 sortable: true,
               },
-              {
-                name: "Status Pengguna",
-                selector: "status_pengguna",
-                sortable: true,
-              },
+              // {
+              //   name: "Status Pengguna",
+              //   selector: "status_pengguna",
+              //   sortable: true,
+              // },
               {
                 name: "Action",
                 button: true,
