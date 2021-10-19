@@ -1,19 +1,16 @@
 <>
   <effect
-    meta={{
-      action: {},
-      datakaryawan: "",
-    }}
+    meta={{}}
     run={async () => {
-      if (location.pathname === "/admin/data-karyawan") {
+      if (location.pathname === "/admin/divisi") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-500");
         document.getElementById("karyawan").classList.toggle("active");
         document.getElementById("text-karyawan").classList.toggle("text-white");
         document
-          .getElementById("btn-data-karyawan")
+          .getElementById("btn-divisi")
           .classList.toggle("border-indigo-500");
         document
-          .getElementById("text-data-karyawan")
+          .getElementById("text-divisi")
           .classList.toggle("text-indigo-500");
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
@@ -36,47 +33,8 @@
         }
       };
       accordion();
-      const datakaryawan = async () => {
-        api("/api/r-karyawan", {}).then((res) => {
-          meta.datakaryawan = res.karyawan;
-          console.log(meta.datakaryawan);
-        });
-      };
-      datakaryawan();
-      meta.action = {
-        tambah: () => {
-          runInAction(() => {
-            document.getElementById("modal-id").classList.toggle("hidden");
-            document
-              .getElementById("modal-id-backdrop")
-              .classList.toggle("hidden");
-          });
-        },
-        read: () => {
-          onChange: (pengguna) => {
-            runInAction(() => {
-              meta.id_pengguna = pengguna.target.value;
-              meta.nama_pengguna = pengguna.target.value;
-              meta.nomor_hp = pengguna.target.value;
-              meta.jabatan = pengguna.target.value;
-              meta.divisi = pengguna.target.value;
-              meta.status_pengguna = pengguna.target.value;
-            });
-          };
-        },
-      };
+      meta.action = {};
     }}
-    // lihatdata={async () => {
-    //   meta.action = {
-    //     lihat: () => {
-    //       runInAction(() =>{
-    //         db.pengguna.findMany().then();
-    //          // console.log("res");
-
-    //       );
-    //     },
-    //   };
-    // }}
   />
   <>
     <div class="flex self-stretch flex-col items-start justify-start">
@@ -100,11 +58,11 @@
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md"
           onClick={() => {
-            navigate("/admin/data-karyawan/tambah");
+            navigate("/admin/divisi/tambah");
           }}
         >
           <faicon iconName="Plus" class="mr-3" />
-          <span>Tambah Karyawan</span>
+          <span>Tambah Divisi</span>
         </button>
         <div class="py-5 w-full filter drop-shadow-md">
           {/*<div*/}
@@ -145,42 +103,21 @@
           {/*</span>*/}
           {/*</div>*/}
           <datatable
-            title={"Data Karyawan"}
+            title={"Divisi"}
             column={[
-              // {
-              //   name: "No",
-              //   selector: "no",
-              //   sortable: true,
-              // },
               {
-                name: "Nama Karyawan",
-                selector: "nama_pengguna",
-                sortable: true,
-                // const user = await prisma.user({ nama }),
-              },
-              {
-                name: "No.Hp",
-                selector: "nomor_hp",
+                name: "No",
+                selector: "no",
                 sortable: true,
               },
               {
-                name: "Email",
-                selector: "email",
+                name: "Nama Divisi",
+                selector: "nama_divisi",
                 sortable: true,
               },
               {
-                name: "Divisi",
-                selector: "jabatan.departemen.nama_departemen",
-                sortable: true,
-              },
-              {
-                name: "Jabatan",
-                selector: "jabatan.nama_jabatan",
-                sortable: true,
-              },
-              {
-                name: "Status Pengguna",
-                selector: "status_pengguna",
+                name: "Status",
+                selector: "status",
                 sortable: true,
               },
               {
@@ -192,7 +129,7 @@
                       <button
                         class="bg-indigo-200 hover:bg-indigo-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
                         onClick={() => {
-                          navigate("/admin/data-karyawan/edit/");
+                          navigate("#");
                         }}
                       >
                         <faicon iconName="edit" class="" />
@@ -200,7 +137,7 @@
                       <button
                         class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
                         onClick={() => {
-                          navigate("/admin/data-karyawan/detail/");
+                          navigate("#");
                         }}
                       >
                         <faicon iconName="show" class="" />
@@ -210,10 +147,14 @@
                 ),
               },
             ]}
-            data={meta.datakaryawan}
+            data={[
+              {
+                no: 1,
+                nama_divisi: "lorem",
+                status: "ipsum",
+              },
+            ]}
           />
-
-          {/*<datatable />*/}
         </div>
       </div>
     </div>
