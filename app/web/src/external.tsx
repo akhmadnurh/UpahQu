@@ -29,4 +29,8 @@ export default {
   datatable: () => [import("./components/datatable"), { c: "", s: "", h: "" }],
   navbar: () => [import("./components/navbar"), { c: "", s: "", h: "" }],
   sidebar: () => [import("./components/sidebar"), { c: "", s: "", h: "" }],
+  "form-data-karyawan": () => [
+    import("./components/form-data-karyawan"),
+    { c: "", s: "", h: "" },
+  ],
 };
