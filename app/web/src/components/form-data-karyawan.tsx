@@ -13,6 +13,6 @@ export default ({ children, title }) => {
     var value = "sss";
     var tombol = "Edit Karyawan";
   }
-  const _component = useComponent("form-data-karyawan","/app/web/src/components/form-data-karyawan",{ title, actionn, method , tombol});
+  const _component = useComponent("form-data-karyawan","/app/web/src/components/form-data-karyawan",{ title, actionn, method, tombol });
   return eval(_component.render)
 }
