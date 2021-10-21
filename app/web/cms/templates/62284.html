@@ -2,7 +2,7 @@
   <effect
     meta={{}}
     run={async () => {
-      if (location.pathname === "/admin/dashboard") {
+      if (document.readyState === "complete") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-500");
         document
           .getElementById("text-dashboard")

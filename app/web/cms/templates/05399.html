@@ -2,7 +2,7 @@
   <effect
     meta={{}}
     run={async () => {
-      if (location.pathname === "/admin/divisi/detail") {
+      if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-500");
         document.getElementById("karyawan").classList.toggle("active");
         document.getElementById("text-karyawan").classList.toggle("text-white");

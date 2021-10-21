@@ -2,10 +2,7 @@
   <effect
     meta={{}}
     run={async () => {
-      if (
-        location.pathname === "/admin/data-karyawan/tambah" ||
-        location.pathname === "/admin/data-karyawan/edit/" + [params.id]
-      ) {
+      if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-500");
         document.getElementById("karyawan").classList.toggle("active");
         document.getElementById("text-karyawan").classList.toggle("text-white");
@@ -27,11 +24,13 @@
     }}
   />
   <>
-    <div id="tambah">
-      <form-data-karyawan title={"Tambah Data Karyawan"} />
-    </div>
-    <div id="edit">
-      <form-data-karyawan title={"Edit Data Karyawan"} />
+    <div class="w-full">
+      <div id="tambah">
+        <form-data-karyawan title={"Tambah Data Karyawan"} />
+      </div>
+      <div id="edit">
+        <form-data-karyawan title={"Edit Data Karyawan"} />
+      </div>
     </div>
   </>
 </>
