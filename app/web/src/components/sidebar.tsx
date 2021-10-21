@@ -4,7 +4,7 @@ import { useComponent } from "web.utils/component";
 
 export default ({ children }) => {
   const logout = () => {
-    window.user = {};
+    window.user = null;
     navigate("/login");
   };
 

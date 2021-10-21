@@ -24,6 +24,9 @@
               password: meta.password,
             }).then((res) => {
               if (res.status == "success") {
+                // console.log("res", res.data);
+                // window.user = res.data;
+                // console.log(window.user);
                 if ((res.role = 1)) {
                   navigate("/admin/dashboard");
                 } else {
