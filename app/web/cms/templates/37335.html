@@ -1,0 +1,128 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("karyawan").classList.toggle("bg-indigo-900");
+        document.getElementById("karyawan").classList.toggle("active");
+        document.getElementById("text-karyawan").classList.toggle("text-white");
+        document
+          .getElementById("btn-data-karyawan")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-data-karyawan")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("karyawan").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <div class="w-full">
+      <form
+        // method={method}
+        // action={actionn}
+        class="flex self-stretch flex-col space-y-10 items-center justify-center pt-5 pb-2.5 rounded-2xl"
+      >
+        <div class="text-sm font-bold text-center text-indigo-500">
+          Tambah Data Karyawan
+        </div>
+        <div class="flex space-x-5 items-start justify-center p-10 bg-white border rounded-lg border-indigo-200">
+          <div class="flex flex-col space-y-5 items-start justify-start">
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-xs font-bold text-indigo-500">Nama</div>
+              <input
+                type="text"
+                class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
+                required
+                style="min-width: 215px;"
+              />
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-xs font-bold text-indigo-500">No.Hp</div>
+              <input
+                type="number"
+                class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
+                required
+                style="min-width: 215px;"
+              />
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-xs font-bold text-indigo-500">Email</div>
+              <input
+                type="email"
+                class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
+                required
+                style="min-width: 215px;"
+              />
+            </div>
+          </div>
+          <div class="flex flex-col space-y-5 items-start justify-start">
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-xs font-bold text-indigo-500">
+                Divisi Karyawan
+              </div>
+              {/*<input*/}
+              {/*type="text"*/}
+              {/*class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}*/}
+              {/*required*/}
+              {/*/>*/}
+              <div
+                class="relative inline-block w-full text-gray-700"
+                style="min-width: 215px;"
+              >
+                <select
+                  class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
+                  placeholder="Regular input"
+                >
+                  <option>----------</option>
+                  <option>Another option</option>
+                  <option>And one more</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                    <path
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
+              <div class="text-xs font-bold text-indigo-500">
+                Jabatan Karyawan
+              </div>
+              <div
+                class="relative inline-block w-full text-gray-700"
+                style="min-width: 215px;"
+              >
+                <select
+                  class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
+                  placeholder="Regular input"
+                >
+                  <option>----------</option>
+                  <option>Another option</option>
+                  <option>And one more</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                    <path
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md">
+          <span>Submit</span>
+        </button>
+      </form>
+    </div>
+  </>
+</>
