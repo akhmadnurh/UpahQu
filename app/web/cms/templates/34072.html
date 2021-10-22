@@ -40,23 +40,57 @@
         },
         // tambahJabatan: () => {
         //   var tr = document.createElement("tr");
-        //   var td = document.createElement("td");
-        //   var input = document.createElement("input");
-        //   // var textnode = document.getElementById("input-jabatan");
-        //   // node.appendChild(textnode);
-        //   input.classList.add(
-        //     "border",
-        //     "focus:outline-none",
-        //     "border-gray-500",
-        //     "py-1.5",
-        //     "px-3",
-        //     "rounded-xl"
-        //   );
-        //   td.appendChild(input);
-        //   td.classList.add("border-t", "border-gray-200", "px-5", "py-2");
-        //   tr.appendChild(td);
-        //   document.getElementById("jabatan").appendChild(tr);
+        //   var input = document.getElementById("input-jabatan1");
+        //   tr.appendChild(input);
+        //   // document.getElementById("jabatan").appendChild(tr);
         // },
+
+        tambahJabatan: () => {
+          var tr = document.createElement("tr");
+          var tdleft = document.createElement("td");
+          var tdright = document.createElement("td");
+          var input = document.createElement("input");
+          var button = document.createElement("button");
+          var icon = document.createElement("faicon");
+          input.classList.add(
+            "border",
+            "focus:outline-none",
+            "border-gray-500",
+            "py-1.5",
+            "px-3",
+            "rounded-xl"
+          );
+
+          button.classList.add(
+            "bg-red-200",
+            "hover:bg-red-300",
+            "text-black",
+            "text-xs",
+            "font-bold",
+            "rounded",
+            "inline-flex",
+            "items-center",
+            "justify-center",
+            "w-7",
+            "h-7"
+          );
+
+          icon.setAttribute("iconName", "delete");
+          button.innerHTML = '<faicon iconName="delete" />';
+          tdleft.appendChild(input);
+          tdleft.classList.add("border-t", "border-gray-200", "px-5", "py-2");
+          tdright.appendChild(button);
+          tdright.classList.add(
+            "border-t",
+            "border-gray-200",
+            "px-5",
+            "py-2",
+            "text-right"
+          );
+          tr.appendChild(tdleft);
+          tr.appendChild(tdright);
+          document.getElementById("jabatan").appendChild(tr);
+        },
       };
     }}
   />
@@ -81,38 +115,36 @@
               <td class="border-t border-gray-200 px-5 py-2">
                 <input
                   type="text"
-                  class="border-0 focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
-                  style="min-width: 215px;"
+                  class="border focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
                   id="input-divisi"
                   // value=""
-                  disabled
                 />
               </td>
-              <td class="border-t border-gray-200 px-5 py-2 text-right">
-                <div id="btn-default-divisi">
-                  <button
-                    class="bg-indigo-200 hover:bg-indigo-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
-                    onClick={() => {
-                      meta.action.changeButtonDivisi();
-                    }}
-                  >
-                    <faicon iconName="edit" class="" />
-                  </button>
-                </div>
-                <div id="btn-action-divisi" class="hidden space-x-2">
-                  <button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
-                    <faicon iconName="save" class="" />
-                  </button>
-                  <button
-                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
-                    onClick={() => {
-                      meta.action.changeButtonDivisi();
-                    }}
-                  >
-                    <faicon iconName="cancel" class="" />
-                  </button>
-                </div>
-              </td>
+              {/*<td class="border-t border-gray-200 px-5 py-2 text-right">*/}
+              {/*<div id="btn-default-divisi">*/}
+              {/*<button*/}
+              {/*class="bg-indigo-200 hover:bg-indigo-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"*/}
+              {/*onClick={() => {*/}
+              {/*meta.action.changeButtonDivisi();*/}
+              {/*}}*/}
+              {/*>*/}
+              {/*<faicon iconName="edit" class="" />*/}
+              {/*</button>*/}
+              {/*</div>*/}
+              {/*<div id="btn-action-divisi" class="hidden space-x-2">*/}
+              {/*<button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">*/}
+              {/*<faicon iconName="save" class="" />*/}
+              {/*</button>*/}
+              {/*<button*/}
+              {/*class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"*/}
+              {/*onClick={() => {*/}
+              {/*meta.action.changeButtonDivisi();*/}
+              {/*}}*/}
+              {/*>*/}
+              {/*<faicon iconName="cancel" class="" />*/}
+              {/*</button>*/}
+              {/*</div>*/}
+              {/*</td>*/}
             </tr>
           </tbody>
         </table>
@@ -124,43 +156,19 @@
               {/*<th class=" border-gray-200 px-5 py-2 text-right">Action</th>*/}
             </tr>
           </thead>
-          <tbody>
+          <tbody id="jabatan">
             <tr>
               <td class="border-t border-gray-200 px-5 py-2">
                 <input
                   type="text"
-                  class="border-0 focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
-                  style="min-width: 215px;"
+                  class="border focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
                   id="input-jabatan1"
-                  // value=""
-                  disabled
                 />
               </td>
               <td class="border-t border-gray-200 px-5 py-2 text-right">
                 <div id="btn-default-jabatan1">
-                  <button
-                    class="bg-indigo-200 hover:bg-indigo-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
-                    onClick={() => {
-                      meta.action.changeButtonJabatan(1);
-                    }}
-                  >
-                    <faicon iconName="edit" class="" />
-                  </button>
-                </div>
-                <div id="btn-action-jabatan1" class="hidden space-x-2">
-                  <button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
-                    <faicon iconName="save" class="" />
-                  </button>
                   <button class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
                     <faicon iconName="delete" class="" />
-                  </button>
-                  <button
-                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
-                    onClick={() => {
-                      meta.action.changeButtonJabatan(1);
-                    }}
-                  >
-                    <faicon iconName="cancel" class="" />
                   </button>
                 </div>
               </td>
@@ -168,6 +176,16 @@
             {/*btas*/}
           </tbody>
         </table>
+        <div class="flex flex-1 items-center justify-center">
+          <button
+            class="bg-indigo-900 text-white rounded-full w-8 h-8"
+            onClick={() => {
+              meta.action.tambahJabatan();
+            }}
+          >
+            <faicon iconName="plus" class="" />
+          </button>
+        </div>
       </div>
     </div>
     {/*<button*/}
