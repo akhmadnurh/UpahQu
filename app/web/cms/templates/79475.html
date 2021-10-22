@@ -3,15 +3,15 @@
     meta={{}}
     run={async () => {
       if (document.readyState === "complete") {
-        document.getElementById("karyawan").classList.toggle("bg-indigo-500");
+        document.getElementById("karyawan").classList.toggle("bg-indigo-900");
         document.getElementById("karyawan").classList.toggle("active");
         document.getElementById("text-karyawan").classList.toggle("text-white");
         document
           .getElementById("btn-divisi")
-          .classList.toggle("border-indigo-500");
+          .classList.toggle("border-indigo-900");
         document
           .getElementById("text-divisi")
-          .classList.toggle("text-indigo-500");
+          .classList.toggle("text-indigo-900");
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
