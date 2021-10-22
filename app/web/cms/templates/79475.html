@@ -1,6 +1,9 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      departemen: "",
+      action: {},
+    }}
     run={async () => {
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
@@ -15,6 +18,15 @@
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+
+      // Get data
+      const getData = () => {
+        const data = api("/api/r-departemen").then((res) => {
+          meta.departemen = res.departemen;
+        });
+      };
+      getData();
+
       meta.action = {};
     }}
   />
@@ -71,17 +83,12 @@
         column={[
           {
             name: "No",
-            selector: "no",
+            selector: (row, index) => ++index,
             sortable: true,
           },
           {
             name: "Nama Divisi",
-            selector: "nama_divisi",
-            sortable: true,
-          },
-          {
-            name: "Status",
-            selector: "status",
+            selector: "nama_departemen",
             sortable: true,
           },
           {
@@ -111,13 +118,7 @@
             ),
           },
         ]}
-        data={[
-          {
-            no: 1,
-            nama_divisi: "lorem",
-            status: "ipsum",
-          },
-        ]}
+        data={meta.departemen}
       />
     </div>
   </>
