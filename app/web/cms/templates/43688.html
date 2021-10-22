@@ -3,13 +3,15 @@
     meta={{}}
     run={async () => {
       const check = () => {
-        // If user has logged in
-        if (window.user.role == 1) {
-          //Navigate to admin page
-          navigate("/admin/data-karyawan");
-        } else if (window.user.role == 2) {
-          // Navigate to user page
-          navigate("/admin/data-karyawan");
+        if (window.user.loggedIn == true) {
+          // If user has logged in
+          if (window.user.role == 1) {
+            //Navigate to admin page
+            navigate("/admin/data-karyawan");
+          } else if (window.user.role == 2) {
+            // Navigate to user page
+            navigate("/admin/data-karyawan");
+          }
         }
       };
       check();

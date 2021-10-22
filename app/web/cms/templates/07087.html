@@ -21,7 +21,12 @@
       accordion();
       const check = () => {
         // If user has not logged in
-        if (window.user.role == "guest" || window.user.role == 2) {
+        if (
+          window.user.role == "guest" ||
+          window.user.role == 2 ||
+          window.user.loggedIn == false ||
+          window.user == null
+        ) {
           //Navigate to login page
           navigate("/login");
         }
