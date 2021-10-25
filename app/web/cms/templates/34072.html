@@ -1,6 +1,10 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      action: {},
+      departemen: "",
+      jabatan: "",
+    }}
     run={async () => {
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
@@ -15,6 +19,13 @@
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      // Get Departemen
+      const getDepartemen = () => {
+        api("/api/r-departemen").then((res) => {
+          meta.departemen = res.departemen;
+        });
+      };
+
       meta.action = {
         changeButtonDivisi: () => {
           document

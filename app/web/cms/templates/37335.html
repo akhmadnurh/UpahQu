@@ -1,6 +1,17 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      action: {},
+      departemenData: [],
+      jabatanData: [],
+      departemen: "#",
+      jabatan: "#",
+      isJabatanDisabled: true,
+      isSubmitDisabled: true,
+      nama: "",
+      noHP: "",
+      email: "",
+    }}
     run={async () => {
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
@@ -15,6 +26,59 @@
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+
+      // Get Departemen
+      const getDepartemen = () => {
+        api("/api/r-departemen").then((res) => {
+          meta.departemenData = res.departemen;
+        });
+      };
+      getDepartemen();
+
+      meta.action = {
+        setDepartemen: (e) => {
+          meta.departemen = e.target.value;
+          if (meta.departemen !== "#") {
+            api("/api/r-jabatan", {
+              id_departemen: parseInt(meta.departemen),
+            }).then((res) => {
+              meta.jabatanData = res.jabatan;
+              meta.isJabatanDisabled = false;
+            });
+          } else {
+            meta.jabatan = "#";
+            meta.isJabatanDisabled = true;
+            meta.jabatanData = [];
+          }
+        },
+        setJabatan: (e) => {
+          meta.jabatan = e.target.value;
+          if (meta.jabatan !== "#") {
+            meta.isSubmitDisabled = false;
+          } else {
+            meta.isSubmitDisabled = true;
+          }
+        },
+        addUser: () => {
+          api("/api/c-karyawan", {
+            nama_pengguna: meta.nama,
+            email: meta.email,
+            nomor_hp: meta.noHP,
+            id_jabatan: parseInt(meta.jabatan),
+          }).then((res) => {
+            console.log(res.status);
+          });
+        },
+        setNama: (e) => {
+          meta.nama = e.target.value;
+        },
+        setEmail: (e) => {
+          meta.email = e.target.value;
+        },
+        setNoHP: (e) => {
+          meta.noHP = e.target.value;
+        },
+      };
     }}
   />
   <>
@@ -23,6 +87,10 @@
         // method={method}
         // action={actionn}
         class="flex self-stretch flex-col space-y-10 items-center justify-center pt-5 pb-2.5 rounded-2xl"
+        onSubmit={(e) => {
+          meta.action.addUser();
+          e.preventDefault();
+        }}
       >
         <div class="text-sm font-bold text-center text-indigo-500">
           Tambah Data Karyawan
@@ -35,6 +103,8 @@
                 type="text"
                 class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
                 required
+                value={meta.nama}
+                onChange={(e) => meta.action.setNama(e)}
                 style="min-width: 215px;"
               />
             </div>
@@ -44,6 +114,8 @@
                 type="number"
                 class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
                 required
+                value={meta.noHP}
+                onChange={(e) => meta.action.setNoHP(e)}
                 style="min-width: 215px;"
               />
             </div>
@@ -53,6 +125,8 @@
                 type="email"
                 class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
                 required
+                value={meta.email}
+                onChange={(e) => meta.action.setEmail(e)}
                 style="min-width: 215px;"
               />
             </div>
@@ -74,17 +148,22 @@
                 <select
                   class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
                   placeholder="Regular input"
+                  value={meta.departemen}
+                  onChange={(e) => meta.action.setDepartemen(e)}
                 >
-                  <option>----------</option>
-                  <option>Another option</option>
-                  <option>And one more</option>
+                  <option value="#">----------</option>
+                  {meta.departemenData.map((val) => (
+                    <option value={val.id_departemen} key={val.id_departemen}>
+                      {val.nama_departemen}
+                    </option>
+                  ))}
                 </select>
                 <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                   <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
                     ></path>
                   </svg>
                 </div>
@@ -101,17 +180,25 @@
                 <select
                   class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
                   placeholder="Regular input"
+                  disabled={meta.isJabatanDisabled}
+                  value={meta.jabatan}
+                  onChange={(e) => {
+                    meta.action.setJabatan(e);
+                  }}
                 >
-                  <option>----------</option>
-                  <option>Another option</option>
-                  <option>And one more</option>
+                  <option value="#">----------</option>
+                  {meta.jabatanData.map((val) => (
+                    <option value={val.id_jabatan} key={val.id_jabatan}>
+                      {val.nama_jabatan}
+                    </option>
+                  ))}
                 </select>
                 <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                   <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
                     ></path>
                   </svg>
                 </div>
@@ -119,7 +206,11 @@
             </div>
           </div>
         </div>
-        <button class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md">
+        <button
+          type="submit"
+          disabled={meta.isSubmitDisabled}
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md"
+        >
           <span>Submit</span>
         </button>
       </form>
