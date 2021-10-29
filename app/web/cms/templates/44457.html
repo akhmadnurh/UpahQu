@@ -1,0 +1,22 @@
+<div>
+  <effect
+    meta={{}}
+    run={async () => {
+      const check = () => {
+        if (window.user.loggedIn == true || window.user.role !== "guest") {
+          // If user has logged in
+          if (window.user.role == 1) {
+            //Navigate to admin page
+            navigate("/admin/data-karyawan");
+          } else if (window.user.role == 2) {
+            // Navigate to user page
+            navigate("/admin/data-karyawan");
+          }
+        } else {
+          navigate("/login");
+        }
+      };
+      check();
+    }}
+  />
+</div>
