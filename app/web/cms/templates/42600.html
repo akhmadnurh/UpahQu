@@ -187,13 +187,16 @@
           {
             name: "Action",
             button: true,
-            cell: (row) => (
+            cell: (row, index) => (
               <>
                 <div class="space-x-2">
                   <button
                     class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
                     onClick={() => {
-                      navigate("/admin/data-karyawan/detail/");
+                      navigate(
+                        "/admin/data-karyawan/detail?id=" +
+                          meta.datakaryawan[index].id_pengguna
+                      );
                     }}
                   >
                     <faicon iconName="show" class="" />
@@ -201,7 +204,20 @@
                   <button
                     class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
                     onClick={() => {
-                      confirm("Press a button!");
+                      const conf = confirm("Are you sure?");
+                      if (conf) {
+                        api("/api/d-karyawan", {
+                          id_pengguna: meta.datakaryawan[index].id_pengguna,
+                        }).then((res) => {
+                          if (res.status == "success") {
+                            console.log("Success");
+                          } else {
+                            console.log("error");
+                          }
+                        });
+                      } else {
+                        console.log("cancel");
+                      }
                     }}
                   >
                     <faicon iconName="delete" class="" />
