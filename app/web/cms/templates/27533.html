@@ -1,7 +1,37 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      userdata: "",
+      nama_pengguna: "",
+      email: "",
+      id_departemen: "",
+      id_jabatan: "",
+      nomor_hp: "",
+      departemenData: [],
+      jabatanData: [],
+      jabatanState: false,
+      submitState: false,
+      action: {},
+    }}
     run={async () => {
+      // Get data
+      api("/api/detail-karyawan", { id_pengguna: params.id }).then((res) => {
+        meta.userdata = res.userdata;
+        meta.id_departemen = meta.userdata.jabatan.id_departemen;
+        meta.id_jabatan = meta.userdata.jabatan.id_jabatan;
+        meta.nama_pengguna = res.userdata.nama_pengguna;
+        meta.email = res.userdata.email;
+        meta.nomor_hp = res.userdata.nomor_hp;
+      });
+      api("/api/r-departemen").then((res) => {
+        meta.departemenData = res.departemen;
+        api("/api/r-jabatan", {
+          id_departemen: res.departemen.id_departemen,
+        }).then((res) => {
+          meta.jabatanData = res.jabatan;
+        });
+      });
+
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
         document.getElementById("karyawan").classList.toggle("active");
@@ -15,6 +45,57 @@
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+
+      meta.action = {
+        setDepartemen: (e) => {
+          meta.id_departemen = e.target.value;
+          // Set value jabatan
+          if (meta.id_departemen == "#") {
+            meta.id_jabatan = "#";
+            meta.jabatanState = true;
+            meta.submitState = true;
+          } else {
+            api("/api/r-jabatan", {
+              id_departemen: parseInt(meta.id_departemen),
+            }).then((res) => {
+              meta.jabatanData = res.jabatan;
+              meta.jabatanState = false;
+            });
+          }
+        },
+        setJabatan: (e) => {
+          meta.id_jabatan = e.target.value;
+          if (meta.id_jabatan == "#") {
+            meta.submitState = true;
+          } else {
+            meta.submitState = false;
+          }
+        },
+        setNama: (e) => {
+          meta.nama_pengguna = e.target.value;
+        },
+        setNomorHP: (e) => {
+          meta.nomor_hp = e.target.value;
+        },
+        setEmail: (e) => {
+          meta.email = e.target.value;
+        },
+        submitData: () => {
+          api("/api/u-karyawan", {
+            id_pengguna: params.id,
+            nama_pengguna: meta.nama_pengguna,
+            email: meta.email,
+            nomor_hp: meta.nomor_hp,
+            id_jabatan: meta.id_jabatan,
+          }).then((res) => {
+            if (res.status == "success") {
+              console.log("success");
+            } else {
+              console.log("error");
+            }
+          });
+        },
+      };
     }}
   />
   <>
@@ -23,6 +104,10 @@
         // method={method}
         // action={actionn}
         class="flex self-stretch flex-col space-y-10 items-center justify-center pt-5 pb-2.5 rounded-2xl"
+        onSubmit={(e) => {
+          meta.action.submitData();
+          e.preventDefault();
+        }}
       >
         <div class="text-sm font-bold text-center text-indigo-500">
           Edit Data Karyawan
@@ -35,15 +120,23 @@
                 type="text"
                 class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
                 required
+                defaultValue={meta.userdata.nama_pengguna}
+                onChange={(e) => {
+                  meta.action.setNama(e);
+                }}
                 style="min-width: 215px;"
               />
             </div>
             <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
               <div class="text-xs font-bold text-indigo-500">No.Hp</div>
               <input
-                type="number"
+                type="text"
                 class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
                 required
+                defaultValue={meta.userdata.nomor_hp}
+                onChange={(e) => {
+                  meta.action.setNomorHP(e);
+                }}
                 style="min-width: 215px;"
               />
             </div>
@@ -53,6 +146,10 @@
                 type="email"
                 class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
                 required
+                defaultValue={meta.userdata.email}
+                onChange={(e) => {
+                  meta.action.setEmail(e);
+                }}
                 style="min-width: 215px;"
               />
             </div>
@@ -74,17 +171,24 @@
                 <select
                   class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
                   placeholder="Regular input"
+                  value={meta.id_departemen}
+                  onChange={(e) => {
+                    meta.action.setDepartemen(e);
+                  }}
                 >
-                  <option>----------</option>
-                  <option>Another option</option>
-                  <option>And one more</option>
+                  <option value="#">-----</option>
+                  {meta.departemenData.map((val) => (
+                    <option value={val.id_departemen}>
+                      {val.nama_departemen}
+                    </option>
+                  ))}
                 </select>
                 <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                   <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
                     ></path>
                   </svg>
                 </div>
@@ -101,17 +205,23 @@
                 <select
                   class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
                   placeholder="Regular input"
+                  value={meta.id_jabatan}
+                  disabled={meta.jabatanState}
+                  onChange={(e) => {
+                    meta.action.setJabatan(e);
+                  }}
                 >
-                  <option>----------</option>
-                  <option>Another option</option>
-                  <option>And one more</option>
+                  <option value="#">-----</option>
+                  {meta.jabatanData.map((val) => (
+                    <option value={val.id_jabatan}>{val.nama_jabatan}</option>
+                  ))}
                 </select>
                 <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                   <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
                     ></path>
                   </svg>
                 </div>
@@ -119,7 +229,11 @@
             </div>
           </div>
         </div>
-        <button class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md">
+        <button
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md"
+          type="submit"
+          disabled={meta.submitState}
+        >
           <span>Submit</span>
         </button>
       </form>
