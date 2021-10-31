@@ -210,6 +210,9 @@
                           id_pengguna: meta.datakaryawan[index].id_pengguna,
                         }).then((res) => {
                           if (res.status == "success") {
+                            api("/api/r-karyawan").then((res) => {
+                              meta.datakaryawan = res.karyawan;
+                            });
                             console.log("Success");
                           } else {
                             console.log("error");

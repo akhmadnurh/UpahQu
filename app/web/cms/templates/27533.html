@@ -89,7 +89,7 @@
             id_jabatan: meta.id_jabatan,
           }).then((res) => {
             if (res.status == "success") {
-              console.log("success");
+              navigate("/admin/data-karyawan");
             } else {
               console.log("error");
             }
