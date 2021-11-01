@@ -33,4 +33,8 @@ export default {
     import("./components/form-data-karyawan"),
     { c: "", s: "", h: "" },
   ],
+  button_toggle: () => [
+    import("./components/button_toggle"),
+    { c: "", s: "", h: "" },
+  ],
 };
