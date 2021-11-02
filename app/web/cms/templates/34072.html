@@ -35,29 +35,6 @@
       // }
 
       meta.action = {
-        changeButtonDivisi: () => {
-          document
-            .getElementById("btn-default-divisi")
-            .classList.toggle("hidden");
-          document
-            .getElementById("btn-action-divisi")
-            .classList.toggle("hidden");
-          const inputDivisi = document.getElementById("input-divisi");
-          inputDivisi.toggleAttribute("disabled");
-          inputDivisi.classList.toggle("border");
-        },
-        changeButtonJabatan: (s) => {
-          document
-            .getElementById("btn-default-jabatan" + s)
-            .classList.toggle("hidden");
-          document
-            .getElementById("btn-action-jabatan" + s)
-            .classList.toggle("hidden");
-          const inputJabatan = document.getElementById("input-jabatan" + s);
-          inputJabatan.toggleAttribute("disabled");
-          inputJabatan.classList.toggle("border");
-        },
-
         tambahJabatan: () => {
           var tr = document.createElement("tr");
           var tdleft = document.createElement("td");
@@ -187,12 +164,8 @@
                   <button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
                     <faicon iconName="save" class="" />
                   </button>
-                  {/*<button class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">*/}
-                  {/*<faicon iconName="delete" class="" />*/}
-                  {/*</button>*/}
                 </td>
               </tr>
-              {/*btas*/}
             </tbody>
           </table>
           <div class="flex flex-1 items-center justify-center flex-col space-y-6">

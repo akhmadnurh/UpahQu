@@ -96,24 +96,14 @@
             button: true,
             cell: (row) => (
               <>
-                <div class="space-x-2">
-                  <button
-                    class="bg-indigo-200 hover:bg-indigo-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
-                    onClick={() => {
-                      navigate("#");
-                    }}
-                  >
-                    <faicon iconName="edit" class="" />
-                  </button>
-                  <button
-                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
-                    onClick={() => {
-                      navigate("/admin/divisi/detail");
-                    }}
-                  >
-                    <faicon iconName="show" class="" />
-                  </button>
-                </div>
+                <button
+                  class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold py-1 px-2 rounded inline-flex items-center"
+                  onClick={() => {
+                    navigate("/admin/divisi/detail");
+                  }}
+                >
+                  <faicon iconName="show" class="" />
+                </button>
               </>
             ),
           },
