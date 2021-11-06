@@ -5,6 +5,7 @@
       departemen: "",
       id_departemen: "",
       jabatan: "",
+      index: 0,
     }}
     run={async () => {
       if (document.readyState === "complete") {
@@ -27,15 +28,11 @@
         });
       };
 
-      // const form_jabatan = document.getElementById("form_jabatan");
-      // const btn_save_divisi = document.getElementById("btn-save-divisi");
-      // if (params.id == undefined) {
-      //   form_jabatan.classList.add("hidden");
-      // } else {
-      //   btn_save_divisi.classList.add("hidden");
-      // }
-
       meta.action = {
+        cancel: (i) => {
+          var myobj = document.getElementById("input" + i);
+          myobj.remove();
+        },
         tambahJabatan: () => {
           var tr = document.createElement("tr");
           var tdleft = document.createElement("td");
@@ -43,13 +40,18 @@
           var input = document.createElement("input");
           var buttonsave = document.createElement("button");
           var buttoncancel = document.createElement("button");
+          var idInput = meta.index + 1;
+
           input.classList.add(
             "border",
             "focus:outline-none",
-            "border-gray-500",
+            "focus:border-indigo-900",
+            "border-gray-300",
             "py-1.5",
             "px-3",
-            "rounded-xl"
+            "rounded",
+            "w-96",
+            "text-md"
           );
 
           buttonsave.classList.add(
@@ -78,27 +80,32 @@
             "w-7",
             "h-7"
           );
+          input.setAttribute("placeholder", "Masukkan jabatan ke " + idInput);
           buttonsave.innerHTML =
             '<img src="../../../save-solid.svg" class="w-2.5"></img>';
           buttoncancel.innerHTML =
             '<img src="../../../times-solid.svg" class="w-2.5"></img>';
+          buttoncancel.setAttribute("id", "input" + meta.index);
+          buttoncancel.onclick = function () {
+            meta.action.cancel(meta.index);
+          };
           tdleft.appendChild(input);
-          tdleft.classList.add("border-t", "border-gray-200", "px-5", "py-2");
           tdright.appendChild(buttonsave);
           tdright.appendChild(buttoncancel);
           tdright.classList.add(
-            "p-5",
             "text-right",
             "space-x-2",
             "w-full",
+            "py-3.5",
             "text-right",
             "inline-flex",
             "items-end",
             "justify-end"
           );
+          tr.classList.add("py-3");
+          tr.setAttribute("id", "input" + meta.index);
           tr.appendChild(tdleft);
           tr.appendChild(tdright);
-          tr.classList.add("border-t", "border-gray-200");
           document.getElementById("jabatan").appendChild(tr);
         },
         setDepartemen: (e) => {
@@ -110,6 +117,12 @@
               if (res.status == "success") {
                 // Tambah id_departemen
                 meta.id_departemen = res.id_departemen;
+                document
+                  .getElementById("form-jabatan")
+                  .classList.toggle("hidden");
+                document
+                  .getElementById("button-save-divisi")
+                  .classList.toggle("hidden");
                 // Tambah form jabatan
                 console.log(res.id_departemen);
               } else {
@@ -119,18 +132,43 @@
           );
         },
       };
+      document.getElementById("form-jabatan").classList.toggle("hidden");
     }}
   />
   <>
-    <div class="flex flex-col items-start justify-start bg-white shadow border rounded-2xl border-gray-200 w-3/4">
-      <div class="flex self-stretch items-center justify-between bg-white shadow-inner p-5 rounded-2xl">
-        <div class="flex flex-col items-start justify-start">
-          <div class="flex items-center justify-start">
-            <div class="text-lg font-bold text-black">Tambah Divisi</div>
-          </div>
-        </div>
-      </div>
-      <div class="w-full pb-5">
+    <a class="text-xl font-bold">Tambah Divisi</a>
+    <nav class="font-sans w-full mb-6 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs">
+        <li>
+          <a href="#" class="font-bold">
+            Karyawan
+          </a>
+        </li>
+        <li>
+          <span class="mx-2">></span>
+        </li>
+        <li>
+          <a href="#" class="font-bold">
+            Divisi
+          </a>
+        </li>
+        <li>
+          <span class="mx-2">></span>
+        </li>
+        <li>
+          <li>Tambah Divisi</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-md rounded w-3/4 p-8">
+      {/*<div class="flex self-stretch items-center justify-between bg-white shadow-inner p-5 rounded-2xl">*/}
+      {/*<div class="flex flex-col items-start justify-start">*/}
+      {/*<div class="flex items-center justify-start">*/}
+      {/*<div class="text-lg font-bold text-black">Tambah Divisi</div>*/}
+      {/*</div>*/}
+      {/*</div>*/}
+      {/*</div>*/}
+      <div class="w-full">
         <form
           onSubmit={(e) => {
             meta.action.submitDepartemen();
@@ -140,31 +178,27 @@
           <table class="w-full">
             <thead>
               <tr>
-                <th class=" border-gray-200 px-5 py-2 text-left">
-                  Nama Divisi
-                </th>
+                <th class="text-left text-sm font-normal">Nama Divisi</th>
               </tr>
             </thead>
-
             <tbody>
               <tr>
-                <td class="border-t border-gray-200 p-5">
+                <td class="py-2">
                   <input
                     type="text"
-                    class="border focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
+                    placeholder="Masukkan Divisi"
+                    class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
                     id="input-divisi"
                     onChange={(e) => meta.action.setDepartemen(e)}
                     required
                   />
                 </td>
-                <td
-                  class="border-t border-gray-200 px-5 py-2 text-right"
-                  id="btn-save-divisi"
-                >
+                <td class="py-2 text-right space-x-2" id="btn-save-divisi">
                   <div>
                     <button
                       class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
                       type="submit"
+                      id="button-save-divisi"
                     >
                       <faicon iconName="save" class="" />
                     </button>
@@ -175,25 +209,24 @@
           </table>
         </form>
 
-        <div id="form_jabatan">
-          <table class="w-full">
+        <div id="form-jabatan">
+          <table class="w-full mt-5">
             <thead>
               <tr>
-                <th class=" border-gray-200 px-5 py-2 text-left">
-                  Nama Jabatan
-                </th>
+                <th class="text-left text-sm font-normal">Nama Jabatan</th>
               </tr>
             </thead>
             <tbody id="jabatan">
               <tr>
-                <td class="border-t border-gray-200 p-5">
+                <td class="py-2">
                   <input
                     type="text"
-                    class="border focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
+                    placeholder="Masukkan jabatan ke 1"
+                    class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
                     id="input-jabatan1"
                   />
                 </td>
-                <td class="border-t border-gray-200 px-5 py-2 text-right space-x-2">
+                <td class="py-2 text-right space-x-2">
                   <button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
                     <faicon iconName="save" class="" />
                   </button>
@@ -201,14 +234,17 @@
               </tr>
             </tbody>
           </table>
-          <div class="flex flex-1 items-center justify-center flex-col space-y-6">
+          <div class="mt-1">
             <button
-              class="bg-gray-300 text-white rounded-full w-8 h-8 hover:bg-gray-400"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-900 text-xs font-medium py-1 px-2 rounded inline-flex items-center"
+              type="button"
               onClick={() => {
+                meta.index++;
                 meta.action.tambahJabatan();
               }}
             >
-              <faicon iconName="plus" class="" />
+              <faicon iconName="Plus" class="mr-2" />
+              <span>Tambah Jabatan</span>
             </button>
           </div>
         </div>

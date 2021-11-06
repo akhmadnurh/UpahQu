@@ -22,6 +22,7 @@
       const datakaryawan = async () => {
         api("/api/r-karyawan", {}).then((res) => {
           meta.datakaryawan = res.karyawan;
+
           console.log(meta.datakaryawan);
         });
       };
@@ -54,16 +55,57 @@
     // }}
   />
   <>
-    <button
-      class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md"
-      onClick={() => {
-        navigate("/admin/data-karyawan/tambah");
-      }}
-    >
-      <faicon iconName="Plus" class="mr-3" />
-      <span>Tambah Karyawan</span>
-    </button>
-    <div class="py-5 w-full filter drop-shadow-md">
+    <a class="text-xl font-bold">Data Karyawan</a>
+    <nav class="font-sans w-full mb-6 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs">
+        <li>
+          <a href="#" class="font-bold">
+            Karyawan
+          </a>
+        </li>
+        <li>
+          <span class="mx-2">></span>
+        </li>
+        <li>
+          <li>Data Karyawan</li>
+        </li>
+      </ol>
+    </nav>
+    {/*<div>*/}
+    {/*<button*/}
+    {/*class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"*/}
+    {/*onClick={() => {*/}
+    {/*navigate("/admin/data-karyawan/tambah");*/}
+    {/*}}*/}
+    {/*>*/}
+    {/*<faicon iconName="Plus" class="mr-3" />*/}
+    {/*<span>Tambah Karyawan</span>*/}
+    {/*</button>*/}
+    {/*asdasd*/}
+    {/*</div>*/}
+    <div class={`flex self-stretch items-center justify-start`}>
+      <div class="flex flex-1 justify-start">
+        <button
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
+          onClick={() => {
+            navigate("/admin/data-karyawan/tambah");
+          }}
+        >
+          <faicon iconName="Plus" class="mr-3" />
+          <span>Tambah Karyawan</span>
+        </button>
+      </div>
+      <div class="flex flex-1 items-center justify-end">
+        <input
+          type="text"
+          placeholder="Cari Data"
+          class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+          id="input-divisi"
+          // value=""
+        />
+      </div>
+    </div>
+    <div class="mt-5 w-full filter drop-shadow-sm bg-white p-3 rounded">
       {/*<div*/}
       {/*class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"*/}
       {/*role="alert"*/}
@@ -102,7 +144,7 @@
       {/*</span>*/}
       {/*</div>*/}
       <datatable
-        title={"Data Karyawan"}
+        // title={"Data Karyawan"}
         column={[
           {
             name: "No",
@@ -136,19 +178,17 @@
             sortable: true,
           },
           {
-            name: "Status Pengguna",
-            sortable: true,
-            // selector: "status_pengguna",
-            // omit: true,
-            button: true,
+            name: "Status",
+            selector: "status_pengguna",
+            center: true,
             cell: (row, index) => (
               <>
-                <div class="relative inline-block w-10 align-middle select-none transition duration-700 ease-in">
+                <div class="relative inline-block w-8 align-middle select-none transition duration-700 ease-in">
                   <input
                     type="checkbox"
                     name={"toggle" + index}
                     id={"toggle" + index}
-                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                    class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"
                     onClick={() => {
                       // Alert confirmation
                       const conf = confirm("Are you sure?");
@@ -180,7 +220,7 @@
                   />
                   <label
                     for={"toggle" + index}
-                    class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                    class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
                   ></label>
                 </div>
               </>

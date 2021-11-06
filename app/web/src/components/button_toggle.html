@@ -1,40 +1,13 @@
-<div class="relative inline-block w-10 align-middle select-none transition duration-700 ease-in">
-                  <input
-                    type="checkbox"
-                    name={"toggle" + index}
-                    id={"toggle" + index}
-                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-                    onClick={() => {
-                      // Alert confirmation
-                      const conf = confirm("Are you sure?");
-                      let btn = document.getElementById("toggle" + index);
-
-                      // If confirmed
-                      if (conf) {
-                        // Call API
-                        api("/api/toggle-karyawan", {
-                          id_pengguna: meta.datakaryawan[index].id_pengguna,
-                        }).then((res) => {
-                          // If response success, button will change to different side
-                          if (res.status === "error") {
-                            btn.checked = !btn.checked;
-                          } else {
-                            console.log("success");
-                          }
-                        });
-                      } else {
-                        btn.checked = !btn.checked;
-                      }
-                    }}
-                    defaultChecked={
-                      // Default checked checkbox
-                      meta.datakaryawan[index].status_pengguna == "active"
-                        ? true
-                        : false
-                    }
-                  />
-                  <label
-                    for={"toggle" + index}
-                    class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                  ></label>
-                </div>
+<div class="relative inline-block w-9 align-middle select-none transition duration-700 ease-in">
+  <input
+    type="checkbox"
+    name={"toggle" + id}
+    id={"toggle" + id}
+    class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"
+    checked={coba == "active" ? true : false}
+  />
+  <label
+    for={"toggle" + id}
+    class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
+  ></label>
+</div>

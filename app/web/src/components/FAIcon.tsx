@@ -1,6 +1,6 @@
 import { registerIcons } from '@fluentui/react/lib/Styling';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSortDown, faSortUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSortDown, faSortUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell } from '@fortawesome/free-solid-svg-icons';
 
 registerIcons({
   icons: {
@@ -14,7 +14,8 @@ registerIcons({
     delete : <FontAwesomeIcon icon={faTrash} />,
     cancel : <FontAwesomeIcon icon={faTimes} />,
     toggleNav : <FontAwesomeIcon icon={faBars} />,
-    save : <FontAwesomeIcon icon={faSave} />
+    save : <FontAwesomeIcon icon={faSave} />,
+    notifikasi : <FontAwesomeIcon icon={faBell} />
   }
 });
 

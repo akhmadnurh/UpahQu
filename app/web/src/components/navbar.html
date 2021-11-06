@@ -1,29 +1,24 @@
 <div
-  class={`flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-indigo-900 shadow`}
+  class={`flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-white`}
 >
-  <div class="flex flex-1 items-center justify-start px-5">
-    <faicon iconName="toggleNav" class="text-white" />
+  <div class="flex flex-1 items-center justify-start px-5 space-x-8">
+    <faicon iconName="toggleNav" class="text-indigo-900" />
+    <input
+          type="text"
+          placeholder="Cari Sesuatu"
+          class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+          id="input-divisi"
+          // value=""
+        />
   </div>
-  <div class="flex flex-1 space-x-2.5 items-center justify-end px-5">
+  <div class="flex flex-1 space-x-6 items-center justify-end px-5">
     <!-- <img
       src="/fimgs/186_5055.x1.svg"
       class="bg-white rounded-full"
       style="width: 28px; min-width: 28px; max-width: 28px; height: 28px; min-height: 28px; max-height: 28px;"
     /> -->
-    <div class="dropdown-profile">
-    <button class="text-sm font-medium text-white hover:text-gray-200 py-1">{window.user.name}
+    <div><faicon iconName="notifikasi" class="text-indigo-900" /></div>
+    <button class="text-xs font-medium text-white py-1 px-3 rounded-xl bg-indigo-900">Halo, {window.user.name}
     </button>
-    <div class="list-dropdown-profile hidden absolute z-50 right-5 top-10">
-        <div class="max-w-xs mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-xs">
-          <div class="md:flex">
-            <div class="p-8">
-              <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">lorem</div>
-              <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Lorem ipsum dolor sit.</a>
-              <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. In, dignissimos!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

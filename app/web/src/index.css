@@ -50,11 +50,11 @@ input[type='number'] {
 }
 
 .toggle-checkbox:checked {
-  @apply: right-0 border-green-400;
+  @apply: right-0 border-green-400; 
   right: 0;
-  border-color: #68d391;
+  border-color: #4fad73;
 }
 .toggle-checkbox:checked + .toggle-label {
   @apply: bg-green-400;
-  background-color: #68d391;
+  background-color: #4fad73;
 }
