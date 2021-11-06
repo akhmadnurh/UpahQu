@@ -3,6 +3,7 @@
     meta={{
       action: {},
       departemen: "",
+      id_departemen: "",
       jabatan: "",
     }}
     run={async () => {
@@ -100,6 +101,23 @@
           tr.classList.add("border-t", "border-gray-200");
           document.getElementById("jabatan").appendChild(tr);
         },
+        setDepartemen: (e) => {
+          meta.departemen = e.target.value;
+        },
+        submitDepartemen: () => {
+          api("/api/c-departemen", { nama_departemen: meta.departemen }).then(
+            (res) => {
+              if (res.status == "success") {
+                // Tambah id_departemen
+                meta.id_departemen = res.id_departemen;
+                // Tambah form jabatan
+                console.log(res.id_departemen);
+              } else {
+                console.log("error");
+              }
+            }
+          );
+        },
       };
     }}
   />
@@ -113,35 +131,50 @@
         </div>
       </div>
       <div class="w-full pb-5">
-        <table class="w-full">
-          <thead>
-            <tr>
-              <th class=" border-gray-200 px-5 py-2 text-left">Nama Divisi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="border-t border-gray-200 p-5">
-                <input
-                  type="text"
-                  class="border focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
-                  id="input-divisi"
-                  // value=""
-                />
-              </td>
-              <td
-                class="border-t border-gray-200 px-5 py-2 text-right"
-                id="btn-save-divisi"
-              >
-                <div>
-                  <button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
-                    <faicon iconName="save" class="" />
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <form
+          onSubmit={(e) => {
+            meta.action.submitDepartemen();
+            e.preventDefault();
+          }}
+        >
+          <table class="w-full">
+            <thead>
+              <tr>
+                <th class=" border-gray-200 px-5 py-2 text-left">
+                  Nama Divisi
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="border-t border-gray-200 p-5">
+                  <input
+                    type="text"
+                    class="border focus:outline-none border-gray-500 py-1.5 px-3 rounded-xl"
+                    id="input-divisi"
+                    onChange={(e) => meta.action.setDepartemen(e)}
+                    required
+                  />
+                </td>
+                <td
+                  class="border-t border-gray-200 px-5 py-2 text-right"
+                  id="btn-save-divisi"
+                >
+                  <div>
+                    <button
+                      class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
+                      type="submit"
+                    >
+                      <faicon iconName="save" class="" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+
         <div id="form_jabatan">
           <table class="w-full">
             <thead>
