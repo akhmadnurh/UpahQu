@@ -3,8 +3,10 @@
     meta={{
       action: {},
       departemen: "",
+      departemenState: false,
+      jabatanState: true,
       id_departemen: "",
-      jabatan: "",
+      jabatan: [],
       index: 0,
     }}
     run={async () => {
@@ -31,9 +33,14 @@
       meta.action = {
         cancel: (i) => {
           var myobj = document.getElementById("input" + i);
+          meta.index -= 1;
+          meta.jabatanState = false;
           myobj.remove();
         },
         tambahJabatan: () => {
+          // Set jabatanState to true
+          meta.jabatanState = true;
+
           var tr = document.createElement("tr");
           var tdleft = document.createElement("td");
           var tdright = document.createElement("td");
@@ -41,7 +48,7 @@
           var buttonsave = document.createElement("button");
           var buttoncancel = document.createElement("button");
           var idInput = meta.index + 1;
-
+          const id = meta.index;
           input.classList.add(
             "border",
             "focus:outline-none",
@@ -81,13 +88,25 @@
             "h-7"
           );
           input.setAttribute("placeholder", "Masukkan jabatan ke " + idInput);
+          input.setAttribute("id", "input-jabatan" + meta.index);
           buttonsave.innerHTML =
             '<img src="../../../save-solid.svg" class="w-2.5"></img>';
           buttoncancel.innerHTML =
             '<img src="../../../times-solid.svg" class="w-2.5"></img>';
-          buttoncancel.setAttribute("id", "input" + meta.index);
+          buttonsave.setAttribute("id", "save-button" + id);
+          buttonsave.onclick = () => {
+            if (document.getElementById("input-jabatan" + id).value == "") {
+              console.log("error");
+            } else {
+              meta.action.submitJabatan(id);
+            }
+          };
+          buttoncancel.setAttribute("id", "cancel-button" + id);
           buttoncancel.onclick = function () {
-            meta.action.cancel(meta.index);
+            meta.action.cancel(id);
+          };
+          input.onchange = (e) => {
+            meta.action.setJabatan(id, e);
           };
           tdleft.appendChild(input);
           tdright.appendChild(buttonsave);
@@ -117,6 +136,7 @@
               if (res.status == "success") {
                 // Tambah id_departemen
                 meta.id_departemen = res.id_departemen;
+                meta.departemenState = true;
                 document
                   .getElementById("form-jabatan")
                   .classList.toggle("hidden");
@@ -130,6 +150,46 @@
               }
             }
           );
+        },
+        submitJabatan: (index) => {
+          if (document.getElementById("input-jabatan" + index).value !== "") {
+            api("/api/c-jabatan", {
+              id_departemen: meta.id_departemen.id_departemen,
+              nama_jabatan: meta.jabatan[index].nama_jabatan,
+            }).then((res) => {
+              if (res.status == "success") {
+                meta.jabatanState = false;
+
+                // Hide save & cancel btn
+                if (index == 0) {
+                  document
+                    .getElementById("save-button" + index)
+                    .classList.toggle("hidden");
+                } else {
+                  document
+                    .getElementById("cancel-button" + index)
+                    .classList.toggle("hidden");
+                  document
+                    .getElementById("save-button" + index)
+                    .classList.toggle("hidden");
+                }
+                document
+                  .getElementById("input-jabatan" + index)
+                  .setAttribute("disabled", "disabled");
+              } else {
+                console.log("error");
+              }
+            });
+          } else {
+            console.log("error submit");
+          }
+        },
+        setJabatan: (index, e) => {
+          meta.jabatan[index] = {
+            index: index,
+            nama_jabatan: e.target.value,
+          };
+          console.log(meta.jabatan[index].nama_jabatan);
         },
       };
       document.getElementById("form-jabatan").classList.toggle("hidden");
@@ -154,6 +214,8 @@
         </li>
         <li>
           <span class="mx-2">></span>
+          It is recommended not to make any process of uploading or downloading
+          files or make use of any device associated with the optical terminal.
         </li>
         <li>
           <li>Tambah Divisi</li>
@@ -191,6 +253,7 @@
                     id="input-divisi"
                     onChange={(e) => meta.action.setDepartemen(e)}
                     required
+                    disabled={meta.departemenState}
                   />
                 </td>
                 <td class="py-2 text-right space-x-2" id="btn-save-divisi">
@@ -223,17 +286,24 @@
                     type="text"
                     placeholder="Masukkan jabatan ke 1"
                     class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
-                    id="input-jabatan1"
+                    id="input-jabatan0"
+                    required
+                    onChange={(e) => meta.action.setJabatan(0, e)}
                   />
                 </td>
                 <td class="py-2 text-right space-x-2">
-                  <button class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7">
+                  <button
+                    class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
+                    onClick={() => meta.action.submitJabatan(0)}
+                    id="save-button0"
+                  >
                     <faicon iconName="save" class="" />
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
+
           <div class="mt-1">
             <button
               class="bg-gray-200 hover:bg-gray-300 text-gray-900 text-xs font-medium py-1 px-2 rounded inline-flex items-center"
@@ -242,6 +312,7 @@
                 meta.index++;
                 meta.action.tambahJabatan();
               }}
+              disabled={meta.jabatanState}
             >
               <faicon iconName="Plus" class="mr-2" />
               <span>Tambah Jabatan</span>
