@@ -1,6 +1,8 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      action: {},
+    }}
     run={async () => {
       const accordion = () => {
         var coll = document.getElementsByClassName("collapsible");
@@ -32,22 +34,226 @@
         }
       };
       check();
+
+      meta.action = {
+        logout: () => {
+          window.user = null;
+          navigate("/login");
+        },
+        dashboard: () => {
+          navigate("/admin/dashboard");
+        },
+        divisi: () => {
+          navigate("/admin/divisi");
+        },
+        dataKaryawan: () => {
+          navigate("/admin/data-karyawan");
+        },
+        hideSidebar: () => {
+          document.getElementById("sidebar").classList.toggle("w-0");
+          // console.log("hahah");
+        },
+      };
     }}
   />
   <div class="flex flex-col items-start justify-start bg-white" style="">
     <div class={`flex flex-1 self-stretch justify-center bg-white z-10`}>
       <div
-        class={`flex self-stretch flex-col items-center justify-center filter drop-shadow-sm h-screen sticky top-0 overflow-y-auto`}
+        id="sidebar"
+        class="flex self-stretch flex-col items-center h-screen sticky top-0 overflow-y-auto"
       >
-        <sidebar
-          class={`flex flex-1 self-stretch items-start justify-start rounded-2xl`}
-        />
+        <div class="lg:w-72 md:w-0 sm:w-0 lg:px-8 md:px-0 sm:px-0 h-full">
+          {/*<sidebar*/}
+          {/*class={`flex flex-1 self-stretch items-start justify-start rounded-2xl`}*/}
+          {/*/>*/}
+          {/*sidebar*/}
+          <div class={`flex flex-1 self-stretch items-start justify-start`}>
+            <div
+              class={`flex flex-1 self-stretch flex-col space-y-3 items-start justify-start pb-8 lg:block md:hidden`}
+            >
+              <div class="flex space-x-2.5 items-center justify-center px-3 pt-8 pb-5">
+                <img
+                  src="/fimgs/849_13529.x3.png"
+                  class="flex self-stretch flex-col items-start justify-start"
+                  style="width: 30px; min-width: 30px; max-width: 30px; height: 28.40px; min-height: 28.40px; max-height: 28.40px;"
+                />
+                <img
+                  src="/fimgs/849_13530.x1.svg"
+                  class="flex flex-col items-start justify-start"
+                  style="width: 72px; min-width: 72px; max-width: 72px; height: 27px; min-height: 27px; max-height: 27px;"
+                />
+              </div>
+              <button
+                class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                id="dashboard"
+                onClick={() => {
+                  meta.action.dashboard();
+                }}
+              >
+                <div
+                  class="text-sm font-bold flex flex-row w-full"
+                  id="text-dashboard"
+                >
+                  <div class="w-8 text-left">
+                    <faicon iconName="dashboard" />
+                  </div>
+                  <div>Dashboard</div>
+                </div>
+              </button>
+              <div class="flex self-stretch flex-col items-start justify-center rounded">
+                <button
+                  class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                  id="karyawan"
+                >
+                  <div class="flex flex-1 self-stretch flex-col items-start justify-center">
+                    <div
+                      class="text-sm font-bold flex flex-row w-full"
+                      id="text-karyawan"
+                    >
+                      <div class="w-8 text-left">
+                        <faicon iconName="karyawan" />
+                      </div>
+                      <div>Karyawan</div>
+                    </div>
+                  </div>
+                </button>
+                <div class="items-start justify-center pl-7 mr-10 content w-full">
+                  <button
+                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3"
+                    id="btn-data-karyawan"
+                    onClick={() => {
+                      meta.action.dataKaryawan();
+                    }}
+                  >
+                    <div class="text-sm font-semibold" id="text-data-karyawan">
+                      Data Karyawan
+                    </div>
+                  </button>
+                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
+                    <div class="text-sm font-semibold">
+                      Parameter Penggajian
+                    </div>
+                  </button>
+                  <button
+                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900"
+                    id="btn-divisi"
+                    onClick={() => {
+                      meta.action.divisi();
+                    }}
+                  >
+                    <div class="text-sm font-semibold" id="text-divisi">
+                      Divisi
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex self-stretch flex-col items-start justify-center rounded">
+                <button
+                  class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                  id="gaji"
+                >
+                  <div class="flex flex-1 self-stretch flex-col items-start justify-center">
+                    <div
+                      class="text-sm font-bold flex flex-row w-full"
+                      id="text-gaji"
+                    >
+                      <div class="w-8 text-left">
+                        <faicon iconName="gaji" />
+                      </div>
+                      <div>Gaji</div>
+                    </div>
+                  </div>
+                </button>
+                <div class="items-start justify-center pl-7 mr-10 content w-full">
+                  <button
+                    id="btn-informasi-gaji"
+                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3"
+                  >
+                    <div class="text-sm font-semibold" id="text-informasi-gaji">
+                      Informasi Gaji
+                    </div>
+                  </button>
+                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
+                    <div class="text-sm font-semibold">Pengeluaran Uang</div>
+                  </button>
+                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
+                    <div class="text-sm font-semibold">Pemasukan Uang</div>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex self-stretch flex-col items-start justify-center rounded">
+                <button
+                  class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                  id="presensi"
+                >
+                  <div class="flex flex-1 self-stretch flex-col items-start justify-center">
+                    <div
+                      class="text-sm font-bold flex flex-row w-full"
+                      id="text-presensi"
+                    >
+                      <div class="w-8 text-left">
+                        <faicon iconName="presensi" />
+                      </div>
+                      <div>Presensi</div>
+                    </div>
+                  </div>
+                </button>
+                <div class="items-start justify-center pl-7 mr-10 content w-full">
+                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3">
+                    <div class="text-sm font-semibold">List Kehadiran</div>
+                  </button>
+                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
+                    <div class="text-sm font-semibold">List Perizinan</div>
+                  </button>
+                </div>
+              </div>
+              <button
+                class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                onClick={() => {
+                  meta.action.logout();
+                }}
+              >
+                <div class="text-sm font-bold flex flex-row w-full">
+                  <div class="w-8 text-left">
+                    <faicon iconName="logout" />
+                  </div>
+                  <div>Logout</div>
+                </div>
+              </button>
+            </div>
+          </div>
+          {/*end of sidebar*/}
+        </div>
       </div>
       <div class="flex flex-1 flex-col">
         <div class="sticky top-0 z-20 filter drop-shadow-sm">
-          <navbar
-            class={`flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-indigo-900 shadow`}
-          />
+          {/*<navbar class="flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-indigo-900 shadow" />*/}
+          <div class="flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-white">
+            <div class="flex flex-1 items-center justify-start px-5 space-x-8">
+              <button
+                onClick={() => {
+                  meta.action.hideSidebar();
+                }}
+              >
+                <faicon iconName="toggleNav" class="text-indigo-900" />
+              </button>
+              <input
+                type="text"
+                placeholder="Cari Sesuatu"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+              />
+            </div>
+            <div class="flex flex-1 space-x-6 items-center justify-end px-5">
+              <div>
+                <faicon iconName="notifikasi" class="text-indigo-900" />
+              </div>
+              <button class="text-xs font-medium text-white py-1 px-3 rounded-xl bg-indigo-900">
+                Halo, {window.user.name}
+              </button>
+            </div>
+          </div>
         </div>
         <div
           class={`flex flex-1 self-stretch flex-col items-start justify-start p-10 bg-gray-100`}

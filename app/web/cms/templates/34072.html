@@ -67,12 +67,12 @@
             "text-black",
             "text-xs",
             "font-bold",
+            "w-7",
+            "h-6",
             "rounded",
             "inline-flex",
             "items-center",
-            "justify-center",
-            "w-7",
-            "h-7"
+            "justify-center"
           );
           buttoncancel.classList.add(
             "bg-gray-200",
@@ -80,12 +80,12 @@
             "text-black",
             "text-xs",
             "font-bold",
+            "w-7",
+            "h-6",
             "rounded",
             "inline-flex",
             "items-center",
-            "justify-center",
-            "w-7",
-            "h-7"
+            "justify-center"
           );
           input.setAttribute("placeholder", "Masukkan jabatan ke " + idInput);
           input.setAttribute("id", "input-jabatan" + meta.index);
@@ -119,9 +119,9 @@
             "text-right",
             "inline-flex",
             "items-end",
-            "justify-end"
+            "justify-center"
           );
-          tr.classList.add("py-3");
+          tr.classList.add("py-3.5");
           tr.setAttribute("id", "input" + meta.index);
           tr.appendChild(tdleft);
           tr.appendChild(tdright);
@@ -197,39 +197,26 @@
   />
   <>
     <a class="text-xl font-bold">Tambah Divisi</a>
-    <nav class="font-sans w-full mb-6 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs">
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
         <li>
-          <a href="#" class="font-bold">
-            Karyawan
-          </a>
+          <a href="#">Karyawan</a>
         </li>
         <li>
-          <span class="mx-2">></span>
+          <faicon iconName="arrowRight" />
         </li>
         <li>
-          <a href="#" class="font-bold">
-            Divisi
-          </a>
+          <a href="#">Divisi</a>
         </li>
         <li>
-          <span class="mx-2">></span>
-          It is recommended not to make any process of uploading or downloading
-          files or make use of any device associated with the optical terminal.
+          <faicon iconName="arrowRight" />
         </li>
         <li>
           <li>Tambah Divisi</li>
         </li>
       </ol>
     </nav>
-    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-md rounded w-3/4 p-8">
-      {/*<div class="flex self-stretch items-center justify-between bg-white shadow-inner p-5 rounded-2xl">*/}
-      {/*<div class="flex flex-col items-start justify-start">*/}
-      {/*<div class="flex items-center justify-start">*/}
-      {/*<div class="text-lg font-bold text-black">Tambah Divisi</div>*/}
-      {/*</div>*/}
-      {/*</div>*/}
-      {/*</div>*/}
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-3/4 p-8">
       <div class="w-full">
         <form
           onSubmit={(e) => {
@@ -259,7 +246,7 @@
                 <td class="py-2 text-right space-x-2" id="btn-save-divisi">
                   <div>
                     <button
-                      class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
+                      class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                       type="submit"
                       id="button-save-divisi"
                     >
@@ -293,7 +280,7 @@
                 </td>
                 <td class="py-2 text-right space-x-2">
                   <button
-                    class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold rounded inline-flex items-center justify-center w-7 h-7"
+                    class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => meta.action.submitJabatan(0)}
                     id="save-button0"
                   >

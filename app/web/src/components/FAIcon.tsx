@@ -1,6 +1,6 @@
 import { registerIcons } from '@fluentui/react/lib/Styling';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSortDown, faSortUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSortDown, faSortUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell , faChevronRight, faCheckCircle, faTachometerAlt, faUsers, faMoneyBill, faChalkboardTeacher, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 registerIcons({
   icons: {
@@ -15,7 +15,14 @@ registerIcons({
     cancel : <FontAwesomeIcon icon={faTimes} />,
     toggleNav : <FontAwesomeIcon icon={faBars} />,
     save : <FontAwesomeIcon icon={faSave} />,
-    notifikasi : <FontAwesomeIcon icon={faBell} />
+    notifikasi : <FontAwesomeIcon icon={faBell} />,
+    arrowRight : <FontAwesomeIcon icon={faChevronRight} />,
+    success : <FontAwesomeIcon icon={faCheckCircle} />,
+    dashboard : <FontAwesomeIcon icon={faTachometerAlt} />,
+    karyawan : <FontAwesomeIcon icon={faUsers} />,
+    gaji : <FontAwesomeIcon icon={faMoneyBill} />,
+    presensi : <FontAwesomeIcon icon={faChalkboardTeacher} />,
+    logout : <FontAwesomeIcon icon={faSignOutAlt} />,
   }
 });
 
