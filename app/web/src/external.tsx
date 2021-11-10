@@ -27,6 +27,9 @@ export default {
     { c: "", s: "", h: "" },
   ],
   datatable: () => [import("./components/datatable"), { c: "", s: "", h: "" }],
+  bar_chart: () => [import("./components/bar_chart"), { c: "", s: "", h: "" }],
+  line_chart: () => [import("./components/line_chart"), { c: "", s: "", h: "" }],
+  doughnut_chart: () => [import("./components/doughnut_chart"), { c: "", s: "", h: "" }],
   navbar: () => [import("./components/navbar"), { c: "", s: "", h: "" }],
   sidebar: () => [import("./components/sidebar"), { c: "", s: "", h: "" }],
   "form-data-karyawan": () => [

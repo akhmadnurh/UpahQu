@@ -22,8 +22,6 @@
       const datakaryawan = async () => {
         api("/api/r-karyawan", {}).then((res) => {
           meta.datakaryawan = res.karyawan;
-
-          console.log(meta.datakaryawan);
         });
       };
       datakaryawan();
@@ -86,7 +84,8 @@
           type="text"
           placeholder="Cari Data"
           class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
-          // value=""
+          // value={meta.value}
+          // onChange={(e) => meta.onChange(e.target.value)}
         />
       </div>
     </div>
@@ -126,33 +125,33 @@
           },
           {
             name: "Nama Karyawan",
-            selector: "nama_pengguna",
+            selector: (row) => row.nama_pengguna,
             sortable: true,
             // const user = await prisma.user({ nama }),
           },
           {
             name: "No.Hp",
-            selector: "nomor_hp",
+            selector: (row) => row.nomor_hp,
             sortable: true,
           },
           {
             name: "Email",
-            selector: "email",
+            selector: (row) => row.email,
             sortable: true,
           },
           {
             name: "Divisi",
-            selector: "jabatan.departemen.nama_departemen",
+            selector: (row) => row.jabatan.departemen.nama_departemen,
             sortable: true,
           },
           {
             name: "Jabatan",
-            selector: "jabatan.nama_jabatan",
+            selector: (row) => row.jabatan.nama_jabatan,
             sortable: true,
           },
           {
             name: "Status",
-            selector: "status_pengguna",
+            selector: (row) => row.status_pengguna,
             center: true,
             cell: (row, index) => (
               <>

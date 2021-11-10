@@ -86,71 +86,75 @@
     }}
   />
   <>
-    <div class="w-full">
+    <a class="text-xl font-bold">Tambah Karyawan</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Karyawan</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <a href="#">Data Karyawan</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Tambah Karyawan</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-3/4 p-8">
       <form
         // method={method}
         // action={actionn}
-        class="flex self-stretch flex-col space-y-10 items-center justify-center pt-5 pb-2.5 rounded-2xl"
+        class="w-full"
         onSubmit={(e) => {
           meta.action.addUser();
           e.preventDefault();
         }}
       >
-        <div class="text-sm font-bold text-center text-indigo-500">
-          Tambah Data Karyawan
-        </div>
-        <div class="flex space-x-5 items-start justify-center p-10 bg-white border rounded-lg border-indigo-200">
-          <div class="flex flex-col space-y-5 items-start justify-start">
-            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
-              <div class="text-xs font-bold text-indigo-500">Nama</div>
+        <div class="flex items-start justify-center w-full space-x-10">
+          <div class="flex flex-col space-y-5 items-start justify-start w-full">
+            <div class="flex flex-col space-y-2 items-start justify-center w-full">
+              <div class="text-sm font-bold text-black">Nama Karyawan</div>
               <input
                 type="text"
-                class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                onChange={(e) => meta.action.setNama(e)}
                 required
                 value={meta.nama}
-                onChange={(e) => meta.action.setNama(e)}
-                style="min-width: 215px;"
               />
             </div>
-            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
-              <div class="text-xs font-bold text-indigo-500">No.Hp</div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">No.Hp</div>
               <input
                 type="number"
-                class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
+                class={`border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md`}
                 required
                 value={meta.noHP}
                 onChange={(e) => meta.action.setNoHP(e)}
-                style="min-width: 215px;"
               />
             </div>
-            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
-              <div class="text-xs font-bold text-indigo-500">Email</div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Email</div>
               <input
                 type="email"
-                class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}
+                class={`border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md`}
                 required
                 value={meta.email}
                 onChange={(e) => meta.action.setEmail(e)}
-                style="min-width: 215px;"
               />
             </div>
           </div>
-          <div class="flex flex-col space-y-5 items-start justify-start">
-            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
-              <div class="text-xs font-bold text-indigo-500">
-                Divisi Karyawan
-              </div>
-              {/*<input*/}
-              {/*type="text"*/}
-              {/*class={`border border-indigo-300 py-1.5 px-3 rounded-xl`}*/}
-              {/*required*/}
-              {/*/>*/}
-              <div
-                class="relative inline-block w-full text-gray-700"
-                style="min-width: 215px;"
-              >
+          <div class="flex flex-col space-y-5 items-start justify-start w-full">
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Divisi Karyawan</div>
+              <div class="relative inline-block w-full text-gray-700">
                 <select
-                  class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
+                  class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md appearance-none"
                   placeholder="Regular input"
                   value={meta.departemen}
                   onChange={(e) => meta.action.setDepartemen(e)}
@@ -173,16 +177,11 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-col space-y-1 items-start justify-center px-6 rounded-lg">
-              <div class="text-xs font-bold text-indigo-500">
-                Jabatan Karyawan
-              </div>
-              <div
-                class="relative inline-block w-full text-gray-700"
-                style="min-width: 215px;"
-              >
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Jabatan Karyawan</div>
+              <div class="relative inline-block w-full text-gray-700">
                 <select
-                  class="w-full text-base placeholder-gray-600 border border-indigo-300 py-1.5 px-3 pr-7 rounded-xl appearance-none focus:shadow-outline"
+                  class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md appearance-none"
                   placeholder="Regular input"
                   disabled={meta.isJabatanDisabled}
                   value={meta.jabatan}
@@ -210,13 +209,17 @@
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          disabled={meta.isSubmitDisabled}
-          class="bg-indigo-900 hover:bg-indigo-800 text-white text-sm font-bold py-2 px-4 rounded-lg inline-flex items-center filter drop-shadow-md"
-        >
-          <span>Submit</span>
-        </button>
+        <div class="flex items-center justify-center">
+          <button
+            type="submit"
+            disabled={meta.isSubmitDisabled}
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Submit</span>
+          </button>
+          {/*     asas     */}
+          {/*asas*/}
+        </div>
       </form>
     </div>
   </>

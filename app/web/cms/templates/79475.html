@@ -23,11 +23,14 @@
       const getData = () => {
         const data = api("/api/r-departemen").then((res) => {
           meta.departemen = res.departemen;
+
+          // console.log(meta.departemen);
         });
       };
       getData();
+      console.log(meta.departemen.target.value);
 
-      meta.action = {};
+      // meta.action = {};
     }}
   />
   <>
@@ -71,12 +74,12 @@
         column={[
           {
             name: "No",
-            selector: (row, index) => ++index,
+            selector: (row, index) => index + 1,
             sortable: true,
           },
           {
             name: "Nama Divisi",
-            selector: "nama_departemen",
+            selector: (row) => row.nama_departemen,
             sortable: true,
           },
           {
