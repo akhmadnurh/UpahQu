@@ -82,12 +82,15 @@
           {
             name: "Action",
             button: true,
-            cell: (row) => (
+            cell: (row, index) => (
               <>
                 <button
                   class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                   onClick={() => {
-                    navigate("/admin/divisi/detail");
+                    navigate(
+                      "/admin/divisi/detail/" +
+                        meta.departemen[index].id_departemen
+                    );
                   }}
                 >
                   <faicon iconName="show" class="" />
