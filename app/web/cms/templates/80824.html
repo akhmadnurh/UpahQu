@@ -32,7 +32,7 @@
                 }
               } else {
                 document.getElementById("alert").innerHTML =
-                  '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"> <strong class="font-bold">Email atau Password Anda Salah </strong></div>';
+                  '<div class="flex self-stretch items-center justify-center text-sm text-center text-white bg-red-500 h-12 items-center p-4 rounded w-full"><div class="flex flex-1 justify-center items-center">Email atau password anda salah.</div></div>';
               }
             });
           });
@@ -46,81 +46,146 @@
     }}
   />
   <>
-    <div
-      class={`flex flex-1 self-stretch items-center justify-center p-24 bg-white`}
-    >
-      <div
-        class={`flex flex-1 self-stretch items-center justify-center shadow-lg rounded-2xl flex-col lg:flex-row`}
-      >
-        <div
-          class={`flex flex-1 self-stretch flex-col space-y-24 items-center justify-center p-8 rounded-tl-2xl rounded-bl-2xl lg:rounded-tr-none lg:rounded-br-none lg:rounded-tl-2xl lg:rounded-bl-2xl`}
-          style={`background-image: url('/fimgs/bg-638530deb7fed74f740e6e857a0ca12f1a553845');background-size:100% 100%;background-repeat:no-repeat;`}
-        >
-          <div />
-          <img
-            src="/fimgs/424_6527.x3.png"
-            style="width: 131.52px; min-width: 131.52px; max-width: 131.52px; height: 50px; min-height: 50px; max-height: 50px;background-image: url('/fimgs/bg-9b3bfae3f6d9b076a99172604d0c5a5622ad67df');background-size:100% 100%;background-repeat:no-repeat;"
-          />
-          <div class="flex items-start justify-start py-0.5 rounded-2xl">
-            <div class="text-xl font-semibold text-center text-gray-50">
-              "You've got to make your team have value, inovation, and vision."
-              <br />
-              -Jack Ma
-            </div>
-          </div>
-          <div />
-        </div>
-        <form
-          class={`flex flex-1 self-stretch flex-col space-y-8 items-center justify-center px-24 py-2.5 bg-white rounded-tr-2xl rounded-br-2xl pt-10 pb-10 lg:pt-0 lg:pb-0 lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-tl-none lg:rounded-bl-none`}
-          method="POST"
-          onSubmit={(e) => {
-            meta.action.login();
-            e.preventDefault();
-          }}
-        >
-          <div id="alert"></div>
+    {/*<div*/}
+    {/*class={`flex flex-1 self-stretch items-center justify-center p-24 bg-white`}*/}
+    {/*>*/}
+    {/*<div*/}
+    {/*class={`flex flex-1 self-stretch items-center justify-center shadow-lg rounded-2xl flex-col lg:flex-row`}*/}
+    {/*>*/}
+    {/*<div*/}
+    {/*class={`flex flex-1 self-stretch flex-col space-y-24 items-center justify-center p-8 rounded-tl-2xl rounded-bl-2xl lg:rounded-tr-none lg:rounded-br-none lg:rounded-tl-2xl lg:rounded-bl-2xl`}*/}
+    {/*style={`background-image: url('/fimgs/bg-638530deb7fed74f740e6e857a0ca12f1a553845');background-size:100% 100%;background-repeat:no-repeat;`}*/}
+    {/*>*/}
+    {/*<div />*/}
+    {/*<img*/}
+    {/*src="/fimgs/424_6527.x3.png"*/}
+    {/*style="width: 131.52px; min-width: 131.52px; max-width: 131.52px; height: 50px; min-height: 50px; max-height: 50px;background-image: url('/fimgs/bg-9b3bfae3f6d9b076a99172604d0c5a5622ad67df');background-size:100% 100%;background-repeat:no-repeat;"*/}
+    {/*/>*/}
+    {/*<div class="flex items-start justify-start py-0.5 rounded-2xl">*/}
+    {/*<div class="text-xl font-semibold text-center text-gray-50">*/}
+    {/*"You've got to make your team have value, inovation, and vision."*/}
+    {/*<br />*/}
+    {/*-Jack Ma*/}
+    {/*</div>*/}
+    {/*</div>*/}
+    {/*<div />*/}
+    {/*</div>*/}
+    {/*<form*/}
+    {/*class={`flex flex-1 self-stretch flex-col space-y-8 items-center justify-center px-24 py-2.5 bg-white rounded-tr-2xl rounded-br-2xl pt-10 pb-10 lg:pt-0 lg:pb-0 lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-tl-none lg:rounded-bl-none`}*/}
+    {/*method="POST"*/}
+    {/*onSubmit={(e) => {*/}
+    {/*meta.action.login();*/}
+    {/*e.preventDefault();*/}
+    {/*}}*/}
+    {/*>*/}
+    {/*<div id="alert"></div>*/}
+    {/**/}
+    {/*<div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">*/}
+    {/*<div class="text-base font-medium text-indigo-900">Email</div>*/}
+    {/*<input*/}
+    {/*type="email"*/}
+    {/*class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}*/}
+    {/*onChange={(e) => {*/}
+    {/*meta.action.changeEmail(e);*/}
+    {/*}}*/}
+    {/*onFocus={() => {*/}
+    {/*meta.action.removeAlert();*/}
+    {/*}}*/}
+    {/*required*/}
+    {/*/>*/}
+    {/*</div>*/}
+    {/*<div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">*/}
+    {/*<div class="text-base font-medium text-indigo-900">Password</div>*/}
+    {/*<input*/}
+    {/*type="password"*/}
+    {/*class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}*/}
+    {/*onChange={(e) => {*/}
+    {/*meta.action.changePassword(e);*/}
+    {/*}}*/}
+    {/*onFocus={() => {*/}
+    {/*meta.action.removeAlert();*/}
+    {/*}}*/}
+    {/*required*/}
+    {/*/>*/}
+    {/*</div>*/}
+    {/*<div class="flex flex-col items-center justify-center rounded-lg">*/}
+    {/*<button*/}
+    {/*class={`flex self-stretch flex-col items-center justify-center px-14 py-1 bg-indigo-900 hover:bg-indigo-700 rounded-xl`}*/}
+    {/*>*/}
+    {/*<div class="flex self-stretch items-center justify-center">*/}
+    {/*<div class="text-lg font-semibold text-center text-white">*/}
+    {/*Login*/}
+    {/*</div>*/}
+    {/*</div>*/}
+    {/*</button>*/}
+    {/*</div>*/}
+    {/*</form>*/}
+    {/*</div>*/}
+    {/*</div>*/}
 
-          <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
-            <div class="text-base font-medium text-indigo-900">Email</div>
-            <input
-              type="email"
-              class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}
-              onChange={(e) => {
-                meta.action.changeEmail(e);
-              }}
-              onFocus={() => {
-                meta.action.removeAlert();
-              }}
-              required
-            />
-          </div>
-          <div class="flex flex-col space-y-1 items-start justify-start px-6 rounded-lg">
-            <div class="text-base font-medium text-indigo-900">Password</div>
-            <input
-              type="password"
-              class={`border-2 border-indigo-600 py-2 px-3 rounded-2xl`}
-              onChange={(e) => {
-                meta.action.changePassword(e);
-              }}
-              onFocus={() => {
-                meta.action.removeAlert();
-              }}
-              required
-            />
-          </div>
-          <div class="flex flex-col items-center justify-center rounded-lg">
-            <button
-              class={`flex self-stretch flex-col items-center justify-center px-14 py-1 bg-indigo-900 hover:bg-indigo-700 rounded-xl`}
-            >
-              <div class="flex self-stretch items-center justify-center">
-                <div class="text-lg font-semibold text-center text-white">
-                  Login
-                </div>
-              </div>
-            </button>
-          </div>
-        </form>
+    {/**/}
+    {/**/}
+    {/**/}
+    {/**/}
+    {/**/}
+    <div class="flex flex-row w-3/4 h-3/4 shadow-md">
+      <div class="w-full bg-indigo-900 flex flex-col justify-center items-center space-y-24 text-center text-white">
+        <div class="flex flex-col w-3/4">
+          <p class="font-bold">UpahQu</p>
+        </div>
+        <div class="flex flex-col space-y-3 w-3/4">
+          <p class="italic">
+            "You've got to make your team have value, inovation, and vision."
+          </p>
+          <p class="font-bold">- Jack Ma -</p>
+        </div>
       </div>
+      <form
+        class="w-full bg-white flex flex-col justify-center items-center space-y-5"
+        method="POST"
+        onSubmit={(e) => {
+          meta.action.login();
+          e.preventDefault();
+        }}
+      >
+        <div class="flex flex-col space-y-2 rounded-lg w-1/2" id="alert"></div>
+        <div class="flex flex-col space-y-2 rounded-lg w-1/2">
+          <div class="text-sm font-bold text-black">Email</div>
+          <input
+            type="email"
+            class={`border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md`}
+            onChange={(e) => {
+              meta.action.changeEmail(e);
+            }}
+            onFocus={() => {
+              meta.action.removeAlert();
+            }}
+            required
+          />
+        </div>
+        <div class="flex flex-col space-y-2 rounded-lg w-1/2">
+          <div class="text-sm font-bold text-black">Password</div>
+          <input
+            type="password"
+            class={`border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md`}
+            onChange={(e) => {
+              meta.action.changePassword(e);
+            }}
+            onFocus={() => {
+              meta.action.removeAlert();
+            }}
+            required
+          />
+        </div>
+        <div class="flex items-center justify-center w-1/2">
+          <button
+            type="submit"
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Login</span>
+          </button>
+        </div>
+      </form>
     </div>
   </>
 </>
