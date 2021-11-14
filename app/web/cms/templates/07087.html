@@ -35,23 +35,16 @@
       };
       check();
 
+      var modal = document.getElementById("modal");
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
       meta.action = {
-        logout: () => {
-          window.user = null;
-          navigate("/login");
-        },
-        dashboard: () => {
-          navigate("/admin/dashboard");
-        },
-        divisi: () => {
-          navigate("/admin/divisi");
-        },
-        dataKaryawan: () => {
-          navigate("/admin/data-karyawan");
-        },
         hideSidebar: () => {
           document.getElementById("sidebar").classList.toggle("w-0");
-          // console.log("hahah");
         },
       };
     }}
@@ -87,7 +80,7 @@
                 class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
                 id="dashboard"
                 onClick={() => {
-                  meta.action.dashboard();
+                  navigate("/admin/dashboard");
                 }}
               >
                 <div
@@ -110,10 +103,13 @@
                       class="text-sm font-bold flex flex-row w-full"
                       id="text-karyawan"
                     >
-                      <div class="w-8 text-left">
+                      <div class="mr-4 text-left">
                         <faicon iconName="karyawan" />
                       </div>
-                      <div>Karyawan</div>
+                      <div class="w-full flex items-start">Karyawan</div>
+                      <div class="flex">
+                        <faicon iconName="ArrowDown" />
+                      </div>
                     </div>
                   </div>
                 </button>
@@ -122,15 +118,21 @@
                     class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3"
                     id="btn-data-karyawan"
                     onClick={() => {
-                      meta.action.dataKaryawan();
+                      navigate("/admin/data-karyawan");
                     }}
                   >
                     <div class="text-sm font-semibold" id="text-data-karyawan">
                       Data Karyawan
                     </div>
                   </button>
-                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
-                    <div class="text-sm font-semibold">
+                  <button
+                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900"
+                    id="btn-parameter"
+                    onClick={() => {
+                      navigate("/admin/parameter-penggajian");
+                    }}
+                  >
+                    <div class="text-sm font-semibold" id="text-parameter">
                       Parameter Penggajian
                     </div>
                   </button>
@@ -138,7 +140,7 @@
                     class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900"
                     id="btn-divisi"
                     onClick={() => {
-                      meta.action.divisi();
+                      navigate("/admin/divisi");
                     }}
                   >
                     <div class="text-sm font-semibold" id="text-divisi">
@@ -158,10 +160,13 @@
                       class="text-sm font-bold flex flex-row w-full"
                       id="text-gaji"
                     >
-                      <div class="w-8 text-left">
+                      <div class="mr-4 text-left">
                         <faicon iconName="gaji" />
                       </div>
-                      <div>Gaji</div>
+                      <div class="w-full flex items-start">Gaji</div>
+                      <div class="flex">
+                        <faicon iconName="ArrowDown" />
+                      </div>
                     </div>
                   </div>
                 </button>
@@ -193,10 +198,13 @@
                       class="text-sm font-bold flex flex-row w-full"
                       id="text-presensi"
                     >
-                      <div class="w-8 text-left">
+                      <div class="mr-4 text-left">
                         <faicon iconName="presensi" />
                       </div>
-                      <div>Presensi</div>
+                      <div class="w-full flex items-start">Presensi</div>
+                      <div class="flex">
+                        <faicon iconName="ArrowDown" />
+                      </div>
                     </div>
                   </div>
                 </button>
@@ -211,8 +219,27 @@
               </div>
               <button
                 class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                id="grafik"
                 onClick={() => {
-                  meta.action.logout();
+                  navigate("/admin/grafik");
+                }}
+              >
+                <div
+                  class="text-sm font-bold flex flex-row w-full"
+                  id="text-grafik"
+                >
+                  <div class="w-8 text-left">
+                    <faicon iconName="grafik" />
+                  </div>
+                  <div>Grafik</div>
+                </div>
+              </button>
+              <button
+                class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                onClick={() => {
+                  // window.user = null;
+                  // navigate("/login");
+                  document.getElementById("modal").style.display = "block";
                 }}
               >
                 <div class="text-sm font-bold flex flex-row w-full">
@@ -228,7 +255,7 @@
         </div>
       </div>
       <div class="flex flex-1 flex-col">
-        <div class="sticky top-0 z-20 filter drop-shadow-sm">
+        <div class="sticky top-0 filter drop-shadow-sm">
           {/*<navbar class="flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-indigo-900 shadow" />*/}
           <div class="flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-white">
             <div class="flex flex-1 items-center justify-start px-5 space-x-8">
@@ -262,5 +289,33 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="modal" id="modal">
+    <form class="modal-content w-max flex items-center justify-center">
+      <div class="flex flex-col bg-white p-14 space-y-10 rounded">
+        <div class="font-bold">Apakah yakin ingin keluar?</div>
+        <div class="flex flex-row w-full text-sm">
+          <button
+            class="w-full bg-indigo-900 mx-5 p-1 rounded text-white font-bold hover:bg-indigo-800 b-ya"
+            type="button"
+            onClick={() => {
+              window.user = null;
+              navigate("/login");
+            }}
+          >
+            Ya
+          </button>
+          <button
+            class="w-full bg-gray-200 mx-5 p-1 rounded font-bold hover:bg-gray-300"
+            type="button"
+            onClick={() => {
+              document.getElementById("modal").style.display = "none";
+            }}
+          >
+            Batal
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </>

@@ -16,10 +16,22 @@ const LineChart = () => {
               label: '# of votes',
               data: [12, 19, 3, 5, 2, 3],
               borderColor : '#312E81',
-              backgroundColor: '#312E81',
+              // backgroundColor: '#312e8115',
               pointBackgroundColor:'#ffffff',
-              fill:true,
-              tension:0.2
+              pointRadius:5,
+              pointHoverRadius:7,
+              borderWidth:2,
+              // tension:0.2
+            },{
+              label: '# of votes',
+              data: [11, 18, 2, 4, 8, 3],
+              borderColor : '#ff6600',
+              // backgroundColor: '#ff660015',
+              pointBackgroundColor:'#ffffff',
+              pointRadius:5,
+              pointHoverRadius:7,
+              borderWidth:2,
+              // tension:0.2
             },
           ],
         }}

@@ -5,6 +5,9 @@
       if (document.readyState === "complete") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-900");
         document
+          .getElementById("dashboard")
+          .classList.remove("hover:bg-gray-200");
+        document
           .getElementById("text-dashboard")
           .classList.toggle("text-white");
       }
@@ -13,16 +16,16 @@
   <>
     <a class="text-xl font-bold mb-7">Dashboard</a>
 
-    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
-      <div class="w-full">
+    <div class="flex flex-col items-center justify-start bg-white filter drop-shadow-sm rounded w-full py-8">
+      <div class="w-11/12">
         <line_chart />
       </div>
-      <div class="w-full">
-        <bar_chart />
-      </div>
-      <div class="w-full">
-        <doughnut_chart />
-      </div>
+      {/*<div class="w-11/12">*/}
+      {/*<bar_chart />*/}
+      {/*</div>*/}
+      {/*<div class="w-11/12">*/}
+      {/*<doughnut_chart />*/}
+      {/*</div>*/}
     </div>
   </>
 </>

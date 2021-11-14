@@ -1,9 +1,6 @@
 <>
   <effect
-    meta={{
-      departemen: "",
-      action: {},
-    }}
+    meta={{}}
     run={async () => {
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
@@ -13,31 +10,25 @@
         document.getElementById("karyawan").classList.toggle("active");
         document.getElementById("text-karyawan").classList.toggle("text-white");
         document
-          .getElementById("btn-divisi")
+          .getElementById("btn-parameter")
           .classList.toggle("border-indigo-900");
         document
-          .getElementById("text-divisi")
+          .getElementById("text-parameter")
           .classList.toggle("text-indigo-900");
         var content = document.getElementById("karyawan").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
 
-      // Get data
-      const getData = () => {
-        const data = api("/api/r-departemen").then((res) => {
-          meta.departemen = res.departemen;
-
-          // console.log(meta.departemen);
-        });
+      var modal = document.getElementById("modal");
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
       };
-      getData();
-      console.log(meta.departemen.target.value);
-
-      // meta.action = {};
     }}
   />
   <>
-    <a class="text-xl font-bold">Divisi</a>
+    <a class="text-xl font-bold">Parameter Penggajian</a>
     <nav class="font-sans w-full mb-7 mt-2">
       <ol class="list-reset flex text-grey-dark text-xs space-x-3">
         <li>
@@ -47,7 +38,7 @@
           <faicon iconName="arrowRight" />
         </li>
         <li>
-          <li>Divisi</li>
+          <li>Parameter Penggajian</li>
         </li>
       </ol>
     </nav>
@@ -56,11 +47,11 @@
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
           onClick={() => {
-            navigate("/admin/divisi/tambah");
+            document.getElementById("modal").style.display = "block";
           }}
         >
           <faicon iconName="Plus" class="mr-3" />
-          <span>Tambah Divisi</span>
+          <span>Tambah Parameter</span>
         </button>
       </div>
       <div class="flex flex-1 items-center justify-end">
@@ -73,16 +64,20 @@
     </div>
     <div class="mt-2 w-full filter drop-shadow-sm bg-white p-3 rounded">
       <datatable
-        // title={"Divisi"}
         column={[
           {
             name: "No",
-            selector: (row, index) => index + 1,
+            selector: (row) => row.no,
             sortable: true,
           },
           {
-            name: "Nama Divisi",
-            selector: (row) => row.nama_departemen,
+            name: "Nama Parameter",
+            selector: (row) => row.param,
+            sortable: true,
+          },
+          {
+            name: "Pendapatan",
+            selector: (row) => row.pendapatan,
             sortable: true,
           },
           {
@@ -105,8 +100,53 @@
             ),
           },
         ]}
-        data={meta.departemen}
+        data={[
+          {
+            id: 1,
+            no: "1",
+            param: "Golongan 1",
+            pendapatan: "1.200.000",
+          },
+          {
+            id: 2,
+            no: "2",
+            param: "Golongan 2",
+            pendapatan: "1.300.000",
+          },
+        ]}
       />
+    </div>
+    <div class="modal" id="modal">
+      <form class="modal-content w-max flex items-center justify-center">
+        <div class="flex flex-col bg-white p-14 rounded space-y-5">
+          <div class="space-y-2">
+            <div class="text-left text-sm font-bold">Nama Parameter</div>
+            <input
+              type="text"
+              placeholder="Masukkan nama parameter"
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+              id="nama_parameter"
+              required
+            />
+          </div>
+          <div class="space-y-2">
+            <div class="text-left text-sm font-bold">Pendapatan</div>
+            <input
+              type="number"
+              placeholder="Masukkan pendapatan"
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+              id="pendapatanr"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Submit</span>
+          </button>
+        </div>
+      </form>
     </div>
   </>
 </>

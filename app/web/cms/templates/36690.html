@@ -1,0 +1,27 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("grafik").classList.toggle("bg-indigo-900");
+        document.getElementById("grafik").classList.remove("hover:bg-gray-200");
+        document.getElementById("text-grafik").classList.toggle("text-white");
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold mb-7">Grafik</a>
+
+    <div class="flex flex-col items-center justify-start bg-white filter drop-shadow-sm rounded w-full py-8">
+      <div class="w-11/12">
+        <line_chart />
+      </div>
+      <div class="w-11/12">
+        <bar_chart />
+      </div>
+      <div class="w-11/12">
+        <doughnut_chart />
+      </div>
+    </div>
+  </>
+</>
