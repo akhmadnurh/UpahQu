@@ -1,0 +1,25 @@
+<div class="modal" id={id}>
+  <form class="modal-content w-max flex items-center justify-center">
+    <div class="flex flex-col bg-white p-14 space-y-10 rounded">
+      <div class="font-bold">{text}</div>
+      <div class="flex flex-row w-full text-sm">
+        <button
+          class="w-full bg-indigo-900 mx-5 p-1 rounded text-white font-bold hover:bg-indigo-800"
+          type="button"
+          
+        >
+          Ya
+        </button>
+        <button
+          class="w-full bg-gray-200 mx-5 p-1 rounded font-bold hover:bg-gray-300"
+          type="button"
+          onClick={() => {
+           batal()
+          }}
+        >
+          Batal
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

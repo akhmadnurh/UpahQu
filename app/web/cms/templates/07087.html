@@ -35,11 +35,9 @@
       };
       check();
 
-      var modal = document.getElementById("modal");
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
+      var modal_logout = document.getElementById("modal_logout");
+      modal_logout.onclick = function () {
+        modal_logout.style.display = "none";
       };
 
       meta.action = {
@@ -237,9 +235,8 @@
               <button
                 class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
                 onClick={() => {
-                  // window.user = null;
-                  // navigate("/login");
-                  document.getElementById("modal").style.display = "block";
+                  document.getElementById("modal_logout").style.display =
+                    "block";
                 }}
               >
                 <div class="text-sm font-bold flex flex-row w-full">
@@ -290,13 +287,13 @@
       </div>
     </div>
   </div>
-  <div class="modal" id="modal">
+  <div class="modal" id="modal_logout">
     <form class="modal-content w-max flex items-center justify-center">
       <div class="flex flex-col bg-white p-14 space-y-10 rounded">
         <div class="font-bold">Apakah yakin ingin keluar?</div>
         <div class="flex flex-row w-full text-sm">
           <button
-            class="w-full bg-indigo-900 mx-5 p-1 rounded text-white font-bold hover:bg-indigo-800 b-ya"
+            class="w-full bg-indigo-900 mx-5 p-1 rounded text-white font-bold hover:bg-indigo-800"
             type="button"
             onClick={() => {
               window.user = null;
@@ -309,7 +306,7 @@
             class="w-full bg-gray-200 mx-5 p-1 rounded font-bold hover:bg-gray-300"
             type="button"
             onClick={() => {
-              document.getElementById("modal").style.display = "none";
+              document.getElementById("modal_logout").style.display = "none";
             }}
           >
             Batal

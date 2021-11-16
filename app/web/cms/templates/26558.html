@@ -32,11 +32,12 @@
         content.style.maxHeight = content.scrollHeight + "px";
       }
 
-      if (params.form === "tambah") {
-        document.getElementById("edit").classList.add("hidden");
-      } else if (params.form === "edit") {
-        document.getElementById("tambah").classList.add("hidden");
-      }
+      var modal = document.getElementById("modal");
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     }}
   />
   <>
@@ -89,6 +90,82 @@
           </div>
           <div class="flex flex-col space-y-1 items-start justify-center">
             <div class="text-sm font-bold text-black">Parameter Penggajian</div>
+            <div class="flex flex-row space-x-4">
+              <div>
+                <input
+                  type="text"
+                  class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                  id="input-divisi"
+                  onChange={(e) => meta.action.setDepartemen(e)}
+                  required
+                  disabled={meta.departemenState}
+                />
+              </div>
+              <div class="flex items-center justify-center">
+                <div>
+                  <div class="dropdown flex flex-row relative space-x-4">
+                    <div>
+                      <button
+                        class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                        onClick={() => {
+                          document
+                            .getElementById("dropdown-menu")
+                            .classList.toggle("hidden");
+                        }}
+                      >
+                        <faicon iconName="edit" class="" />
+                      </button>
+                    </div>
+                    <div class="">
+                      <div
+                        class="dropdown-menu absolute hidden text-gray-700 p-2 bg-blue-100 rounded w-max -top-3"
+                        id="dropdown-menu"
+                      >
+                        <div class="">
+                          <div class="space-y-2">
+                            <div>
+                              <label class="inline-flex items-center w-full h-full bg-blue-200 p-2 hover:bg-blue-300 rounded">
+                                <input
+                                  type="checkbox"
+                                  class="form-checkbox"
+                                  defaultChecked
+                                />
+                                <span class="ml-2">Default</span>
+                              </label>
+                            </div>
+                            <div>
+                              <label class="inline-flex items-center w-full h-full bg-blue-200 p-2 hover:bg-blue-300 rounded">
+                                <input
+                                  type="checkbox"
+                                  class="form-checkbox"
+                                  defaultChecked
+                                />
+                                <span class="ml-2">Default</span>
+                              </label>
+                            </div>
+                            <div>
+                              <label class="inline-flex items-center w-full h-full bg-blue-200 p-2 hover:bg-blue-300 rounded">
+                                <input
+                                  type="checkbox"
+                                  class="form-checkbox"
+                                  defaultChecked
+                                />
+                                <span class="ml-2">Default</span>
+                              </label>
+                            </div>
+                            <div>
+                              <button class="inline-flex items-center w-full h-full bg-blue-200 p-2 hover:bg-blue-300 rounded">
+                                <span class="font-bold">Tambah Parameter</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="flex flex-col items-start justify-start w-full space-y-4">
@@ -120,6 +197,50 @@
           </button>
         </div>
       </div>
+    </div>
+    <div class="modal" id="modal">
+      <form class="modal-content w-max flex flex-col items-center justify-center">
+        <div class="flex flex-col bg-white rounded">
+          <div class="flex items-end justify-end rounded">
+            <button
+              class="bg-gray-100 hover:bg-gray-200 text-black text-sm w-8 h-8 rounded inline-flex items-center justify-center"
+              onClick={() => {
+                document.getElementById("modal").style.display = "none";
+              }}
+            >
+              <faicon iconName="cancel" class="" />
+            </button>
+          </div>
+          <div class="space-y-5 px-14 pb-14 pt-6">
+            <div class="space-y-2">
+              <div class="text-left text-sm font-bold">Nama Parameter</div>
+              <input
+                type="text"
+                placeholder="Masukkan nama parameter"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                id="nama_parameter"
+                required
+              />
+            </div>
+            <div class="space-y-2">
+              <div class="text-left text-sm font-bold">Pendapatan</div>
+              <input
+                type="number"
+                placeholder="Masukkan pendapatan"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                id="pendapatan"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded items-center filter drop-shadow-sm justify-center w-full"
+            >
+              <span>Submit</span>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </>
 </>
