@@ -16,16 +16,90 @@
   <>
     <a class="text-xl font-bold mb-7">Dashboard</a>
 
-    <div class="flex flex-col items-center justify-start bg-white filter drop-shadow-sm rounded w-full py-8">
+    <div class="flex flex-col items-center justify-start bg-white filter drop-shadow-sm rounded w-full p-8 space-y-8">
+      <div class="flex flex-row w-full space-x-5 justify-center items-center">
+        <div class="w-full flex flex-col space-y-2">
+          <div class="text-lg font-bold">Absen Hari Ini</div>
+          <div class="flex flex-row space-x-2 border-solid">
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-green-600">Hadir</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-blue-600">Sakit</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-purple-600">Izin</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-yellow-300">Cuti</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-full flex flex-col">
+              <div class="text-xs text-red-600">Tidak Absen</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-full flex flex-col text-right">
+              <div class="text-xs text-yellow-700">Total Karyawan</div>
+              <div class="text-sm">90</div>
+            </div>
+          </div>
+        </div>
+        <div class="w-0.5 bg-gray-300 h-1/2 m-auto"></div>
+        <div class="w-full space-y-2">
+          <div class="text-lg font-bold">Transfer Terakhir</div>
+          <datatable
+            pagination={false}
+            column={[
+              {
+                name: "ID Karyawan",
+                selector: (row) => row.id,
+                // sortable: true,
+              },
+              {
+                name: "Transaksi",
+                selector: (row) => row.trans,
+                // sortable: true,
+              },
+              {
+                name: "Tanggal",
+                selector: (row) => row.tgl,
+                // sortable: true,
+              },
+              {
+                name: "Jumlah",
+                selector: (row) => row.jml,
+                // sortable: true,
+              },
+            ]}
+            data={[
+              {
+                id: 1,
+                trans: "Berhasil",
+                tgl: "10/09/21",
+                jml: "Rp. 3.000.000,-",
+              },
+              {
+                id: 2,
+                trans: "Berhasil",
+                tgl: "10/09/21",
+                jml: "Rp. 3.000.000,-",
+              },
+            ]}
+          />
+        </div>
+      </div>
+      <div class="w-full">
+        <button class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold p-3 rounded inline-flex items-center filter drop-shadow-md w-full flex items-center justify-center">
+          <faicon iconName="Plus" class="mr-3" />
+          <span>Buat Absensi Hari Ini</span>
+        </button>
+      </div>
       <div class="w-11/12">
         <line_chart />
       </div>
-      {/*<div class="w-11/12">*/}
-      {/*<bar_chart />*/}
-      {/*</div>*/}
-      {/*<div class="w-11/12">*/}
-      {/*<doughnut_chart />*/}
-      {/*</div>*/}
     </div>
   </>
 </>

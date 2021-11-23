@@ -215,6 +215,12 @@
                 document
                   .getElementById("input-jabatan" + index)
                   .setAttribute("disabled", "disabled");
+                document
+                  .getElementById("input-jabatan" + index)
+                  .classList.toggle("border");
+                document
+                  .getElementById("input-jabatan" + index)
+                  .classList.toggle("px-3");
                 meta.addJabatanState = true;
               } else {
                 console.log("error");

@@ -64,6 +64,7 @@
     </div>
     <div class="mt-2 w-full filter drop-shadow-sm bg-white p-3 rounded">
       <datatable
+        pagination={true}
         column={[
           {
             name: "No",
@@ -116,7 +117,7 @@
         ]}
       />
     </div>
-    <div class="modal" id="modal">
+    <div class="modal z-20" id="modal">
       <form class="modal-content w-max flex flex-col items-center justify-center">
         <div class="flex flex-col bg-white rounded">
           <div class="flex items-end justify-end rounded">
