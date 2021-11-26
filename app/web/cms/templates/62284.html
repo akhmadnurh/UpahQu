@@ -1,7 +1,19 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      total_karyawan: 0,
+      action: {},
+    }}
     run={async () => {
+      // Get data
+      const getData = () => {
+        api("/api/dashboard-admin").then((res) => {
+          meta.total_karyawan = res.total_karyawan;
+          document.getElementById("total_karyawan").innerText =
+            res.total_karyawan;
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-900");
         document
@@ -43,7 +55,9 @@
             </div>
             <div class="w-full flex flex-col text-right">
               <div class="text-xs text-yellow-700">Total Karyawan</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm" id="total_karyawan">
+                0
+              </div>
             </div>
           </div>
         </div>
