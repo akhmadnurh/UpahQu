@@ -1,7 +1,21 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      params: [],
+      addParam: {
+        nama_parameter: "",
+        pendapatan: "",
+      },
+      action: {},
+    }}
     run={async () => {
+      const getParams = () => {
+        api("/api/r-prm-penggajian").then((res) => {
+          meta.params = res.params;
+          console.log(res.params);
+        });
+      };
+      getParams();
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
         document
@@ -24,6 +38,28 @@
         if (event.target == modal) {
           modal.style.display = "none";
         }
+      };
+
+      meta.action = {
+        setNamaParam: (e) => {
+          meta.addParam.nama_parameter = e.target.value;
+        },
+        setPendapatan: (e) => {
+          meta.addParam.pendapatan = e.target.value;
+        },
+        submitParameter: () => {
+          api("/api/c-prm-penggajian", {
+            nama_parameter: meta.addParam.nama_parameter,
+            pendapatan: meta.addParam.pendapatan,
+          }).then((res) => {
+            console.log(res.status);
+            getParams();
+
+            // Reset input form
+            document.getElementById("nama_parameter").value = "";
+            document.getElementById("pendapatan").value = "";
+          });
+        },
       };
     }}
   />
@@ -68,12 +104,12 @@
         column={[
           {
             name: "No",
-            selector: (row) => row.no,
+            selector: (row, index) => ++index,
             sortable: true,
           },
           {
             name: "Nama Parameter",
-            selector: (row) => row.param,
+            selector: (row) => row.nama_parameter,
             sortable: true,
           },
           {
@@ -101,24 +137,17 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            no: "1",
-            param: "Golongan 1",
-            pendapatan: "1.200.000",
-          },
-          {
-            id: 2,
-            no: "2",
-            param: "Golongan 2",
-            pendapatan: "1.300.000",
-          },
-        ]}
+        data={meta.params}
       />
     </div>
     <div class="modal z-20" id="modal">
-      <form class="modal-content w-max flex flex-col items-center justify-center">
+      <form
+        class="modal-content w-max flex flex-col items-center justify-center"
+        onSubmit={(e) => {
+          meta.action.submitParameter();
+          e.preventDefault();
+        }}
+      >
         <div class="flex flex-col bg-white rounded">
           <div class="flex items-end justify-end rounded">
             <button
@@ -126,6 +155,7 @@
               onClick={() => {
                 document.getElementById("modal").style.display = "none";
               }}
+              type="button"
             >
               <faicon iconName="cancel" class="" />
             </button>
@@ -138,6 +168,9 @@
                 placeholder="Masukkan nama parameter"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
                 id="nama_parameter"
+                onChange={(e) => {
+                  meta.action.setNamaParam(e);
+                }}
                 required
               />
             </div>
@@ -148,6 +181,9 @@
                 placeholder="Masukkan pendapatan"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
                 id="pendapatan"
+                onChange={(e) => {
+                  meta.action.setPendapatan(e);
+                }}
                 required
               />
             </div>
