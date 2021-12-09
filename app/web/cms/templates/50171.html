@@ -79,7 +79,7 @@
       </ol>
     </nav>
     <div class={`flex self-stretch items-center justify-start`}>
-      <div class="flex flex-1 justify-start">
+      <div class="flex flex-1 justify-start space-x-2">
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
           onClick={() => {
@@ -88,6 +88,15 @@
         >
           <faicon iconName="Plus" class="mr-3" />
           <span>Tambah Parameter</span>
+        </button>
+
+        <button
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
+          onClick={() => {
+            navigate("/admin/parameter-penggajian/detail");
+          }}
+        >
+          <span>Default Parameter</span>
         </button>
       </div>
       <div class="flex flex-1 items-center justify-end">
@@ -122,17 +131,24 @@
             button: true,
             cell: (row, index) => (
               <>
-                <button
-                  class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
-                  onClick={() => {
-                    navigate(
-                      "/admin/divisi/detail/" +
-                        meta.departemen[index].id_departemen
-                    );
-                  }}
-                >
-                  <faicon iconName="show" class="" />
-                </button>
+                <div class="space-x-2">
+                  <button
+                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/admin/parameter-penggajian/detail");
+                    }}
+                  >
+                    <faicon iconName="show" class="" />
+                  </button>
+                  <button
+                    class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      console.log("S");
+                    }}
+                  >
+                    <faicon iconName="delete" class="" />
+                  </button>
+                </div>
               </>
             ),
           },

@@ -1,0 +1,103 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("karyawan").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("karyawan")
+          .classList.remove("hover:bg-gray-200");
+        document.getElementById("karyawan").classList.toggle("active");
+        document.getElementById("text-karyawan").classList.toggle("text-white");
+        document
+          .getElementById("btn-parameter")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-parameter")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("karyawan").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Detail Parameter Penggajian</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Karyawan</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Parameter Penggajian</li>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Detail</li>
+        </li>
+      </ol>
+    </nav>
+    <div class={`flex self-stretch items-center justify-start`}>
+      <div class="flex flex-1 justify-start space-x-2">
+        {/*<button class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md">*/}
+        {/*<span>Default Parameter</span>*/}
+        {/*</button>*/}
+      </div>
+      <div class="flex flex-1 items-center justify-end">
+        <input
+          type="text"
+          placeholder="Cari Data"
+          class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+        />
+      </div>
+    </div>
+    <div class="mt-2 w-full filter drop-shadow-sm bg-white p-3 rounded">
+      <datatable
+        pagination={true}
+        column={[
+          {
+            name: "No",
+            selector: (row, index) => ++index,
+            sortable: true,
+          },
+          {
+            name: "Nama Karyawan",
+            selector: (row) => row.nama_karyawan,
+            sortable: true,
+          },
+          {
+            name: "Divisi",
+            selector: (row) => row.divisi,
+            sortable: true,
+          },
+          {
+            name: "",
+            // selector: (row) => row.divisi,
+            sortable: true,
+            cell: (row, index) => (
+              <>
+                <input type="checkbox" class="form-checkbox" />
+              </>
+            ),
+          },
+        ]}
+        data={[
+          {
+            id: 1,
+            nama_karyawan: "asep",
+            divisi: "penjualan",
+          },
+          {
+            id: 2,
+            nama_karyawan: "budi",
+            divisi: "teknik",
+          },
+        ]}
+      />
+    </div>
+  </>
+</>
