@@ -65,6 +65,22 @@ model jenis_absen {
   @@ignore
 }
 
+model karyawan_parameter_penggajian {
+  id_karyawan          Int
+  id_parameter         Int
+  id_kpp               Int                  @id @default(autoincrement())
+  pengguna             pengguna             @relation(fields: [id_karyawan], references: [id_pengguna], onDelete: Cascade)
+  parameter_penggajian parameter_penggajian @relation(fields: [id_parameter], references: [id_parameter], onDelete: Cascade)
+}
+
+model parameter_penggajian {
+  id_parameter                  Int                             @id @default(autoincrement())
+  nama_parameter                String                          @db.VarChar(30)
+  pendapatan                    Int
+  default                       Boolean?
+  karyawan_parameter_penggajian karyawan_parameter_penggajian[]
+}
+
 model pengguna {
   id_pengguna                   Int                             @id @default(autoincrement())
   nama_pengguna                 String                          @db.VarChar(100)
@@ -74,8 +90,8 @@ model pengguna {
   id_role                       Int
   id_jabatan                    Int
   status_pengguna               String                          @db.VarChar(10)
-  jabatan                       jabatan                         @relation(fields: [id_jabatan], references: [id_jabatan])
-  role                          role                            @relation(fields: [id_role], references: [id_role])
+  jabatan                       jabatan                         @relation(fields: [id_jabatan], references: [id_jabatan], onDelete: Cascade)
+  role                          role                            @relation(fields: [id_role], references: [id_role], onDelete: Cascade)
   karyawan_parameter_penggajian karyawan_parameter_penggajian[]
 }
 
@@ -99,20 +115,4 @@ model status_pengajuan {
   pengajuan    String @db.VarChar(30)
 
   @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model karyawan_parameter_penggajian {
-  id_karyawan          Int
-  id_parameter         Int
-  id_kpp               Int                  @id @default(autoincrement())
-  pengguna             pengguna             @relation(fields: [id_karyawan], references: [id_pengguna])
-  parameter_penggajian parameter_penggajian @relation(fields: [id_parameter], references: [id_parameter])
-}
-
-model parameter_penggajian {
-  id_parameter                  Int                             @id @default(autoincrement())
-  nama_parameter                String                          @db.VarChar(30)
-  pendapatan                    Int
-  karyawan_parameter_penggajian karyawan_parameter_penggajian[]
 }

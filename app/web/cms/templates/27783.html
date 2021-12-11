@@ -1,20 +1,16 @@
 <>
   <effect
     meta={{
-      id_parameter: "",
-      karyawan: [],
+      parameter: [],
       action: {},
     }}
     run={async () => {
-      const getKaryawanByParam = () => {
-        meta.id_parameter = params.id;
-        api("/api/r-karyawan-by-param", { id_parameter: params.id }).then(
-          (res) => {
-            meta.karyawan = res.karyawan;
-          }
-        );
+      const getDefaultParameter = () => {
+        api("/api/r-prm-default").then((res) => {
+          meta.parameter = res.parameter;
+        });
       };
-      getKaryawanByParam();
+      getDefaultParameter();
 
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
@@ -35,13 +31,12 @@
 
       meta.action = {
         setChecked: (index) => {
-          api("/api/check-parameter", {
-            id_parameter: meta.id_parameter,
-            id_pengguna: meta.karyawan[index].id_pengguna,
-            prev_checked: meta.karyawan[index].checked,
+          api("/api/check-default-parameter", {
+            id_parameter: meta.parameter[index].id_parameter,
+            prev_checked: meta.parameter[index].default,
           }).then((res) => {
             if (res.status == "success") {
-              getKaryawanByParam();
+              getDefaultParameter();
             } else {
               console.log(res.status);
             }
@@ -95,13 +90,13 @@
             sortable: true,
           },
           {
-            name: "Nama Karyawan",
-            selector: (row) => row.nama_pengguna,
+            name: "Nama Parameter",
+            selector: (row) => row.nama_parameter,
             sortable: true,
           },
           {
-            name: "Divisi",
-            selector: (row) => row.jabatan.departemen.nama_departemen,
+            name: "Pendapatan",
+            selector: (row) => row.pendapatan,
             sortable: true,
           },
           {
@@ -113,8 +108,8 @@
                 <input
                   type="checkbox"
                   class="form-checkbox"
-                  id={"check" + meta.karyawan[index].id_pengguna}
-                  defaultChecked={meta.karyawan[index].checked}
+                  id={"check" + meta.parameter[index].id_parameter}
+                  defaultChecked={meta.parameter[index].default}
                   onChange={() => {
                     meta.action.setChecked(index);
                   }}
@@ -123,7 +118,7 @@
             ),
           },
         ]}
-        data={meta.karyawan}
+        data={meta.parameter}
       />
     </div>
   </>

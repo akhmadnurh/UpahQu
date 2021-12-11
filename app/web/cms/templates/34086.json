@@ -1,1 +1,1 @@
-{"content":{"type":"Page","structure":"","figma":{}},"title":"detail-parameter","type":"cms-template","lang":"","status":"SYSTEM","parent_id":"07087","slug":"/admin/parameter-penggajian/detail","site":"*","id":"34086"}
+{"content":{"type":"Page","structure":"","figma":{}},"title":"detail-parameter","type":"cms-template","lang":"","status":"SYSTEM","parent_id":"07087","slug":"/admin/parameter-penggajian/detail/[id]","site":"*","id":"34086"}

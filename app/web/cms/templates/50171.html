@@ -60,6 +60,17 @@
             document.getElementById("pendapatan").value = "";
           });
         },
+        removeParameter: (index) => {
+          api("/api/d-prm-penggajian", {
+            id_parameter: meta.params[index].id_parameter,
+          }).then((res) => {
+            if (res.status == "success") {
+              getParams();
+            } else {
+              console.log(res.status);
+            }
+          });
+        },
       };
     }}
   />
@@ -93,7 +104,7 @@
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
           onClick={() => {
-            navigate("/admin/parameter-penggajian/detail");
+            navigate("/admin/parameter-penggajian/default");
           }}
         >
           <span>Default Parameter</span>
@@ -135,7 +146,10 @@
                   <button
                     class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      navigate("/admin/parameter-penggajian/detail");
+                      navigate(
+                        "/admin/parameter-penggajian/detail/" +
+                          meta.params[index].id_parameter
+                      );
                     }}
                   >
                     <faicon iconName="show" class="" />
@@ -143,7 +157,10 @@
                   <button
                     class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      console.log("S");
+                      const conf = confirm("Are you sure?");
+                      if (conf) {
+                        meta.action.removeParameter(index);
+                      }
                     }}
                   >
                     <faicon iconName="delete" class="" />

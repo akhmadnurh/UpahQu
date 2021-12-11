@@ -21,6 +21,7 @@
           // Set temp data
           meta.departemenTemp = res.departemen;
           meta.jabatanTemp = res.jabatan;
+          meta.addJabatanState = false;
         });
       };
       getData(params.id);
@@ -208,6 +209,10 @@
               nama_jabatan: meta.jabatan[index].nama_jabatan,
             }).then((res) => {
               if (res.status == "success") {
+                // a
+                document.getElementById("jabatan" + index).remove();
+                // Refresh data
+                getData(params.id);
                 meta.jabatanState = false;
 
                 // Hide save & cancel btn
@@ -221,7 +226,6 @@
                 document
                   .getElementById("input-jabatan" + index)
                   .classList.toggle("px-3");
-                meta.addJabatanState = true;
               } else {
                 console.log("error");
               }
