@@ -207,8 +207,16 @@
                   </div>
                 </button>
                 <div class="items-start justify-center pl-7 mr-10 content w-full">
-                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3">
-                    <div class="text-sm font-semibold">List Kehadiran</div>
+                  <button
+                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3"
+                    id="btn-list-kehadiran"
+                    onClick={() => {
+                      navigate("/admin/list-kehadiran");
+                    }}
+                  >
+                    <div class="text-sm font-semibold" id="text-list-kehadiran">
+                      List Kehadiran
+                    </div>
                   </button>
                   <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
                     <div class="text-sm font-semibold">List Perizinan</div>

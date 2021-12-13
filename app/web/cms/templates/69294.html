@@ -1,0 +1,212 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("presensi").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("presensi")
+          .classList.remove("hover:bg-gray-200");
+        document.getElementById("presensi").classList.toggle("active");
+        document.getElementById("text-presensi").classList.toggle("text-white");
+        document
+          .getElementById("btn-list-kehadiran")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-list-kehadiran")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("presensi").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">List Kehadiran</a>
+    <nav class="font-sans w-full mb-3 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Presensi</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>List Kehadiran</li>
+        </li>
+      </ol>
+    </nav>
+    <div class={`flex self-stretch items-center justify-start`}>
+      <div class="flex flex-1 justify-start space-x-2">
+        <button
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
+          onClick={() => {
+            console.log("coba");
+          }}
+        >
+          <faicon iconName="Plus" class="mr-3" />
+          <span>Buat Presensi Hari Ini</span>
+        </button>
+      </div>
+      <div class="flex flex-1 items-center justify-end">
+        {/*<input*/}
+        {/*type="text"*/}
+        {/*placeholder="Cari Data"*/}
+        {/*class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"*/}
+        {/*/>*/}
+        <div class="w-full flex flex-col space-y-2">
+          <div class="text-sm font-bold">Presensi Hari Ini</div>
+          <div class="flex flex-row space-x-2 border-solid">
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-green-600">Hadir</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-blue-600">Sakit</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-purple-600">Izin</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-yellow-300">Cuti</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-full flex flex-col">
+              <div class="text-xs text-red-600">Tidak Absen</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-full flex flex-col text-right">
+              <div class="text-xs text-yellow-700">Total Karyawan</div>
+              <div class="text-sm">90</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 w-full filter drop-shadow-sm bg-white p-3 rounded space-y-3">
+      <div class={`flex self-stretch items-center justify-start`}>
+        <div class="flex flex-1 justify-start space-x-2">
+          <span class="text-sm font-semibold">Semua Presensi Hari Ini</span>
+          <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm">
+            7
+          </span>
+        </div>
+        <div class="flex flex-1 items-center justify-end">
+          <input
+            type="text"
+            placeholder="Cari Data"
+            class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+          />
+        </div>
+      </div>
+      <datatable
+        pagination={true}
+        column={[
+          {
+            name: "No",
+            selector: (row, index) => ++index,
+            sortable: true,
+          },
+          {
+            name: "Nama Parameter",
+            selector: (row) => row.nama_karyawan,
+            sortable: true,
+          },
+          {
+            name: "Pendapatan",
+            selector: (row) => row.keterangan,
+            sortable: true,
+          },
+          {
+            name: "Action",
+            button: true,
+            cell: (row, index) => (
+              <>
+                <div class="space-x-2">
+                  <button
+                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/admin/parameter-penggajian/detail/");
+                    }}
+                  >
+                    <faicon iconName="show" class="" />
+                  </button>
+                </div>
+              </>
+            ),
+          },
+        ]}
+        data={[
+          {
+            id: 1,
+            nama_karyawan: "asa",
+            keterangan: "hadir",
+          },
+          {
+            id: 2,
+            nama_karyawan: "aba",
+            keterangan: "cuti",
+          },
+        ]}
+      />
+    </div>
+    <div class="modal z-20" id="modal">
+      <form
+        class="modal-content w-max flex flex-col items-center justify-center"
+        onSubmit={(e) => {
+          meta.action.submitParameter();
+          e.preventDefault();
+        }}
+      >
+        <div class="flex flex-col bg-white rounded">
+          <div class="flex items-end justify-end rounded">
+            <button
+              class="bg-gray-100 hover:bg-gray-200 text-black text-sm w-8 h-8 rounded inline-flex items-center justify-center"
+              onClick={() => {
+                document.getElementById("modal").style.display = "none";
+              }}
+              type="button"
+            >
+              <faicon iconName="cancel" class="" />
+            </button>
+          </div>
+          <div class="space-y-5 px-14 pb-14 pt-6">
+            <div class="space-y-2">
+              <div class="text-left text-sm font-bold">Nama Parameter</div>
+              <input
+                type="text"
+                placeholder="Masukkan nama parameter"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                id="nama_parameter"
+                onChange={(e) => {
+                  meta.action.setNamaParam(e);
+                }}
+                required
+              />
+            </div>
+            <div class="space-y-2">
+              <div class="text-left text-sm font-bold">Pendapatan</div>
+              <input
+                type="number"
+                placeholder="Masukkan pendapatan"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                id="pendapatan"
+                onChange={(e) => {
+                  meta.action.setPendapatan(e);
+                }}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded items-center filter drop-shadow-sm justify-center w-full"
+            >
+              <span>Submit</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </>
+</>
