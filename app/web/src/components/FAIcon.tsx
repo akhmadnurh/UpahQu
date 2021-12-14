@@ -1,6 +1,6 @@
 import { registerIcons } from '@fluentui/react/lib/Styling';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faChevronDown, faChevronUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell , faChevronRight, faCheckCircle, faTachometerAlt, faUsers, faMoneyBill, faChalkboardTeacher, faSignOutAlt, faChartBar} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChevronDown, faChevronUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell , faChevronRight, faCheckCircle, faTachometerAlt, faUsers, faMoneyBill, faChalkboardTeacher, faSignOutAlt, faChartBar, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
 
 registerIcons({
   icons: {
@@ -24,6 +24,7 @@ registerIcons({
     presensi : <FontAwesomeIcon icon={faChalkboardTeacher} />,
     logout : <FontAwesomeIcon icon={faSignOutAlt} />,
     grafik : <FontAwesomeIcon icon={faChartBar} />,
+    refresh : <FontAwesomeIcon icon={faSyncAlt} />
   }
 });
 
