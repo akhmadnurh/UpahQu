@@ -4,6 +4,10 @@
       presensi: [],
       presensi_bulan: [],
       presensi_tahun: [],
+      month: "",
+      year: "",
+      total_karyawan: "",
+      action: {},
     }}
     run={async () => {
       if (document.readyState === "complete") {
@@ -28,9 +32,36 @@
           meta.presensi = res.presensi;
           meta.presensi_bulan = res.presensi_bulan;
           meta.presensi_tahun = res.presensi_tahun;
+          meta.month = res.month;
+          meta.year = res.year;
+          meta.total_karyawan = res.total_karyawan;
         });
       };
       getPresensi();
+
+      const refreshPresensi = (month, year) => {
+        api("/api/r-presensi", {
+          month: month.toString(),
+          year: year.toString(),
+        }).then((res) => {
+          meta.presensi = res.presensi;
+          meta.presensi_bulan = res.presensi_bulan;
+          meta.presensi_tahun = res.presensi_tahun;
+          meta.month = res.month;
+          meta.year = res.year;
+          meta.total_karyawan = res.total_karyawan;
+        });
+      };
+      meta.action = {
+        setMonth: (e) => {
+          meta.month = e.target.value;
+          refreshPresensi(meta.month, meta.year);
+        },
+        setYear: (e) => {
+          meta.year = e.target.value;
+          refreshPresensi(meta.month, meta.year);
+        },
+      };
     }}
   />
   <>
@@ -86,7 +117,7 @@
             </div>
             <div class="w-full flex flex-col text-right">
               <div class="text-xs text-yellow-700">Total Karyawan</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm">{meta.total_karyawan}</div>
             </div>
           </div>
         </div>
@@ -102,9 +133,19 @@
             <select
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
               id="presensi_bulan"
+              onChange={(e) => {
+                meta.action.setMonth(e);
+              }}
             >
               {meta.presensi_bulan.map((val, index) => (
-                <option value={index}>{val.nama_bulan}</option>
+                <option
+                  value={val.bulan}
+                  selected={
+                    parseInt(val.bulan) == parseInt(meta.month) ? true : false
+                  }
+                >
+                  {val.nama_bulan}
+                </option>
               ))}
 
               {/*<option value="#">Februari</option>*/}
@@ -114,9 +155,19 @@
             <select
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
               id="presensi_tahun"
+              onChange={(e) => {
+                meta.action.setYear(e);
+              }}
             >
               {meta.presensi_tahun.map((val, index) => (
-                <option value={index}>{val.tahun}</option>
+                <option
+                  value={val.tahun}
+                  selected={
+                    parseInt(val.tahun) == parseInt(meta.year) ? true : false
+                  }
+                >
+                  {val.tahun}
+                </option>
               ))}
 
               {/*<option value="#">Februari</option>*/}
