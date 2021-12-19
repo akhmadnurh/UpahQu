@@ -1,6 +1,15 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      details: [],
+      date: "",
+      presensi: {
+        hari: "",
+        bulan: "",
+        tahun: "",
+      },
+      action: {},
+    }}
     run={async () => {
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
@@ -18,6 +27,16 @@
         var content = document.getElementById("presensi").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+
+      const getData = () => {
+        api("/api/r-detail-presensi", { id_presensi: params.id }).then(
+          (res) => {
+            meta.details = res.details;
+            meta.presensi = res.presensi;
+          }
+        );
+      };
+      getData();
     }}
   />
   <>
@@ -45,10 +64,15 @@
       <div class={`flex self-stretch items-center justify-start`}>
         <div class="flex flex-1 justify-start space-x-2">
           <span class="text-sm font-semibold flex items-center justify-center">
-            Tanggal 01/02/21
+            Tanggal{" "}
+            {meta.presensi.hari +
+              "/" +
+              meta.presensi.bulan +
+              "/" +
+              meta.presensi.tahun}
           </span>
           <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
-            7
+            {meta.details.length}
           </span>
         </div>
         <div class="flex flex-1 items-center justify-end">
@@ -69,12 +93,12 @@
           },
           {
             name: "Nama Karyawan",
-            selector: (row) => row.nama_karyawan,
+            selector: (row) => row.pengguna.nama_pengguna,
             sortable: true,
           },
           {
             name: "Keterangan",
-            selector: (row) => row.keterangan,
+            selector: (row) => row.status_presensi.status,
             sortable: true,
           },
           {
@@ -96,18 +120,7 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            nama_karyawan: "budi",
-            keterangan: "hadir",
-          },
-          {
-            id: 2,
-            nama_karyawan: "bejo",
-            keterangan: "cuti",
-          },
-        ]}
+        data={meta.details}
       />
     </div>
   </>

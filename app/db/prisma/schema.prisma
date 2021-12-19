@@ -66,6 +66,16 @@ model karyawan_parameter_penggajian {
   parameter_penggajian parameter_penggajian @relation(fields: [id_parameter], references: [id_parameter])
 }
 
+model karyawan_presensi {
+  id_kp           Int             @id @default(autoincrement())
+  id_presensi     Int
+  id_karyawan     Int
+  id_status       Int             @db.SmallInt
+  pengguna        pengguna        @relation(fields: [id_karyawan], references: [id_pengguna])
+  presensi        presensi        @relation(fields: [id_presensi], references: [id_presensi])
+  status_presensi status_presensi @relation(fields: [id_status], references: [id_status])
+}
+
 model parameter_penggajian {
   id_parameter                  Int                             @id @default(autoincrement())
   nama_parameter                String                          @db.VarChar(30)
@@ -86,6 +96,17 @@ model pengguna {
   jabatan                       jabatan                         @relation(fields: [id_jabatan], references: [id_jabatan])
   role                          role                            @relation(fields: [id_role], references: [id_role])
   karyawan_parameter_penggajian karyawan_parameter_penggajian[]
+  karyawan_presensi             karyawan_presensi[]
+}
+
+model presensi {
+  id_presensi       Int                 @id @default(autoincrement())
+  hari              String              @db.VarChar(2)
+  bulan             String              @db.VarChar(2)
+  tahun             String              @db.VarChar(4)
+  token             String              @db.VarChar(6)
+  limit             DateTime            @db.Time(6)
+  karyawan_presensi karyawan_presensi[]
 }
 
 model role {
@@ -102,26 +123,8 @@ model status_pengajuan {
   @@ignore
 }
 
-model karyawan_presensi {
-  id_kp       Int @id @default(autoincrement())
-  id_presensi Int
-  id_karyawan Int
-  id_status   Int
-}
-
-model presensi {
-  id_presensi Int      @id @default(autoincrement())
-  hari        String   @db.VarChar(2)
-  bulan       String   @db.VarChar(2)
-  tahun       String   @db.VarChar(4)
-  token       String   @db.VarChar(6)
-  limit       DateTime @db.Time(6)
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model status_presensi {
-  id_status Int    @db.SmallInt
-  status    String @db.VarChar(15)
-
-  @@ignore
+  id_status         Int                 @id @default(autoincrement()) @db.SmallInt
+  status            String              @db.VarChar(30)
+  karyawan_presensi karyawan_presensi[]
 }
