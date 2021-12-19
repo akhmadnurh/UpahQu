@@ -8,13 +8,6 @@ datasource db {
   url      = "postgresql://magang:magang123$%^@db.plansys.co:5432/magang3?schema=public"
 }
 
-model absen {
-  id_absen  Int      @id @default(autoincrement())
-  waktu     DateTime @db.Time(6)
-  tanggal   DateTime @db.Date
-  id_status Int
-}
-
 model custom_kategori {
   id_custom_kategori Int    @id @default(autoincrement())
   nama_kategori      String @db.VarChar(100)
@@ -69,8 +62,8 @@ model karyawan_parameter_penggajian {
   id_karyawan          Int
   id_parameter         Int
   id_kpp               Int                  @id @default(autoincrement())
-  pengguna             pengguna             @relation(fields: [id_karyawan], references: [id_pengguna], onDelete: Cascade)
-  parameter_penggajian parameter_penggajian @relation(fields: [id_parameter], references: [id_parameter], onDelete: Cascade)
+  pengguna             pengguna             @relation(fields: [id_karyawan], references: [id_pengguna])
+  parameter_penggajian parameter_penggajian @relation(fields: [id_parameter], references: [id_parameter])
 }
 
 model parameter_penggajian {
@@ -90,8 +83,8 @@ model pengguna {
   id_role                       Int
   id_jabatan                    Int
   status_pengguna               String                          @db.VarChar(10)
-  jabatan                       jabatan                         @relation(fields: [id_jabatan], references: [id_jabatan], onDelete: Cascade)
-  role                          role                            @relation(fields: [id_role], references: [id_role], onDelete: Cascade)
+  jabatan                       jabatan                         @relation(fields: [id_jabatan], references: [id_jabatan])
+  role                          role                            @relation(fields: [id_role], references: [id_role])
   karyawan_parameter_penggajian karyawan_parameter_penggajian[]
 }
 
@@ -102,17 +95,33 @@ model role {
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model status_absen {
-  id_status Int    @db.SmallInt
-  status    String @db.VarChar(15)
+model status_pengajuan {
+  id_pengajuan Int
+  pengajuan    String @db.VarChar(30)
 
   @@ignore
 }
 
+model karyawan_presensi {
+  id_kp       Int @id @default(autoincrement())
+  id_presensi Int
+  id_karyawan Int
+  id_status   Int
+}
+
+model presensi {
+  id_presensi Int      @id @default(autoincrement())
+  hari        String   @db.VarChar(2)
+  bulan       String   @db.VarChar(2)
+  tahun       String   @db.VarChar(4)
+  token       String   @db.VarChar(6)
+  limit       DateTime @db.Time(6)
+}
+
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model status_pengajuan {
-  id_pengajuan Int
-  pengajuan    String @db.VarChar(30)
+model status_presensi {
+  id_status Int    @db.SmallInt
+  status    String @db.VarChar(15)
 
   @@ignore
 }
