@@ -1,0 +1,201 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("presensi").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("presensi")
+          .classList.remove("hover:bg-gray-200");
+        document.getElementById("presensi").classList.toggle("active");
+        document.getElementById("text-presensi").classList.toggle("text-white");
+        document
+          .getElementById("btn-list-perizinan")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-list-perizinan")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("presensi").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">List Perizinan</a>
+    <nav class="font-sans w-full mb-3 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Presensi</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>List Kehadiran</li>
+        </li>
+      </ol>
+    </nav>
+    <div class={`flex self-stretch items-center justify-end`}>
+      <div class="flex w-1/2">
+        <div class="w-full flex flex-col space-y-2">
+          <div class="text-sm font-bold">Perizinan Hari Ini</div>
+          <div class="flex flex-row space-x-2 border-solid">
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-green-600">Hadir</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-blue-600">Sakit</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-purple-600">Izin</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-1/2 flex flex-col border-r">
+              <div class="text-xs text-yellow-300">Cuti</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-full flex flex-col">
+              <div class="text-xs text-red-600">Tidak Absen</div>
+              <div class="text-sm">90</div>
+            </div>
+            <div class="w-full flex flex-col text-right">
+              <div class="text-xs text-yellow-700">Total Karyawan</div>
+              {/*<div class="text-sm">{meta.total_karyawan}</div>*/}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 w-full filter drop-shadow-sm bg-white p-3 rounded space-y-3">
+      <div class={`flex self-stretch items-center justify-start`}>
+        <div class="flex flex-1 justify-start space-x-2">
+          <span class="text-sm font-semibold flex items-center justify-center">
+            Semua Perizinan
+          </span>
+          <div class="relative inline-block w-max text-gray-700">
+            <select
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
+              id="presensi_bulan"
+              onChange={(e) => {
+                // meta.action.setMonth(e);
+              }}
+            >
+              {/*{meta.presensi_bulan.map((val, index) => (*/}
+              <option
+              // value={val.bulan}
+              // selected={
+              //   parseInt(val.bulan) == parseInt(meta.month) ? true : false
+              // }
+              >
+                desember
+                {/*{val.nama_bulan}*/}
+              </option>
+              {/*))}*/}
+
+              {/*<option value="#">Februari</option>*/}
+            </select>
+          </div>
+          <div class="relative inline-block w-max text-gray-700">
+            <select
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
+              id="presensi_tahun"
+              onChange={(e) => {
+                // meta.action.setYear(e);
+              }}
+            >
+              {/*{meta.presensi_tahun.map((val, index) => (*/}
+              <option
+              // value={val.tahun}
+              // selected={
+              //   parseInt(val.tahun) == parseInt(meta.year) ? true : false
+              // }
+              >
+                {/*{val.tahun}*/}
+                2020
+              </option>
+              {/*))}*/}
+
+              {/*<option value="#">Februari</option>*/}
+            </select>
+          </div>
+          <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
+            {/*{meta.presensi.length}*/}20
+          </span>
+        </div>
+        <div class="flex flex-1 items-center justify-end">
+          <input
+            type="text"
+            placeholder="Cari Data"
+            class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+          />
+        </div>
+      </div>
+      <datatable
+        pagination={true}
+        column={[
+          {
+            name: "No",
+            selector: (row, index) => ++index,
+            sortable: true,
+          },
+          {
+            name: "Nama Karyawan",
+            selector: (row) => row.nama,
+            sortable: true,
+          },
+          {
+            name: "Tanggal",
+            selector: (row) => row.tanggal,
+            sortable: true,
+          },
+          {
+            name: "Jenis Izin",
+            selector: (row) => row.jenis_izin,
+            sortable: true,
+          },
+          {
+            name: "Keterangan",
+            selector: (row) => row.keterangan,
+            sortable: true,
+          },
+          {
+            name: "Action",
+            button: true,
+            cell: (row, index) => (
+              <>
+                <div class="space-x-2">
+                  <button
+                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/admin/list-perizinan/detail/");
+                    }}
+                  >
+                    <faicon iconName="show" class="" />
+                  </button>
+                </div>
+              </>
+            ),
+          },
+        ]}
+        data={[
+          {
+            id: 1,
+            nama: "Beetlejuice",
+            tanggal: "1988",
+            jenis_izin: "Cuti",
+            keterangan: "Diterima",
+          },
+          {
+            id: 1,
+            nama: "Beetlejuice",
+            tanggal: "1988",
+            jenis_izin: "Cuti",
+            keterangan: "Diterima",
+          },
+        ]}
+      />
+    </div>
+  </>
+</>

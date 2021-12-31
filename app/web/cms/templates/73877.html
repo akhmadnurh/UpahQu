@@ -50,6 +50,13 @@
                 />
               </div>
               <div class="flex flex-col flex-1 justify-start space-y-2">
+                <div class="text-sm font-bold">Tenggat Waktu</div>
+                <input
+                  type="datetime-local"
+                  class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+                />
+              </div>
+              <div class="flex flex-col flex-1 justify-start space-y-2">
                 <div class="text-sm font-bold">Acak Kode</div>
                 <div class="flex items-center space-x-2">
                   <input
@@ -66,14 +73,25 @@
                   </button>
                 </div>
               </div>
-              <div class="flex flex-col flex-1 justify-start space-y-2">
-                <button
-                  class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-max px-2 py-1.5 rounded inline-flex items-center justify-center"
-                  type="submit"
-                  id="button-refresh"
-                >
-                  Buat Presensi
-                </button>
+              <div class="flex">
+                <div class="flex flex-col flex-1 justify-start space-y-2">
+                  <button
+                    class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-max px-2 py-1.5 rounded inline-flex items-center justify-center"
+                    type="submit"
+                    id="button-refresh"
+                  >
+                    Buat Presensi
+                  </button>
+                </div>
+                <div class="flex flex-col">
+                  <button
+                    class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-max px-2 py-1.5 rounded inline-flex items-center justify-center"
+                    type="submit"
+                    id="button-refresh"
+                  >
+                    Cetak Kode
+                  </button>
+                </div>
               </div>
             </div>
           </div>
