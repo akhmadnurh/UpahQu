@@ -1,0 +1,120 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("gaji").classList.toggle("bg-indigo-900");
+        document.getElementById("gaji").classList.remove("hover:bg-gray-200");
+        document.getElementById("gaji").classList.toggle("active");
+        document.getElementById("text-gaji").classList.toggle("text-white");
+        document
+          .getElementById("btn-informasi-gaji")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-informasi-gaji")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("gaji").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Informasi Gaji</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Gaji</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Informasi Gaji</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="mt-2 w-full filter drop-shadow-sm bg-white p-3 rounded">
+      <div class={`flex self-stretch items-center justify-start`}>
+        <div class="flex flex-1 justify-start space-x-2">
+          <span class="text-sm font-semibold flex items-center justify-center">
+            Semua Gaji
+          </span>
+          <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
+            20
+          </span>
+        </div>
+        <div class="flex flex-1 items-center justify-end">
+          <input
+            type="text"
+            placeholder="Cari Data"
+            class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+          />
+        </div>
+      </div>
+      <datatable
+        pagination={true}
+        column={[
+          {
+            name: "No",
+            selector: (row, index) => ++index,
+            sortable: true,
+          },
+          {
+            name: "Nama Karyawan",
+            selector: (row) => row.nama,
+            sortable: true,
+          },
+          {
+            name: "Divisi",
+            selector: (row) => row.divisi,
+            sortable: true,
+          },
+          {
+            name: "Jabatan",
+            selector: (row) => row.jabatan,
+            sortable: true,
+          },
+          {
+            name: "Jumlah Gaji",
+            selector: (row) => row.jumlah_gaji,
+            sortable: true,
+          },
+          {
+            name: "Action",
+            button: true,
+            cell: (row, index) => (
+              <>
+                <div class="space-x-2">
+                  <button
+                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/admin/informasi-gaji/detail/");
+                    }}
+                  >
+                    <faicon iconName="show" class="" />
+                  </button>
+                </div>
+              </>
+            ),
+          },
+        ]}
+        data={[
+          {
+            id: 1,
+            nama: "Bejo",
+            divisi: "Pegiriman",
+            jabatan: "Driver",
+            jumlah_gaji: "2.500.000",
+          },
+          {
+            id: 1,
+            nama: "Bejo",
+            divisi: "Pegiriman",
+            jabatan: "Driver",
+            jumlah_gaji: "2.500.000",
+          },
+        ]}
+      />
+    </div>
+  </>
+</>

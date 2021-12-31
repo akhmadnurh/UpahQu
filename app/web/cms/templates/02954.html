@@ -1,0 +1,181 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("gaji").classList.toggle("bg-indigo-900");
+        document.getElementById("gaji").classList.remove("hover:bg-gray-200");
+        document.getElementById("gaji").classList.toggle("active");
+        document.getElementById("text-gaji").classList.toggle("text-white");
+        document
+          .getElementById("btn-informasi-gaji")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-informasi-gaji")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("gaji").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Detail Gaji</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Gaji</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <a href="#">Informasi Gaji</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Detail Gaji</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
+      <form class="w-1/2">
+        <div class="flex items-start justify-center w-full space-x-10">
+          <div class="flex flex-col space-y-5 items-start justify-start w-full">
+            <div class="flex flex-col space-y-2 items-start justify-center w-full">
+              <div class="text-sm font-bold text-black">Nama Karyawan</div>
+              <span class="text-sm">Coba</span>
+            </div>
+            <div class="flex items-center w-full">
+              <div class="w-full flex flex-col space-y-2">
+                <div class="text-sm font-bold">Absensi Bulan Ini</div>
+                <div class="flex flex-row space-x-2 border-solid">
+                  <div class="w-1/2 flex flex-col border-r">
+                    <div class="text-xs text-green-600">Hadir</div>
+                    <div class="text-sm">90</div>
+                  </div>
+                  <div class="w-1/2 flex flex-col border-r">
+                    <div class="text-xs text-blue-600">Sakit</div>
+                    <div class="text-sm">90</div>
+                  </div>
+                  <div class="w-1/2 flex flex-col border-r">
+                    <div class="text-xs text-purple-600">Izin</div>
+                    <div class="text-sm">90</div>
+                  </div>
+                  <div class="w-1/2 flex flex-col border-r">
+                    <div class="text-xs text-yellow-300">Cuti</div>
+                    <div class="text-sm">90</div>
+                  </div>
+                  <div class="w-full flex flex-col">
+                    <div class="text-xs text-red-600">Tidak Absen</div>
+                    <div class="text-sm">90</div>
+                  </div>
+                  <div class="w-full flex flex-col text-right">
+                    <div class="text-xs text-yellow-700">Total Karyawan</div>
+                    <div class="text-sm">20</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black flex flex-row w-full">
+                <div class="w-full">Parameter Penggajian</div>
+                <div>
+                  <button class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center">
+                    <faicon iconName="edit" />
+                  </button>
+                </div>
+              </div>
+              <table class="border-collapse border border-gray-300">
+                <tbody>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2">Golongan 1</td>
+                    <td class="border border-gray-300 p-2">Rp 2.000.000</td>
+                  </tr>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2">Bonus 1</td>
+                    <td class="border border-gray-300 p-2">Rp 2.000.000</td>
+                  </tr>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2">Lembur</td>
+                    <td class="border border-gray-300 p-2">Rp 2.000.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black flex flex-row w-full">
+                <div class="w-full">Tambahan Gaji</div>
+                <div>
+                  <button
+                    class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/admin/informasi-gaji/detail/edit-tambahan");
+                    }}
+                  >
+                    <faicon iconName="edit" />
+                  </button>
+                </div>
+              </div>
+              <table class="border-collapse border border-gray-300">
+                <tbody>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2">Bonus Target</td>
+                    <td class="border border-gray-300 p-2">Rp 2.000.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black flex flex-row w-full">
+                <div class="w-full">Potongan Gaji</div>
+                <div>
+                  <button
+                    class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/admin/informasi-gaji/detail/edit-potongan");
+                    }}
+                  >
+                    <faicon iconName="edit" />
+                  </button>
+                </div>
+              </div>
+              <table class="border-collapse border border-gray-300">
+                <tbody>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2">PPH</td>
+                    <td class="border border-gray-300 p-2">Rp 2.000.000</td>
+                  </tr>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2">Asuransi</td>
+                    <td class="border border-gray-300 p-2">Rp 2.000.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">
+                Total Gaji Rp 10.000.000
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center space-x-2">
+          <button
+            type="submit"
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Simpan Perubahan</span>
+          </button>
+          <button
+            type="submit"
+            class="bg-black text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Cetak Slip</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </>
+</>
