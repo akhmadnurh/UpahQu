@@ -8,10 +8,10 @@
         document.getElementById("gaji").classList.toggle("active");
         document.getElementById("text-gaji").classList.toggle("text-white");
         document
-          .getElementById("btn-informasi-gaji")
+          .getElementById("btn-riwayat-gaji")
           .classList.toggle("border-indigo-900");
         document
-          .getElementById("text-informasi-gaji")
+          .getElementById("text-riwayat-gaji")
           .classList.toggle("text-indigo-900");
         var content = document.getElementById("gaji").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
@@ -81,11 +81,6 @@
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black flex flex-row w-full">
                 <div class="w-full">Parameter Penggajian</div>
-                <div>
-                  <button class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center">
-                    <faicon iconName="edit" />
-                  </button>
-                </div>
               </div>
               <table class="border-collapse border border-gray-300 w-full">
                 <tbody>
@@ -101,16 +96,6 @@
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black flex flex-row w-full">
                 <div class="w-full">Tambahan Gaji</div>
-                <div>
-                  <button
-                    class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
-                    onClick={() => {
-                      navigate("/admin/informasi-gaji/detail/edit-tambahan");
-                    }}
-                  >
-                    <faicon iconName="edit" />
-                  </button>
-                </div>
               </div>
               <table class="border-collapse border border-gray-300 w-full">
                 <tbody>
@@ -128,16 +113,6 @@
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black flex flex-row w-full">
                 <div class="w-full">Potongan Gaji</div>
-                <div>
-                  <button
-                    class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
-                    onClick={() => {
-                      navigate("/admin/informasi-gaji/detail/edit-potongan");
-                    }}
-                  >
-                    <faicon iconName="edit" />
-                  </button>
-                </div>
               </div>
               <table class="border-collapse border border-gray-300 w-full">
                 <tbody>
@@ -157,13 +132,7 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center justify-center space-x-2">
-          <button
-            type="submit"
-            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
-          >
-            <span>Simpan Perubahan</span>
-          </button>
+        <div class="flex items-center justify-center">
           <button
             type="submit"
             class="bg-black text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"

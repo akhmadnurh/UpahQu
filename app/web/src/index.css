@@ -75,6 +75,10 @@ input[type='number'] {
   margin: 5% auto 15% auto;
 }
 
+.btn {
+        white-space: nowrap;
+    }
+
 #partitioned {
   padding-left: 15px;
   letter-spacing: 42px;

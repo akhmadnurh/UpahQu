@@ -18,6 +18,11 @@
         var content = document.getElementById("presensi").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+
+      var modal_presensi = document.getElementById("modal_presensi");
+      modal_presensi.onclick = function () {
+        modal_presensi.style.display = "none";
+      };
     }}
   />
   <>
@@ -38,7 +43,7 @@
 
     <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
       <div class="w-full">
-        <form>
+        <div>
           <div class="filter drop-shadow-sm bg-white rounded space-y-2 w-1/2">
             <div class={`flex flex-col space-y-4`}>
               <div class="flex flex-col flex-1 justify-start space-y-2">
@@ -74,29 +79,50 @@
                 </div>
               </div>
               <div class="flex">
-                <div class="flex flex-col flex-1 justify-start space-y-2">
+                <div class="flex flex-col justify-start w-full">
                   <button
-                    class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-max px-2 py-1.5 rounded inline-flex items-center justify-center"
-                    type="submit"
-                    id="button-refresh"
+                    class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-full px-2 py-2 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      document.getElementById("modal_presensi").style.display =
+                        "block";
+                    }}
                   >
                     Buat Presensi
-                  </button>
-                </div>
-                <div class="flex flex-col">
-                  <button
-                    class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-max px-2 py-1.5 rounded inline-flex items-center justify-center"
-                    type="submit"
-                    id="button-refresh"
-                  >
-                    Cetak Kode
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
+    </div>
+    <div class="modal z-20" id="modal_presensi">
+      <form class="modal-content w-max flex items-center justify-center p-5 bg-white rounded">
+        <div class="flex flex-col bg-gray-100 p-9 space-y-10 text-center w-full">
+          <div class="font-bold text-indigo-800">Kode Absensi</div>
+          <div class="font-bold text-gray-400">Kode Absensi</div>
+          <div class="flex space-x-7 text-sm">
+            <button
+              class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-full px-2 py-2 rounded inline-flex items-center justify-center btn"
+              onClick={() => {
+                document.getElementById("modal_presensi").style.display =
+                  "block";
+              }}
+            >
+              Buat Presensi
+            </button>
+            <button
+              class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-full px-2 py-2 rounded inline-flex items-center justify-center"
+              onClick={() => {
+                document.getElementById("modal_presensi").style.display =
+                  "block";
+              }}
+            >
+              Salin Kode
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </>
 </>

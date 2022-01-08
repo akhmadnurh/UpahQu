@@ -180,11 +180,16 @@
                       Informasi Gaji
                     </div>
                   </button>
-                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
-                    <div class="text-sm font-semibold">Pengeluaran Uang</div>
-                  </button>
-                  <button class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900">
-                    <div class="text-sm font-semibold">Pemasukan Uang</div>
+                  <button
+                    id="btn-riwayat-gaji"
+                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900"
+                    onClick={() => {
+                      navigate("/admin/riwayat-gaji");
+                    }}
+                  >
+                    <div class="text-sm font-semibold" id="text-riwayat-gaji">
+                      Riwayat Gaji
+                    </div>
                   </button>
                 </div>
               </div>
