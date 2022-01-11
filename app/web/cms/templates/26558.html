@@ -129,7 +129,13 @@
                                 <input
                                   type="checkbox"
                                   class="form-checkbox"
-                                  defaultChecked
+                                  value="default"
+                                  onClick={() => {
+                                    var is_checked = $(this).prop("checked");
+                                    var val = "";
+                                    if (is_checked) val = this.value;
+                                    $('input[type="text"]').val(val);
+                                  }}
                                 />
                                 <span class="ml-2">Default</span>
                               </label>

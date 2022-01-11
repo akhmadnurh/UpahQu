@@ -16,6 +16,59 @@
         var content = document.getElementById("gaji").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      meta.action = {
+        potonganGaji: () => {
+          var div1 = document.createElement("div");
+          var div2 = document.createElement("div");
+          var div3 = document.createElement("div");
+          var inputKet = document.createElement("input");
+          var inputNom = document.createElement("input");
+          div1.classList.add("flex", "flex-col", "space-y-5");
+          div2.classList.add(
+            "flex",
+            "flex-col",
+            "space-y-2",
+            "text-sm",
+            "font-bold",
+            "text-black"
+          );
+          div3.classList.add(
+            "flex",
+            "flex-col",
+            "space-y-2",
+            "text-sm",
+            "font-bold",
+            "text-black"
+          );
+          inputKet.classList.add(
+            "border",
+            "focus:outline-none",
+            "focus:border-indigo-900",
+            "border-gray-300",
+            "py-1.5",
+            "px-3",
+            "rounded",
+            "text-md"
+          );
+          inputNom.classList.add(
+            "border",
+            "focus:outline-none",
+            "focus:border-indigo-900",
+            "border-gray-300",
+            "py-1.5",
+            "px-3",
+            "rounded",
+            "text-md"
+          );
+          div2.append("Keterangan");
+          div2.appendChild(inputKet);
+          div3.append("Nominal");
+          div3.appendChild(inputNom);
+          div1.appendChild(div2);
+          div1.appendChild(div3);
+          document.getElementById("potongan-gaji").appendChild(div1);
+        },
+      };
     }}
   />
   <>
@@ -46,36 +99,43 @@
       </ol>
     </nav>
     <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
-      <div class="w-1/2">
-        <div class="flex items-start justify-center w-full space-x-10">
-          <div class="flex flex-col space-y-5 items-start justify-start w-full">
-            <div class="flex flex-col space-y-2 items-start justify-center w-full">
-              <div class="text-sm font-bold text-black">Keterangan</div>
-              <input
-                type="text"
-                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-                defaultValue="Bonus Target"
-              />
-            </div>
-            <div class="flex flex-col space-y-2 items-start justify-center w-full">
-              <div class="text-sm font-bold text-black">Nominal</div>
-              <input
-                type="text"
-                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-                defaultValue="2000000"
-              />
-            </div>
+      <div class="w-1/2 space-y-5">
+        <div class="flex flex-col space-y-5">
+          <div class="flex flex-col space-y-2 text-sm font-bold text-black">
+            Keterangan
+            <input
+              type="text"
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded text-md"
+            />
+          </div>
+          <div class="flex flex-col space-y-2 text-sm font-bold text-black">
+            Nominal
+            <input
+              type="text"
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded text-md"
+            />
           </div>
         </div>
+        <div id="potongan-gaji" class="space-y-5"></div>
+        <button
+          class="bg-gray-200 hover:bg-gray-300 text-gray-900 text-xs font-medium py-1 px-2 rounded inline-flex items-center"
+          onClick={() => {
+            meta.action.potonganGaji();
+          }}
+        >
+          <faicon iconName="Plus" class="mr-2" />
+          <span>Tambah Potongan Gaji</span>
+        </button>
         <div class="flex items-center justify-center space-x-2">
           <button
             type="submit"
-            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold  py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
           >
             <span>Simpan Perubahan</span>
           </button>
           <button
-            class="bg-black text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+            type="submit"
+            class="bg-black text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
             onClick={() => {
               history.back();
             }}

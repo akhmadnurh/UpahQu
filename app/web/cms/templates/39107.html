@@ -21,48 +21,52 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">List Perizinan</a>
-    <nav class="font-sans w-full mb-3 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Presensi</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>List Kehadiran</li>
-        </li>
-      </ol>
-    </nav>
-    <div class={`flex self-stretch items-center justify-end`}>
-      <div class="flex w-1/2">
-        <div class="w-full flex flex-col space-y-2">
-          <div class="text-sm font-bold">Perizinan Hari Ini</div>
-          <div class="flex flex-row space-x-2 border-solid">
-            <div class="w-1/2 flex flex-col border-r">
-              <div class="text-xs text-green-600">Hadir</div>
-              <div class="text-sm">90</div>
-            </div>
-            <div class="w-1/2 flex flex-col border-r">
-              <div class="text-xs text-blue-600">Sakit</div>
-              <div class="text-sm">90</div>
-            </div>
-            <div class="w-1/2 flex flex-col border-r">
-              <div class="text-xs text-purple-600">Izin</div>
-              <div class="text-sm">90</div>
-            </div>
-            <div class="w-1/2 flex flex-col border-r">
-              <div class="text-xs text-yellow-300">Cuti</div>
-              <div class="text-sm">90</div>
-            </div>
-            <div class="w-full flex flex-col">
-              <div class="text-xs text-red-600">Tidak Absen</div>
-              <div class="text-sm">90</div>
-            </div>
-            <div class="w-full flex flex-col text-right">
-              <div class="text-xs text-yellow-700">Total Karyawan</div>
-              {/*<div class="text-sm">{meta.total_karyawan}</div>*/}
+    <div class="flex w-full">
+      <div class="flex flex-col w-full">
+        <a class="text-xl font-bold">List Perizinan</a>
+        <nav class="font-sans w-full mb-3 mt-2">
+          <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+            <li>
+              <a href="#">Presensi</a>
+            </li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>
+              <li>List Kehadiran</li>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class={`flex self-stretch items-center justify-end w-full`}>
+        <div class="flex w-full">
+          <div class="w-full flex flex-col space-y-2">
+            <div class="text-sm font-bold">Perizinan Hari Ini</div>
+            <div class="flex flex-row space-x-2 border-solid">
+              <div class="w-1/2 flex flex-col border-r">
+                <div class="text-xs text-green-600">Hadir</div>
+                <div class="text-sm">90</div>
+              </div>
+              <div class="w-1/2 flex flex-col border-r">
+                <div class="text-xs text-blue-600">Sakit</div>
+                <div class="text-sm">90</div>
+              </div>
+              <div class="w-1/2 flex flex-col border-r">
+                <div class="text-xs text-purple-600">Izin</div>
+                <div class="text-sm">90</div>
+              </div>
+              <div class="w-1/2 flex flex-col border-r">
+                <div class="text-xs text-yellow-300">Cuti</div>
+                <div class="text-sm">90</div>
+              </div>
+              <div class="w-full flex flex-col">
+                <div class="text-xs text-red-600">Tidak Absen</div>
+                <div class="text-sm">90</div>
+              </div>
+              <div class="w-full flex flex-col text-right">
+                <div class="text-xs text-yellow-700">Total Karyawan</div>
+                {/*<div class="text-sm">{meta.total_karyawan}</div>*/}
+              </div>
             </div>
           </div>
         </div>

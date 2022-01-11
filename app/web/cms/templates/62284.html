@@ -106,7 +106,12 @@
         </div>
       </div>
       <div class="w-full">
-        <button class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold p-3 rounded inline-flex items-center filter drop-shadow-md w-full flex items-center justify-center">
+        <button
+          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold p-3 rounded inline-flex items-center filter drop-shadow-md w-full flex items-center justify-center"
+          onClick={() => {
+            navigate("/admin/list-kehadiran/buat-presensi");
+          }}
+        >
           <faicon iconName="Plus" class="mr-3" />
           <span>Buat Absensi Hari Ini</span>
         </button>
