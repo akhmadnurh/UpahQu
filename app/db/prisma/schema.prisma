@@ -97,6 +97,20 @@ model pengguna {
   role                          role                            @relation(fields: [id_role], references: [id_role])
   karyawan_parameter_penggajian karyawan_parameter_penggajian[]
   karyawan_presensi             karyawan_presensi[]
+  perizinan                     perizinan[]
+}
+
+model perizinan {
+  id_perizinan     Int              @id @default(autoincrement())
+  id_pengguna      Int
+  jenis_perizinan  String           @db.VarChar(10)
+  keterangan       String
+  tgl_mulai        DateTime         @db.Date
+  tgl_akhir        DateTime         @db.Date
+  id_pengajuan     Int
+  tgl_izin         DateTime         @db.Date
+  status_pengajuan status_pengajuan @relation(fields: [id_pengajuan], references: [id_pengajuan])
+  pengguna         pengguna         @relation(fields: [id_pengguna], references: [id_pengguna])
 }
 
 model presensi {
@@ -115,12 +129,10 @@ model role {
   pengguna pengguna[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model status_pengajuan {
-  id_pengajuan Int
-  pengajuan    String @db.VarChar(30)
-
-  @@ignore
+  id_pengajuan Int         @id
+  pengajuan    String      @db.VarChar(30)
+  perizinan    perizinan[]
 }
 
 model status_presensi {

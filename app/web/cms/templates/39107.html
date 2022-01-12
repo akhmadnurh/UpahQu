@@ -1,7 +1,29 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      total_karyawan: 0,
+      months: [],
+      years: [],
+      month_now: "",
+      year_now: "",
+      perizinan: [],
+      total_perizinan: 0,
+      action: {},
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/r-perizinan").then((res) => {
+          meta.total_karyawan = res.total_karyawan;
+          meta.perizinan = res.perizinan;
+          meta.total_perizinan = res.perizinan.length;
+          meta.months = res.perizinan_bulan;
+          meta.years = res.perizinan_tahun;
+          meta.month_now = res.month;
+          meta.year_now = res.year;
+        });
+      };
+      getData();
+
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -18,6 +40,30 @@
         var content = document.getElementById("presensi").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      meta.action = {
+        setMonth: (e) => {
+          meta.month_now = e.target.value;
+          meta.action.updatePerizinan();
+        },
+        setYear: (e) => {
+          meta.year_now = e.target.value;
+          meta.action.updatePerizinan();
+        },
+        updatePerizinan: () => {
+          api("/api/r-perizinan", {
+            month: meta.month_now,
+            year: meta.year_now,
+          }).then((res) => {
+            meta.total_karyawan = res.total_karyawan;
+            meta.perizinan = res.perizinan;
+            meta.total_perizinan = res.perizinan.length;
+            meta.months = res.perizinan_bulan;
+            meta.years = res.perizinan_tahun;
+            meta.month_now = res.month;
+            meta.year_now = res.year;
+          });
+        },
+      };
     }}
   />
   <>
@@ -65,7 +111,7 @@
               </div>
               <div class="w-full flex flex-col text-right">
                 <div class="text-xs text-yellow-700">Total Karyawan</div>
-                {/*<div class="text-sm">{meta.total_karyawan}</div>*/}
+                <div class="text-sm">{meta.total_karyawan}</div>
               </div>
             </div>
           </div>
@@ -83,22 +129,21 @@
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
               id="presensi_bulan"
               onChange={(e) => {
-                // meta.action.setMonth(e);
+                meta.action.setMonth(e);
               }}
             >
-              {/*{meta.presensi_bulan.map((val, index) => (*/}
-              <option
-              // value={val.bulan}
-              // selected={
-              //   parseInt(val.bulan) == parseInt(meta.month) ? true : false
-              // }
-              >
-                desember
-                {/*{val.nama_bulan}*/}
-              </option>
-              {/*))}*/}
-
-              {/*<option value="#">Februari</option>*/}
+              {meta.months.map((val, index) => (
+                <option
+                  value={val.bulan}
+                  selected={
+                    parseInt(val.bulan) == parseInt(meta.month_now)
+                      ? true
+                      : false
+                  }
+                >
+                  {val.nama_bulan}
+                </option>
+              ))}
             </select>
           </div>
           <div class="relative inline-block w-max text-gray-700">
@@ -106,26 +151,25 @@
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
               id="presensi_tahun"
               onChange={(e) => {
-                // meta.action.setYear(e);
+                meta.action.setYear(e);
               }}
             >
-              {/*{meta.presensi_tahun.map((val, index) => (*/}
-              <option
-              // value={val.tahun}
-              // selected={
-              //   parseInt(val.tahun) == parseInt(meta.year) ? true : false
-              // }
-              >
-                {/*{val.tahun}*/}
-                2020
-              </option>
-              {/*))}*/}
-
-              {/*<option value="#">Februari</option>*/}
+              {meta.years.map((val, index) => (
+                <option
+                  value={val.tahun}
+                  selected={
+                    parseInt(val.tahun) == parseInt(meta.year_now)
+                      ? true
+                      : false
+                  }
+                >
+                  {val.tahun}
+                </option>
+              ))}
             </select>
           </div>
           <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
-            {/*{meta.presensi.length}*/}20
+            {meta.total_perizinan}
           </span>
         </div>
         <div class="flex flex-1 items-center justify-end">
@@ -146,17 +190,17 @@
           },
           {
             name: "Nama Karyawan",
-            selector: (row) => row.nama,
+            selector: (row) => row.nama_pengguna,
             sortable: true,
           },
           {
             name: "Tanggal",
-            selector: (row) => row.tanggal,
+            selector: (row) => row.tgl_izin,
             sortable: true,
           },
           {
             name: "Jenis Izin",
-            selector: (row) => row.jenis_izin,
+            selector: (row) => row.jenis_perizinan,
             sortable: true,
           },
           {
@@ -183,22 +227,7 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            nama: "Beetlejuice",
-            tanggal: "1988",
-            jenis_izin: "Cuti",
-            keterangan: "Diterima",
-          },
-          {
-            id: 1,
-            nama: "Beetlejuice",
-            tanggal: "1988",
-            jenis_izin: "Cuti",
-            keterangan: "Diterima",
-          },
-        ]}
+        data={meta.perizinan}
       />
     </div>
   </>
