@@ -8,6 +8,9 @@
       year_now: "",
       perizinan: [],
       total_perizinan: 0,
+      sakit: 0,
+      izin: 0,
+      cuti: 0,
       action: {},
     }}
     run={async () => {
@@ -20,6 +23,9 @@
           meta.years = res.perizinan_tahun;
           meta.month_now = res.month;
           meta.year_now = res.year;
+          meta.sakit = res.sakit;
+          meta.izin = res.izin;
+          meta.cuti = res.cuti;
         });
       };
       getData();
@@ -89,26 +95,26 @@
           <div class="w-full flex flex-col space-y-2">
             <div class="text-sm font-bold">Perizinan Hari Ini</div>
             <div class="flex flex-row space-x-2 border-solid">
-              <div class="w-1/2 flex flex-col border-r">
-                <div class="text-xs text-green-600">Hadir</div>
-                <div class="text-sm">90</div>
-              </div>
+              {/*<div class="w-1/2 flex flex-col border-r">*/}
+              {/*<div class="text-xs text-green-600">Hadir</div>*/}
+              {/*<div class="text-sm">90</div>*/}
+              {/*</div>*/}
               <div class="w-1/2 flex flex-col border-r">
                 <div class="text-xs text-blue-600">Sakit</div>
-                <div class="text-sm">90</div>
+                <div class="text-sm">{meta.sakit}</div>
               </div>
               <div class="w-1/2 flex flex-col border-r">
                 <div class="text-xs text-purple-600">Izin</div>
-                <div class="text-sm">90</div>
+                <div class="text-sm">{meta.izin}</div>
               </div>
               <div class="w-1/2 flex flex-col border-r">
                 <div class="text-xs text-yellow-300">Cuti</div>
-                <div class="text-sm">90</div>
+                <div class="text-sm">{meta.cuti}</div>
               </div>
-              <div class="w-full flex flex-col">
-                <div class="text-xs text-red-600">Tidak Absen</div>
-                <div class="text-sm">90</div>
-              </div>
+              {/*<div class="w-full flex flex-col">*/}
+              {/*<div class="text-xs text-red-600">Tidak Absen</div>*/}
+              {/*<div class="text-sm">90</div>*/}
+              {/*</div>*/}
               <div class="w-full flex flex-col text-right">
                 <div class="text-xs text-yellow-700">Total Karyawan</div>
                 <div class="text-sm">{meta.total_karyawan}</div>
