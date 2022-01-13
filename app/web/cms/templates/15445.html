@@ -40,7 +40,7 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">Detail Presensi</a>
+    <a class="text-xl font-bold">Detail Kehadiran</a>
     <nav class="font-sans w-full mb-3 mt-2">
       <ol class="list-reset flex text-grey-dark text-xs space-x-3">
         <li>
@@ -56,7 +56,7 @@
           <faicon iconName="arrowRight" />
         </li>
         <li>
-          <li>Detail Presensi</li>
+          <li>Detail Kehadiran</li>
         </li>
       </ol>
     </nav>
@@ -110,7 +110,10 @@
                   <button
                     class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      console.log("coba");
+                      navigate(
+                        "/admin/list-kehadiran/detail/karyawan/" +
+                          row.id_presensi
+                      );
                     }}
                   >
                     <faicon iconName="show" class="" />

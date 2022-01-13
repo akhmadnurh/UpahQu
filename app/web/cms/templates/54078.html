@@ -1,0 +1,110 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("presensi").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("presensi")
+          .classList.remove("hover:bg-gray-200");
+        document.getElementById("presensi").classList.toggle("active");
+        document.getElementById("text-presensi").classList.toggle("text-white");
+        document
+          .getElementById("btn-list-kehadiran")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-list-kehadiran")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("presensi").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Detail Kehadiran Karyawan</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Presensi</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <a href="#">List Kehadiran</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Detail Kehadiran</li>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Kehadiran Karyawan</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
+      <div class="flex items-start justify-center w-full space-x-10">
+        <div class="flex flex-col space-y-5 items-start justify-start w-full">
+          <div class="flex flex-col space-y-2 items-start justify-center w-full">
+            <div class="text-sm font-bold text-black">Nama Karyawan</div>
+            <div class="text-md text-black">Coba</div>
+          </div>
+          <div class="flex flex-1 justify-start space-x-2">
+            <div class="text-sm font-bold text-black">Kehadiran pada</div>
+            <div class="relative inline-block w-max text-gray-700">
+              <select
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
+                id="presensi_bulan"
+              >
+                <option value="#">Februari</option>
+              </select>
+            </div>
+            <div class="relative inline-block w-max text-gray-700">
+              <select
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
+                id="presensi_tahun"
+              >
+                <option value="#">2023</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-4 items-start justify-center w-full">
+            <div class="flex space-x-4 w-3/4 text-center">
+              <div class="bg-gray-200 w-full p-3">
+                <div class="text-sm font-bold text-black">Hadir</div>
+                <div class="text-md text-black">10</div>
+              </div>
+              <div class="bg-gray-200 w-full p-3">
+                <div class="text-sm font-bold text-black">Izin</div>
+                <div class="text-md text-black">10</div>
+              </div>
+              <div class="bg-gray-200 w-full p-3">
+                <div class="text-sm font-bold text-black">Sakit</div>
+                <div class="text-md text-black">10</div>
+              </div>
+            </div>
+            <div class="flex space-x-4 w-3/4 text-center">
+              <div class="bg-gray-200 w-full p-3">
+                <div class="text-sm font-bold text-black">Cuti</div>
+                <div class="text-md text-black">10</div>
+              </div>
+              <div class="bg-gray-200 w-full p-3">
+                <div class="text-sm font-bold text-black">Tidak Absen</div>
+                <div class="text-md text-black">10</div>
+              </div>
+              <div class="bg-gray-200 w-full p-3">
+                <div class="text-sm font-bold text-black">Total Kehadiran</div>
+                <div class="text-md text-black">10</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+</>
