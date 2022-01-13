@@ -1,7 +1,36 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      perizinan: [
+        {
+          jenis_perizinan: "",
+          tgl_mulai: "",
+          tgl_akhir: "",
+          keterangan: "",
+          id_pengguna: "",
+          nama_pengguna: "",
+          id_pengajuan: 1,
+          pengajuan: "",
+        },
+      ],
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/r-detail-perizinan", {
+          id_perizinan: parseInt(params.id),
+        }).then((res) => {
+          meta.perizinan = res.perizinan;
+          meta.perizinan[0].jenis_perizinan =
+            meta.perizinan[0].jenis_perizinan.charAt(0).toUpperCase() +
+            meta.perizinan[0].jenis_perizinan.slice(1);
+
+          // Menghilangkan button jika perizinan sudah diberikan jawaban
+          if (meta.perizinan[0].id_pengajuan != 1) {
+            document.getElementById("btn-answer").innerHTML = "";
+          }
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -51,7 +80,7 @@
                 type="text"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 readOnly
-                defaultValue="Coba"
+                defaultValue={meta.perizinan[0].nama_pengguna}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -60,7 +89,7 @@
                 type="text"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 readOnly
-                defaultValue="IDS23D"
+                defaultValue={meta.perizinan[0].id_pengguna}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -69,7 +98,7 @@
                 type="text"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 readOnly
-                defaultValue="Cuti"
+                defaultValue={meta.perizinan[0].jenis_perizinan}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -77,7 +106,7 @@
               <textarea
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 readOnly
-                defaultValue="Cuti"
+                defaultValue={meta.perizinan[0].keterangan}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -89,20 +118,29 @@
                   type="text"
                   class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                   readOnly
-                  defaultValue="22 Januari 2022"
+                  defaultValue={meta.perizinan[0].tgl_mulai}
                 />
                 <span class="justify-center flex items-center">-</span>
                 <input
                   type="text"
                   class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                   readOnly
-                  defaultValue="2 Februari 2022"
+                  defaultValue={meta.perizinan[0].tgl_akhir}
                 />
               </div>
             </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Status Pengajuan</div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                readOnly
+                defaultValue={meta.perizinan[0].pengajuan}
+              />
+            </div>
           </div>
         </div>
-        <div class="flex items-center justify-center space-x-2">
+        <div class="flex items-center justify-center space-x-2" id="btn-answer">
           <button
             type="submit"
             class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
@@ -115,12 +153,12 @@
           >
             <span>Tolak</span>
           </button>
-          <button
-            type="submit"
-            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
-          >
-            <span>Abaikan</span>
-          </button>
+          {/*<button*/}
+          {/*type="submit"*/}
+          {/*class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"*/}
+          {/*>*/}
+          {/*<span>Abaikan</span>*/}
+          {/*</button>*/}
         </div>
       </form>
     </div>
