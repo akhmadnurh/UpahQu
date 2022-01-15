@@ -13,6 +13,7 @@
           pengajuan: "",
         },
       ],
+      action: {},
     }}
     run={async () => {
       const getData = () => {
@@ -47,6 +48,30 @@
         var content = document.getElementById("presensi").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      meta.action = {
+        terimaPerizinan: () => {
+          api("/api/terima-perizinan", { id_perizinan: params.id }).then(
+            (res) => {
+              if (res.status == "success") {
+                getData();
+              } else {
+                console.log("error");
+              }
+            }
+          );
+        },
+        tolakPerizinan: () => {
+          api("/api/tolak-perizinan", { id_perizinan: params.id }).then(
+            (res) => {
+              if (res.status == "success") {
+                getData();
+              } else {
+                console.log("error");
+              }
+            }
+          );
+        },
+      };
     }}
   />
   <>
@@ -142,14 +167,26 @@
         </div>
         <div class="flex items-center justify-center space-x-2" id="btn-answer">
           <button
-            type="submit"
+            type="button"
             class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+            onClick={() => {
+              const conf = confirm("Are you sure?");
+              if (conf) {
+                meta.action.terimaPerizinan();
+              }
+            }}
           >
             <span>Terima</span>
           </button>
           <button
-            type="submit"
+            type="button"
             class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+            onClick={() => {
+              const conf = confirm("Are you sure?");
+              if (conf) {
+                meta.action.tolakPerizinan();
+              }
+            }}
           >
             <span>Tolak</span>
           </button>
