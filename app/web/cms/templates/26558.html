@@ -38,6 +38,17 @@
           modal.style.display = "none";
         }
       };
+
+      // var s = document.getElementById("s");
+      // s.onclick = function () {
+      //   if (document.getElementById("s").checked) {
+      //     document
+      //       .getElementById("input-parameter")
+      //       .setAttribute("value", s.value);
+      //   } else {
+      //     document.getElementById("input-parameter").setAttribute("value", "");
+      //   }
+      // };
     }}
   />
   <>
@@ -95,11 +106,8 @@
                 <input
                   type="text"
                   class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
-                  id="input-divisi"
+                  id="input-parameter"
                   readOnly
-                  // onChange={(e) => meta.action.setDepartemen(e)}
-                  // required
-                  // disabled={meta.departemenState}
                 />
               </div>
               <div class="flex items-center justify-center">
@@ -128,28 +136,34 @@
                               <label class="inline-flex items-center w-full h-full bg-gray-200 p-2 hover:bg-gray-300 rounded">
                                 <input
                                   type="checkbox"
+                                  id="s1"
                                   class="form-checkbox"
-                                  value="default"
+                                  value="1"
                                   onClick={() => {
-                                    var is_checked = $(this).prop("checked");
-                                    var val = "";
-                                    if (is_checked) val = this.value;
-                                    $('input[type="text"]').val(val);
+                                    if (document.getElementById("s1").checked) {
+                                      document
+                                        .getElementById("input-parameter")
+                                        .setAttribute("value", s1.value);
+                                    } else {
+                                      document
+                                        .getElementById("input-parameter")
+                                        .setAttribute("value", "");
+                                    }
                                   }}
                                 />
                                 <span class="ml-2">Default</span>
                               </label>
                             </div>
-                            <div>
-                              <label class="inline-flex items-center w-full h-full bg-gray-200 p-2 hover:bg-gray-300 rounded">
-                                <input
-                                  type="checkbox"
-                                  class="form-checkbox"
-                                  defaultChecked
-                                />
-                                <span class="ml-2">Default</span>
-                              </label>
-                            </div>
+                            {/*<div>*/}
+                            {/*<label class="inline-flex items-center w-full h-full bg-gray-200 p-2 hover:bg-gray-300 rounded">*/}
+                            {/*<input*/}
+                            {/*type="checkbox"*/}
+                            {/*class="form-checkbox"*/}
+                            {/*defaultChecked*/}
+                            {/*/>*/}
+                            {/*<span class="ml-2">Default</span>*/}
+                            {/*</label>*/}
+                            {/*</div>*/}
                             <div>
                               <button class="inline-flex items-center w-full h-full bg-blue-200 p-2 hover:bg-blue-300 rounded">
                                 <span class="font-bold text-sm">
