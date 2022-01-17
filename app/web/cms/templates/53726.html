@@ -91,52 +91,6 @@
               <div class="flex self-stretch flex-col items-start justify-center rounded">
                 <button
                   class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
-                  id="gaji"
-                >
-                  <div class="flex flex-1 self-stretch flex-col items-start justify-center">
-                    <div
-                      class="text-sm font-bold flex flex-row w-full"
-                      id="text-gaji"
-                    >
-                      <div class="mr-4 text-left">
-                        <faicon iconName="gaji" />
-                      </div>
-                      <div class="w-full flex items-start">Gaji</div>
-                      <div class="flex">
-                        <faicon iconName="ArrowDown" />
-                      </div>
-                    </div>
-                  </div>
-                </button>
-                <div class="items-start justify-center pl-7 mr-10 content w-full">
-                  <button
-                    id="btn-informasi-gaji"
-                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3"
-                    onClick={() => {
-                      navigate("/admin/informasi-gaji");
-                    }}
-                  >
-                    <div class="text-sm font-semibold" id="text-informasi-gaji">
-                      Informasi Gaji
-                    </div>
-                  </button>
-                  <button
-                    id="btn-riwayat-gaji"
-                    class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900"
-                    onClick={() => {
-                      navigate("/admin/riwayat-gaji");
-                    }}
-                  >
-                    <div class="text-sm font-semibold" id="text-riwayat-gaji">
-                      Riwayat Gaji
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              <div class="flex self-stretch flex-col items-start justify-center rounded">
-                <button
-                  class="collapsible flex self-stretch items-center justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
                   id="presensi"
                 >
                   <div class="flex flex-1 self-stretch flex-col items-start justify-center">
@@ -159,7 +113,7 @@
                     class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900 mt-3"
                     id="btn-list-kehadiran"
                     onClick={() => {
-                      navigate("/admin/list-kehadiran");
+                      navigate("/user/list-kehadiran");
                     }}
                   >
                     <div class="text-sm font-semibold" id="text-list-kehadiran">
@@ -170,7 +124,7 @@
                     class="w-full flex self-stretch flex-col items-start justify-center text-gray-600 hover:text-indigo-900 py-2 transition duration-300 border-l-2 border-gray-200 pl-6 hover:border-indigo-900"
                     id="btn-list-perizinan"
                     onClick={() => {
-                      navigate("/admin/list-perizinan");
+                      navigate("/user/list-perizinan");
                     }}
                   >
                     <div class="text-sm font-semibold" id="text-list-perizinan">
@@ -179,6 +133,24 @@
                   </button>
                 </div>
               </div>
+
+              <button
+                class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
+                id="gaji"
+                onClick={() => {
+                  navigate("/user/gaji");
+                }}
+              >
+                <div
+                  class="text-sm font-bold flex flex-row w-full"
+                  id="text-gaji"
+                >
+                  <div class="w-8 text-left">
+                    <faicon iconName="gaji" />
+                  </div>
+                  <div>Gaji</div>
+                </div>
+              </button>
 
               <button
                 class="w-full flex self-stretch flex-col items-start justify-center px-5 py-2.5 bg-gray-100 rounded hover:bg-gray-200 text-gray-800 transition duration-300"
