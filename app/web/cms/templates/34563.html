@@ -1,7 +1,17 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      presensi: [],
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/user/r-presensi", {
+          id_pengguna: parseInt(user.id_pengguna),
+        }).then((res) => {
+          meta.presensi = res.presensi;
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -111,22 +121,19 @@
           },
           {
             name: "Tanggal",
-            selector: (row) => row.tanggal,
+            selector: (row) => row.hari + "/" + row.bulan + "/" + row.tahun,
             sortable: true,
           },
           {
             name: "Keterangan",
-            selector: (row) => row.keterangan,
+            selector: (row) =>
+              row.karyawan_presensi.length > 0
+                ? row.karyawan_presensi[0].status_presensi.status
+                : "?",
             sortable: true,
           },
         ]}
-        data={[
-          {
-            id: 1,
-            tanggal: "05 Februari 2021",
-            keterangan: "Hadir",
-          },
-        ]}
+        data={meta.presensi}
       />
     </div>
     <div class="modal z-20" id="modal">
