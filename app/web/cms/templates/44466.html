@@ -11,6 +11,13 @@
           .getElementById("text-dashboard")
           .classList.toggle("text-white");
       }
+
+      var modal = document.getElementById("modal");
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     }}
   />
   <>
@@ -27,7 +34,7 @@
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
           onClick={() => {
-            navigate("#");
+            document.getElementById("modal").style.display = "block";
           }}
         >
           <span>Ajukan Kehadiran</span>
@@ -115,7 +122,7 @@
                   <button
                     class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      navigate("#");
+                      navigate("/user/gaji/detail");
                     }}
                   >
                     <faicon iconName="show" class="" />
@@ -138,6 +145,41 @@
           },
         ]}
       />
+    </div>
+    <div class="modal z-20" id="modal">
+      <form class="modal-content w-max flex flex-col items-center justify-center">
+        <div class="flex flex-col bg-white rounded">
+          <div class="flex items-end justify-end rounded">
+            <button
+              class="bg-gray-100 hover:bg-gray-200 text-black text-sm w-8 h-8 rounded inline-flex items-center justify-center"
+              onClick={() => {
+                document.getElementById("modal").style.display = "none";
+              }}
+              type="button"
+            >
+              <faicon iconName="cancel" class="" />
+            </button>
+          </div>
+          <div class="space-y-5 px-14 pb-14 pt-6">
+            <div class="space-y-2">
+              <div class="text-left text-sm font-bold">Masukkan Kode</div>
+              <input
+                type="text"
+                placeholder="ASA3543GD"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                id="kode-absensi"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded items-center filter drop-shadow-sm justify-center w-full"
+            >
+              <span>Submit</span>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </>
 </>

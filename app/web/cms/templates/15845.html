@@ -1,0 +1,96 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("gaji").classList.toggle("bg-indigo-900");
+        document.getElementById("gaji").classList.remove("hover:bg-gray-200");
+        document.getElementById("text-gaji").classList.toggle("text-white");
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Detail Gaji</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Riwayat Gaji</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Detail Gaji</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
+      <div class="w-1/2">
+        <div class="flex items-start justify-center w-full space-x-10">
+          <div class="flex flex-col space-y-5 items-start justify-start w-full">
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black flex flex-row w-full">
+                <div class="w-full">Parameter Penggajian</div>
+              </div>
+              <table class="border-collapse border border-gray-300 w-full">
+                <tbody>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2 w-1/2">Golongan 1</td>
+                    <td class="border border-gray-300 p-2 w-1/2">
+                      Rp 2.000.000
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black flex flex-row w-full">
+                <div class="w-full">Tambahan Gaji</div>
+              </div>
+              <table class="border-collapse border border-gray-300 w-full">
+                <tbody>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2 w-1/2">
+                      Bonus Target
+                    </td>
+                    <td class="border border-gray-300 p-2 w-1/2">
+                      Rp 2.000.000
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black flex flex-row w-full">
+                <div class="w-full">Potongan Gaji</div>
+              </div>
+              <table class="border-collapse border border-gray-300 w-full">
+                <tbody>
+                  <tr class="text-sm">
+                    <td class="border border-gray-300 p-2 w-1/2">PPH</td>
+                    <td class="border border-gray-300 p-2 w-1/2">
+                      Rp 2.000.000
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-indigo-900">
+                Total Gaji Rp 10.000.000
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center">
+          <button
+            type="submit"
+            class="bg-black text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Cetak Slip</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </>
+</>

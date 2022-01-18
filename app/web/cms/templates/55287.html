@@ -1,0 +1,98 @@
+<>
+  <effect
+    meta={{
+      action: {},
+    }}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("gaji").classList.toggle("bg-indigo-900");
+        document.getElementById("gaji").classList.remove("hover:bg-gray-200");
+        document.getElementById("text-gaji").classList.toggle("text-white");
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Gaji</a>
+    <nav class="font-sans w-full mb-3 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Riwayat Gaji</a>
+        </li>
+      </ol>
+    </nav>
+    <div class="mt-4 w-full filter drop-shadow-sm bg-white p-3 rounded space-y-3">
+      <div class={`flex self-stretch items-center justify-start`}>
+        <div class="flex flex-1 justify-start space-x-2">
+          <span class="text-sm font-semibold flex items-center justify-center">
+            Semua Gaji
+          </span>
+          <div class="relative inline-block w-max text-gray-700">
+            <select
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
+              id="gaji_tahun"
+            >
+              <option value="#">2021</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-1 items-center justify-end">
+          <input
+            type="text"
+            placeholder="Cari Data"
+            class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+          />
+        </div>
+      </div>
+      <datatable
+        pagination={true}
+        column={[
+          {
+            name: "No",
+            selector: (row, index) => ++index,
+            sortable: true,
+          },
+          {
+            name: "Bulan",
+            selector: (row) => row.bulan,
+            sortable: true,
+          },
+          {
+            name: "Jumlah Gaji",
+            selector: (row) => row.jumlah_gaji,
+            sortable: true,
+          },
+          {
+            name: "Action",
+            button: true,
+            cell: (row, index) => (
+              <>
+                <div class="space-x-2">
+                  <button
+                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    onClick={() => {
+                      navigate("/user/gaji/detail");
+                    }}
+                  >
+                    <faicon iconName="show" class="" />
+                  </button>
+                </div>
+              </>
+            ),
+          },
+        ]}
+        data={[
+          {
+            id: 1,
+            bulan: "Februari",
+            jumlah_gaji: "Rp12.000.000,00",
+          },
+          {
+            id: 2,
+            bulan: "Februari",
+            jumlah_gaji: "Rp12.000.000,00",
+          },
+        ]}
+      />
+    </div>
+  </>
+</>

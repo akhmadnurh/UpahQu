@@ -184,7 +184,44 @@
                 <faicon iconName="toggleNav" class="text-indigo-900" />
               </button>
             </div>
-            <div class="flex flex-1 space-x-6 items-center justify-end px-5">
+            <div class="flex flex-1 space-x-3 items-center justify-end px-5">
+              <div class="flex justify-center">
+                <div>
+                  <div class="dropdown relative">
+                    <button
+                      class="w-full flex self-stretch flex-col items-start justify-center px-2 py-px bg-gray-100 rounded hover:bg-gray-200 transition duration-300"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      onClick={() => {
+                        document
+                          .getElementById("list-dropdown")
+                          .classList.toggle("hidden");
+                      }}
+                    >
+                      <faicon iconName="notifikasi" class="text-indigo-900" />
+                    </button>
+                    <ul
+                      class="dropdown-menu w-72 absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border border-gray-200 hidden right-0"
+                      aria-labelledby="dropdownMenuButton1"
+                      id="list-dropdown"
+                    >
+                      <li>
+                        <a
+                          class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
+                          href="#"
+                        >
+                          Action
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {/*<button onClick={() => {}}>*/}
+              {/*<faicon iconName="notifikasi" class="text-indigo-900" />*/}
+              {/*</button>*/}
               <button class="text-xs font-medium text-white py-1 px-3 rounded-xl bg-indigo-900">
                 Halo, {window.user.name}
               </button>

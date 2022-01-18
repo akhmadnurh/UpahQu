@@ -1,0 +1,111 @@
+<>
+  <effect
+    meta={{
+      action: {},
+    }}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("presensi").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("presensi")
+          .classList.remove("hover:bg-gray-200");
+        document.getElementById("presensi").classList.toggle("active");
+        document.getElementById("text-presensi").classList.toggle("text-white");
+        document
+          .getElementById("btn-list-perizinan")
+          .classList.toggle("border-indigo-900");
+        document
+          .getElementById("text-list-perizinan")
+          .classList.toggle("text-indigo-900");
+        var content = document.getElementById("presensi").nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    }}
+  />
+  <>
+    <a class="text-xl font-bold">Pengajuan Perizinan</a>
+    <nav class="font-sans w-full mb-7 mt-2">
+      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
+        <li>
+          <a href="#">Presensi</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <a href="#">List Perizinan</a>
+        </li>
+        <li>
+          <faicon iconName="arrowRight" />
+        </li>
+        <li>
+          <li>Pengajuan Perizinan</li>
+        </li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
+      <form class="w-1/2">
+        <div class="flex items-start justify-center w-full space-x-10">
+          <div class="flex flex-col space-y-5 items-start justify-start w-full">
+            <div class="flex flex-col space-y-2 items-start justify-center w-full">
+              <div class="text-sm font-bold text-black">Nama Karyawan</div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                readOnly
+                defaultValue="coba"
+              />
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">ID Karyawan</div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                readOnly
+                defaultValue="sda231"
+              />
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Jenis Izin</div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+              />
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Keterangan Izin</div>
+              <textarea
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                defaultValue="sdasdasd"
+              />
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">
+                Tanggal Yang Diajukan
+              </div>
+              <div class="flex space-x-2">
+                <input
+                  type="date"
+                  class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                />
+                <span class="justify-center flex items-center">-</span>
+                <input
+                  type="date"
+                  class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center space-x-2" id="btn-answer">
+          <button
+            type="button"
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Ajukan</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </>
+</>
