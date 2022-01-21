@@ -1,7 +1,30 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      attendance_date: "",
+      attendance_limit: "",
+      token: "",
+      action: {},
+    }}
     run={async () => {
+      const getData = () => {
+        const date = new Date();
+        const d =
+          date.getFullYear() +
+          "-" +
+          (("" + (date.getMonth() + 1)).length < 2
+            ? "0" + (date.getMonth() + 1)
+            : date.getMonth() + 1) +
+          "-" +
+          (("" + date.getDate()).length < 2
+            ? "0" + date.getDate()
+            : date.getDate());
+        meta.attendance_date = d;
+      };
+      getData();
+      const random = () => {
+        return Math.random().toString(16).substr(2, 6);
+      };
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -22,6 +45,44 @@
       var modal_presensi = document.getElementById("modal_presensi");
       modal_presensi.onclick = function () {
         modal_presensi.style.display = "none";
+      };
+      meta.action = {
+        setLimit: (e) => {
+          meta.attendance_limit = e.target.value;
+          console.log(meta.attendance_limit);
+        },
+        setToken: () => {
+          meta.token = random();
+        },
+        setDate: (e) => {
+          meta.attendance_date = e.target.value;
+          console.log(meta.attendance_date);
+        },
+        createAttendance: () => {
+          // Cek form
+          if (
+            meta.attendance_date != "" &&
+            meta.attendance_limit != "" &&
+            meta.token != ""
+          ) {
+            // Disable tombol agar tidak digunakan
+            document.getElementById("create-attendance").disabled = true;
+
+            api("/api/c-presensi", {
+              date: meta.attendance_date,
+              limit: meta.attendance_limit,
+              token: meta.token,
+            }).then((res) => {
+              if (res.status == "success") {
+                navigate("/admin/list-kehadiran");
+              } else {
+                console.log(res.status);
+              }
+            });
+          } else {
+            console.log("Form belum terisi");
+          }
+        },
       };
     }}
   />
@@ -44,55 +105,72 @@
     <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
       <div class="w-full">
         <div>
-          <div class="filter drop-shadow-sm bg-white rounded space-y-2 w-1/2">
-            <div class={`flex flex-col space-y-4`}>
-              <div class="flex flex-col flex-1 justify-start space-y-2">
-                <div class="text-sm font-bold">Presensi Hari Ini</div>
-                <input
-                  type="date"
-                  placeholder="Cari Data"
-                  class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
-                />
-              </div>
-              <div class="flex flex-col flex-1 justify-start space-y-2">
-                <div class="text-sm font-bold">Tenggat Waktu</div>
-                <input
-                  type="datetime-local"
-                  class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
-                />
-              </div>
-              <div class="flex flex-col flex-1 justify-start space-y-2">
-                <div class="text-sm font-bold">Acak Kode</div>
-                <div class="flex items-center space-x-2">
+          <form
+            onSubmit={(e) => {
+              meta.action.createAttendance();
+              e.preventDefault();
+            }}
+          >
+            <div class="filter drop-shadow-sm bg-white rounded space-y-2 w-1/2">
+              <div class={`flex flex-col space-y-4`}>
+                <div class="flex flex-col flex-1 justify-start space-y-2">
+                  <div class="text-sm font-bold">Presensi Hari Ini</div>
                   <input
-                    type="text"
-                    class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs w-full"
-                    readOnly
-                  />
-                  <button
-                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
-                    type="submit"
-                    id="button-refresh"
-                  >
-                    <faicon iconName="refresh" class="" />
-                  </button>
-                </div>
-              </div>
-              <div class="flex">
-                <div class="flex flex-col justify-start w-full">
-                  <button
-                    class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-full px-2 py-2 rounded inline-flex items-center justify-center"
-                    onClick={() => {
-                      document.getElementById("modal_presensi").style.display =
-                        "block";
+                    type="date"
+                    placeholder="Cari Data"
+                    defaultValue={meta.attendance_date}
+                    onChange={(e) => {
+                      meta.action.setDate(e);
                     }}
-                  >
-                    Buat Presensi
-                  </button>
+                    class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+                  />
+                </div>
+                <div class="flex flex-col flex-1 justify-start space-y-2">
+                  <div class="text-sm font-bold">Tenggat Waktu</div>
+                  <input
+                    defaultValue={meta.attendance_limit}
+                    onChange={(e) => {
+                      meta.action.setLimit(e);
+                    }}
+                    type="time"
+                    class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs"
+                  />
+                </div>
+                <div class="flex flex-col flex-1 justify-start space-y-2">
+                  <div class="text-sm font-bold">Acak Kode</div>
+                  <div class="flex items-center space-x-2">
+                    <input
+                      type="text"
+                      defaultValue={meta.token}
+                      class="border focus:outline-none focus:border-indigo-900 border-gray-200 py-1.5 px-3 rounded text-xs w-full"
+                      readOnly
+                    />
+                    <button
+                      class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                      type="button"
+                      id="button-refresh"
+                      onClick={() => {
+                        meta.action.setToken();
+                      }}
+                    >
+                      <faicon iconName="refresh" class="" />
+                    </button>
+                  </div>
+                </div>
+                <div class="flex">
+                  <div class="flex flex-col justify-start w-full">
+                    <button
+                      id="create-attendance"
+                      class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold w-full px-2 py-2 rounded inline-flex items-center justify-center"
+                      type="submit"
+                    >
+                      Buat Presensi
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

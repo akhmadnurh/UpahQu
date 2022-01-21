@@ -119,7 +119,7 @@ model presensi {
   bulan             String              @db.VarChar(2)
   tahun             String              @db.VarChar(4)
   token             String              @db.VarChar(6)
-  limit             DateTime            @db.Time(6)
+  limit             String              @db.VarChar(5)
   karyawan_presensi karyawan_presensi[]
 }
 

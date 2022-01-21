@@ -2,6 +2,8 @@
   <effect
     meta={{
       presensi: [],
+      token: "",
+      action: {},
     }}
     run={async () => {
       const getData = () => {
@@ -34,6 +36,19 @@
         if (event.target == modal) {
           modal.style.display = "none";
         }
+      };
+      meta.action = {
+        setToken: (e) => {
+          meta.token = e.target.value;
+        },
+        submitAttendance: () => {
+          api("/api/user/presensi", {
+            token: meta.token,
+            id_karyawan: user.id_pengguna,
+          }).then((res) => {
+            navigate("/user/list-kehadiran");
+          });
+        },
       };
     }}
   />
@@ -137,7 +152,13 @@
       />
     </div>
     <div class="modal z-20" id="modal">
-      <form class="modal-content w-max flex flex-col items-center justify-center">
+      <form
+        class="modal-content w-max flex flex-col items-center justify-center"
+        onSubmit={(e) => {
+          meta.action.submitAttendance();
+          e.preventDefault();
+        }}
+      >
         <div class="flex flex-col bg-white rounded">
           <div class="flex items-end justify-end rounded">
             <button
@@ -158,6 +179,9 @@
                 placeholder="ASA3543GD"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
                 id="kode-absensi"
+                onChange={(e) => {
+                  meta.action.setToken(e);
+                }}
                 required
               />
             </div>
