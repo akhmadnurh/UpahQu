@@ -1,9 +1,20 @@
 <>
   <effect
     meta={{
+      nama_pengguna: "",
+      id_pengguna: "",
+      jenis_izin: "",
+      keterangan: "",
+      tgl_mulai: "",
+      tgl_selesai: "",
       action: {},
     }}
     run={async () => {
+      const run = () => {
+        meta.nama_pengguna = user.fullname;
+        meta.id_pengguna = user.id_pengguna;
+      };
+      run();
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -20,6 +31,47 @@
         var content = document.getElementById("presensi").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      meta.action = {
+        setJenisPerizinan: (e) => {
+          meta.jenis_izin = e.target.value;
+        },
+        setKeterangan: (e) => {
+          meta.keterangan = e.target.value;
+        },
+        setTglMulai: (e) => {
+          meta.tgl_mulai = e.target.value;
+        },
+        setTglSelesai: (e) => {
+          meta.tgl_selesai = e.target.value;
+        },
+        submitPerizinan: () => {
+          if (
+            meta.nama_pengguna != "" &&
+            meta.id_pengguna != "" &&
+            meta.jenis_izin != "" &&
+            meta.keterangan != "" &&
+            meta.tgl_mulai != "" &&
+            meta.tgl_selesai != ""
+          ) {
+            api("/api/user/c-perizinan", {
+              id_pengguna: meta.id_pengguna,
+              nama_pengguna: meta.nama_pengguna,
+              jenis_izin: meta.jenis_izin,
+              keterangan: meta.keterangan,
+              tgl_mulai: meta.tgl_mulai,
+              tgl_selesai: meta.tgl_selesai,
+            }).then((res) => {
+              if (res.status == "success") {
+                navigate("/user/list-perizinan");
+              } else {
+                console.log("error-submit");
+              }
+            });
+          } else {
+            console.log("error-input");
+          }
+        },
+      };
     }}
   />
   <>
@@ -44,7 +96,13 @@
       </ol>
     </nav>
     <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
-      <form class="w-1/2">
+      <form
+        class="w-1/2"
+        onSubmit={(e) => {
+          meta.action.submitPerizinan();
+          e.preventDefault();
+        }}
+      >
         <div class="flex items-start justify-center w-full space-x-10">
           <div class="flex flex-col space-y-5 items-start justify-start w-full">
             <div class="flex flex-col space-y-2 items-start justify-center w-full">
@@ -53,7 +111,7 @@
                 type="text"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 readOnly
-                defaultValue="coba"
+                defaultValue={meta.nama_pengguna}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -62,21 +120,26 @@
                 type="text"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 readOnly
-                defaultValue="sda231"
+                defaultValue={meta.id_pengguna}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black">Jenis Izin</div>
-              <input
-                type="text"
-                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-              />
+              <select
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md appearance-none"
+                onChange={(e) => meta.action.setJenisPerizinan(e)}
+              >
+                <option value="">----------</option>
+                <option value="izin">Izin</option>
+                <option value="sakit">Sakit</option>
+                <option value="cuti">Cuti</option>
+              </select>
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black">Keterangan Izin</div>
               <textarea
+                onChange={(e) => meta.action.setKeterangan(e)}
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-                defaultValue="sdasdasd"
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -86,11 +149,13 @@
               <div class="flex space-x-2">
                 <input
                   type="date"
+                  onChange={(e) => meta.action.setTglMulai(e)}
                   class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 />
                 <span class="justify-center flex items-center">-</span>
                 <input
                   type="date"
+                  onChange={(e) => meta.action.setTglSelesai(e)}
                   class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
                 />
               </div>
@@ -99,7 +164,7 @@
         </div>
         <div class="flex items-center justify-center space-x-2" id="btn-answer">
           <button
-            type="button"
+            type="submit"
             class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
           >
             <span>Ajukan</span>

@@ -1,7 +1,17 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      perizinan: [],
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/user/r-perizinan", { id_pengguna: user.id_pengguna }).then(
+          (res) => {
+            meta.perizinan = res.perizinan;
+          }
+        );
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -54,7 +64,7 @@
             Perizinan Yang Diajukan
           </span>
           <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
-            10
+            {meta.perizinan.length}
           </span>
         </div>
         <div class="flex flex-1 items-center justify-end">
@@ -74,13 +84,18 @@
             sortable: true,
           },
           {
-            name: "Tanggal",
-            selector: (row) => row.tanggal,
+            name: "Tanggal Mulai",
+            selector: (row) => row.tgl_mulai.slice(0, 10),
+            sortable: true,
+          },
+          {
+            name: "Tanggal Selesai",
+            selector: (row) => row.tgl_akhir.slice(0, 10),
             sortable: true,
           },
           {
             name: "Jenis Izin",
-            selector: (row) => row.jenis_izin,
+            selector: (row) => row.jenis_perizinan,
             sortable: true,
           },
           {
@@ -88,15 +103,13 @@
             selector: (row) => row.keterangan,
             sortable: true,
           },
-        ]}
-        data={[
           {
-            id: 1,
-            tanggal: "05 Februari 2021",
-            jenis_izin: "Izin",
-            keterangan: "Diterima",
+            name: "Status",
+            selector: (row) => row.status_pengajuan.pengajuan,
+            sortable: true,
           },
         ]}
+        data={meta.perizinan}
       />
     </div>
   </>

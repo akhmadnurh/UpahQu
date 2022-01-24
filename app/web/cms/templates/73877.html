@@ -7,7 +7,13 @@
       action: {},
     }}
     run={async () => {
+      const token = () => {
+        api("/api/generate-token", {}).then((res) => {
+          meta.token = res.token;
+        });
+      };
       const getData = () => {
+        token();
         const date = new Date();
         const d =
           date.getFullYear() +
@@ -22,9 +28,7 @@
         meta.attendance_date = d;
       };
       getData();
-      const random = () => {
-        return Math.random().toString(16).substr(2, 6);
-      };
+
       if (document.readyState === "complete") {
         document.getElementById("presensi").classList.toggle("bg-indigo-900");
         document
@@ -52,7 +56,7 @@
           console.log(meta.attendance_limit);
         },
         setToken: () => {
-          meta.token = random();
+          token();
         },
         setDate: (e) => {
           meta.attendance_date = e.target.value;
