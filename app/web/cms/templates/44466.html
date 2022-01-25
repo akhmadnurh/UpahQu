@@ -21,18 +21,16 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">Dashboard</a>
-    <nav class="font-sans w-full mb-3 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Dashboard</a>
-        </li>
-      </ol>
-    </nav>
+    <span class="text-xl font-bold mb-3">Dashboard</span>
+    {/*<nav class="font-sans w-full mb-3 mt-2">*/}
+    {/*<ol class="list-reset flex text-grey-dark text-xs space-x-3">*/}
+    {/*<li>Dashboard</li>*/}
+    {/*</ol>*/}
+    {/*</nav>*/}
     <div class={`flex self-stretch items-center justify-start`}>
       <div class="flex flex-1 justify-start space-x-2">
         <button
-          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
+          class="bg-indigo-900 hover:bg-indigo-800 duration-300 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
           onClick={() => {
             document.getElementById("modal").style.display = "block";
           }}
@@ -80,7 +78,7 @@
           </span>
           <div class="relative inline-block w-max text-gray-700">
             <select
-              class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
+              class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm px-1.5"
               id="gaji_tahun"
             >
               <option value="#">2021</option>
@@ -120,7 +118,7 @@
               <>
                 <div class="space-x-2">
                   <button
-                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                    class="bg-gray-200 hover:bg-gray-300 duration-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
                       navigate("/user/gaji/detail");
                     }}

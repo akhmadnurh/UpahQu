@@ -76,27 +76,41 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">Pengajuan Perizinan</a>
-    <nav class="font-sans w-full mb-7 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Presensi</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <a href="#">List Perizinan</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>Pengajuan Perizinan</li>
-        </li>
-      </ol>
-    </nav>
-    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
+    <div class="flex items-center space-x-4">
+      <div>
+        <button
+          type="submit"
+          class="bg-white hover:border-gray-200 border-2 border-transparent duration-300 text-black text-sm font-bold rounded-full flex items-center filter drop-shadow-sm justify-center w-8 h-8"
+          onClick={() => {
+            history.back();
+          }}
+        >
+          <span>
+            <faicon iconName="arrowLeft" />
+          </span>
+        </button>
+      </div>
+      <div>
+        <span class="text-xl font-bold">Pengajuan Perizinan</span>
+        <nav class="font-normal text-gray-500 w-full mt-2">
+          <ol class="list-reset flex text-xs space-x-3">
+            <li>Presensi</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>List Perizinan</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>
+              <li>Pengajuan Perizinan</li>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8 mt-7">
       <form
         class="w-1/2"
         onSubmit={(e) => {
@@ -147,7 +161,7 @@
               <div class="text-sm font-bold text-black">
                 Tanggal Yang Diajukan
               </div>
-              <div class="flex space-x-2">
+              <div class="flex space-x-2 w-full">
                 <input
                   type="date"
                   onChange={(e) => meta.action.setTglMulai(e)}
@@ -168,7 +182,7 @@
             type="submit"
             class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
           >
-            <span>Ajukan</span>
+            <span>Submit</span>
           </button>
         </div>
       </form>

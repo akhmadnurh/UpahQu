@@ -173,7 +173,6 @@
       </div>
       <div class="flex flex-1 flex-col">
         <div class="sticky top-0 filter drop-shadow-sm z-10">
-          {/*<navbar class="flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-indigo-900 shadow" />*/}
           <div class="flex self-stretch space-x-2.5 items-center justify-start py-2.5 pl-5 pr-8 bg-white">
             <div class="flex flex-1 items-center justify-start px-5 space-x-8">
               <button
@@ -186,45 +185,38 @@
             </div>
             <div class="flex flex-1 space-x-3 items-center justify-end px-5">
               <div class="flex justify-center">
-                <div>
-                  <div class="dropdown relative">
-                    <button
-                      class="w-full flex self-stretch flex-col items-start justify-center px-2 py-px bg-gray-100 rounded hover:bg-gray-200 transition duration-300"
-                      type="button"
-                      id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      onClick={() => {
-                        document
-                          .getElementById("list-dropdown")
-                          .classList.toggle("hidden");
-                      }}
-                    >
-                      <faicon iconName="notifikasi" class="text-indigo-900" />
-                    </button>
-                    <ul
-                      class="dropdown-menu w-72 absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border border-gray-200 hidden right-0"
-                      aria-labelledby="dropdownMenuButton1"
-                      id="list-dropdown"
-                    >
-                      <li>
-                        <a
-                          class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
-                          href="#"
-                        >
-                          Action
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                <div class="dropdown relative">
+                  <button
+                    class="text-xs font-medium text-white py-1 px-3 rounded bg-indigo-900 hover:bg-indigo-800 duration-300"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    onClick={() => {
+                      document
+                        .getElementById("list-dropdown")
+                        .classList.toggle("hidden");
+                    }}
+                  >
+                    {window.user.name}
+                  </button>
+                  <ul
+                    class="dropdown-menu w-56 absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 m-0 bg-clip-padding border border-gray-200 hidden right-0"
+                    aria-labelledby="dropdownMenuButton1"
+                    id="list-dropdown"
+                  >
+                    <li>
+                      <button
+                        class="dropdown-item text-sm py-2 px-4 font-normal w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-200 text-left duration-300"
+                        onClick={() => {
+                          navigate("/user/profil");
+                        }}
+                      >
+                        Profil
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              {/*<button onClick={() => {}}>*/}
-              {/*<faicon iconName="notifikasi" class="text-indigo-900" />*/}
-              {/*</button>*/}
-              <button class="text-xs font-medium text-white py-1 px-3 rounded-xl bg-indigo-900">
-                Halo, {window.user.name}
-              </button>
             </div>
           </div>
         </div>

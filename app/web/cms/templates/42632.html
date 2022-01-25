@@ -1,0 +1,85 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("dashboard").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("dashboard")
+          .classList.remove("hover:bg-gray-200");
+        document
+          .getElementById("text-dashboard")
+          .classList.toggle("text-white");
+      }
+    }}
+  />
+  <>
+    <span class="text-xl font-bold">Profil</span>
+    <nav class="font-normal text-gray-500 w-full mt-2">
+      <ol class="list-reset flex text-xs space-x-3">
+        <li>Profil Karyawan</li>
+      </ol>
+    </nav>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8 mt-7">
+      <div class="flex items-start justify-start w-full">
+        <div class="flex flex-col items-start justify-start space-y-4 w-full">
+          <div class="flex flex-col space-y-1 items-start justify-center">
+            <div class="flex items-start justify-start">
+              <div class="text-sm font-bold text-black">Nama Karyawan</div>
+            </div>
+            <div class="text-sm font-normal text-black">Coba</div>
+          </div>
+          <div class="flex flex-col space-y-1 items-start justify-center">
+            <div class="flex items-start justify-start">
+              <div class="text-sm font-bold text-black">Divisi Karyawan</div>
+            </div>
+            <div class="text-sm font-normal text-black">Coba</div>
+          </div>
+          <div class="flex flex-col space-y-1 items-start justify-center">
+            <div class="flex items-start justify-start">
+              <div class="text-sm font-bold text-black">Jabatan Karyawan</div>
+            </div>
+            <div class="text-sm font-normal text-black">Coba</div>
+          </div>
+        </div>
+        <div class="flex flex-col items-start justify-start w-full space-y-4">
+          <div class="flex flex-col space-y-1 items-start justify-center">
+            <div class="flex items-start justify-start">
+              <div class="text-sm font-bold text-black">No.Hp</div>
+            </div>
+            <div class="text-sm font-normal text-black">242342</div>
+          </div>
+          <div class="flex flex-col space-y-1 items-start justify-center">
+            <div class="flex items-start justify-start">
+              <div class="text-sm font-bold text-black">Email</div>
+            </div>
+            <div class="text-sm font-normal text-black">Coba@gmail.com</div>
+          </div>
+          <div class="flex flex-col space-y-1 items-start justify-center w-full">
+            <div class="flex items-start justify-start">
+              <div class="text-sm font-bold text-black">Sandi</div>
+            </div>
+            <div class="flex flex-row space-x-4">
+              <input
+                type="password"
+                class="border focus:outline-none  border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                value="dsdsdsd"
+                readOnly
+              />
+              <div class="flex items-center justify-center">
+                <button
+                  class="bg-blue-200 hover:bg-blue-300 duration-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                  onClick={() => {
+                    navigate("/user/profil/edit");
+                  }}
+                >
+                  <faicon iconName="edit" class="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+</>

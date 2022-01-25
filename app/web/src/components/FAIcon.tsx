@@ -1,6 +1,6 @@
 import { registerIcons } from '@fluentui/react/lib/Styling';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faChevronDown, faChevronUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell , faChevronRight, faCheckCircle, faTachometerAlt, faUsers, faMoneyBill, faChalkboardTeacher, faSignOutAlt, faChartBar, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChevronDown, faChevronUp, faPlus ,faPen, faEye, faTrash, faTimes, faBars, faSave, faBell , faChevronRight, faCheckCircle, faTachometerAlt, faUsers, faMoneyBill, faChalkboardTeacher, faSignOutAlt, faChartBar, faSyncAlt, faChevronLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 
 registerIcons({
   icons: {
@@ -16,7 +16,8 @@ registerIcons({
     toggleNav : <FontAwesomeIcon icon={faBars} />,
     save : <FontAwesomeIcon icon={faSave} />,
     notifikasi : <FontAwesomeIcon icon={faBell} />,
-    arrowRight : <FontAwesomeIcon icon={faChevronRight} />,
+    arrowRight : <FontAwesomeIcon icon={faAngleRight} />,
+    arrowLeft : <FontAwesomeIcon icon={faChevronLeft} />,
     success : <FontAwesomeIcon icon={faCheckCircle} />,
     dashboard : <FontAwesomeIcon icon={faTachometerAlt} />,
     karyawan : <FontAwesomeIcon icon={faUsers} />,

@@ -1,0 +1,88 @@
+<>
+  <effect
+    meta={{}}
+    run={async () => {
+      if (document.readyState === "complete") {
+        document.getElementById("dashboard").classList.toggle("bg-indigo-900");
+        document
+          .getElementById("dashboard")
+          .classList.remove("hover:bg-gray-200");
+        document
+          .getElementById("text-dashboard")
+          .classList.toggle("text-white");
+      }
+    }}
+  />
+  <>
+    <div class="flex items-center space-x-4">
+      <div>
+        <button
+          type="submit"
+          class="bg-white hover:border-gray-200 border-2 border-transparent duration-300 text-black text-sm font-bold rounded-full flex items-center filter drop-shadow-sm justify-center w-8 h-8"
+          onClick={() => {
+            history.back();
+          }}
+        >
+          <span>
+            <faicon iconName="arrowLeft" />
+          </span>
+        </button>
+      </div>
+      <div>
+        <span class="text-xl font-bold">Edit Sandi</span>
+        <nav class="font-normal text-gray-500 w-full mt-2">
+          <ol class="list-reset flex text-xs space-x-3">
+            <li>Profil Karyawan</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>Edit Sandi</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8 mt-7">
+      <form class="w-1/2">
+        <div class="flex items-start justify-center w-full space-x-10">
+          <div class="flex flex-col space-y-5 items-start justify-start w-full">
+            <div class="flex flex-col space-y-2 items-start justify-center w-full">
+              <div class="text-sm font-bold text-black">Sandi Lama</div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                defaultValue={"coba"}
+              />
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">Sandi Baru</div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                defaultValue={"coba"}
+              />
+            </div>
+            <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
+              <div class="text-sm font-bold text-black">
+                Konfirmasi Sandi Baru
+              </div>
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
+                defaultValue={"coba"}
+              />
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center space-x-2" id="btn-submit">
+          <button
+            type="submit"
+            class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+          >
+            <span>Submit</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </>
+</>

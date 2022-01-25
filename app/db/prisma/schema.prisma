@@ -28,7 +28,6 @@ model detail_absen {
   id_absen         Int      @db.SmallInt
   waktu            DateTime @db.Time(6)
   tanggal          DateTime @db.Date
-
   @@ignore
 }
 
@@ -54,7 +53,6 @@ model jabatan {
 model jenis_absen {
   id_jenis   Int
   nama_jenis String @db.VarChar(30)
-
   @@ignore
 }
 

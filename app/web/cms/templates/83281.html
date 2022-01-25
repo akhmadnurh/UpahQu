@@ -31,28 +31,28 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">List Perizinan</a>
-    <nav class="font-sans w-full mb-7 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Presensi</a>
-        </li>
+    <span class="text-xl font-bold">List Perizinan</span>
+    <nav class="font-normal text-gray-500 w-full mt-2">
+      <ol class="list-reset flex text-xs space-x-3">
+        <li>Presensi</li>
         <li>
           <faicon iconName="arrowRight" />
         </li>
         <li>
-          <li>List Kehadiran</li>
+          <li>List Perizinan</li>
         </li>
       </ol>
     </nav>
-    <div class={`flex self-stretch items-center justify-start`}>
+
+    <div class={`flex self-stretch items-center justify-start mt-7`}>
       <div class="flex flex-1 justify-start space-x-2">
         <button
-          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
+          class="bg-indigo-900 hover:bg-indigo-800 duration-300 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
           onClick={() => {
             navigate("/user/list-perizinan/pengajuan");
           }}
         >
+          <faicon iconName="Plus" class="mr-3" />
           <span>Ajukan Perizinan</span>
         </button>
       </div>
