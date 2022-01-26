@@ -1,7 +1,28 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      karyawan: {
+        nama_pengguna: "",
+        jabatan: {
+          nama_jabatan: "",
+          departemen: {
+            nama_departemen: "",
+          },
+        },
+        nomor_hp: "",
+        email: "",
+        password: "",
+      },
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/user/profile", { id_pengguna: user.id_pengguna }).then(
+          (res) => {
+            meta.karyawan = res.karyawan;
+          }
+        );
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-900");
         document
@@ -27,19 +48,25 @@
             <div class="flex items-start justify-start">
               <div class="text-sm font-bold text-black">Nama Karyawan</div>
             </div>
-            <div class="text-sm font-normal text-black">Coba</div>
+            <div class="text-sm font-normal text-black">
+              {meta.karyawan.nama_pengguna}
+            </div>
           </div>
           <div class="flex flex-col space-y-1 items-start justify-center">
             <div class="flex items-start justify-start">
               <div class="text-sm font-bold text-black">Divisi Karyawan</div>
             </div>
-            <div class="text-sm font-normal text-black">Coba</div>
+            <div class="text-sm font-normal text-black">
+              {meta.karyawan.jabatan.departemen.nama_departemen}
+            </div>
           </div>
           <div class="flex flex-col space-y-1 items-start justify-center">
             <div class="flex items-start justify-start">
               <div class="text-sm font-bold text-black">Jabatan Karyawan</div>
             </div>
-            <div class="text-sm font-normal text-black">Coba</div>
+            <div class="text-sm font-normal text-black">
+              {meta.karyawan.jabatan.nama_jabatan}
+            </div>
           </div>
         </div>
         <div class="flex flex-col items-start justify-start w-full space-y-4">
@@ -63,7 +90,7 @@
               <input
                 type="password"
                 class="border focus:outline-none  border-gray-300 py-1.5 px-3 rounded w-96 text-md"
-                value="dsdsdsd"
+                value={meta.karyawan.password}
                 readOnly
               />
               <div class="flex items-center justify-center">

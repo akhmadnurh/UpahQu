@@ -1,6 +1,11 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      password_lama: "",
+      password_baru: "",
+      k_password_baru: "",
+      action: {},
+    }}
     run={async () => {
       if (document.readyState === "complete") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-900");
@@ -11,6 +16,53 @@
           .getElementById("text-dashboard")
           .classList.toggle("text-white");
       }
+      meta.action = {
+        setPasswordLama: (e) => {
+          meta.password_lama = e.target.value;
+        },
+        setPasswordBaru: (e) => {
+          meta.password_baru = e.target.value;
+        },
+        setKPasswordBaru: (e) => {
+          meta.k_password_baru = e.target.value;
+        },
+        submitPassword: () => {
+          // Form validation
+          // Check old password
+          if (
+            (meta.password_baru.length > 0 && meta.password_lama.length > 0,
+            meta.k_password_baru.length > 0)
+          ) {
+            api("/api/user/check-old-password", {
+              id_pengguna: user.id_pengguna,
+              password: meta.password_lama,
+            }).then((res) => {
+              if (res.status) {
+                // Confirm new password
+                if (meta.password_baru === meta.k_password_baru) {
+                  // Update password
+                  api("/api/user/update-password", {
+                    id_pengguna: user.id_pengguna,
+                    password: meta.password_baru,
+                  }).then((res) => {
+                    if (res.status) {
+                      history.back();
+                    } else {
+                      console.log("Password gagal diubah");
+                    }
+                  });
+                } else {
+                  console.log("Password baru tidak cocok");
+                }
+              } else {
+                console.log("Password lama tidak sesuai");
+              }
+            });
+          } else {
+            console.log("Isi semua form terlebih dahulu");
+          }
+        },
+      };
     }}
   />
   <>
@@ -43,23 +95,33 @@
     </div>
 
     <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8 mt-7">
-      <form class="w-1/2">
+      <form
+        class="w-1/2"
+        onSubmit={(e) => {
+          meta.action.submitPassword();
+          e.preventDefault();
+        }}
+      >
         <div class="flex items-start justify-center w-full space-x-10">
           <div class="flex flex-col space-y-5 items-start justify-start w-full">
             <div class="flex flex-col space-y-2 items-start justify-center w-full">
               <div class="text-sm font-bold text-black">Sandi Lama</div>
               <input
-                type="text"
+                type="password"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-                defaultValue={"coba"}
+                onChange={(e) => {
+                  meta.action.setPasswordLama(e);
+                }}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black">Sandi Baru</div>
               <input
-                type="text"
+                type="password"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-                defaultValue={"coba"}
+                onChange={(e) => {
+                  meta.action.setPasswordBaru(e);
+                }}
               />
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
@@ -67,9 +129,11 @@
                 Konfirmasi Sandi Baru
               </div>
               <input
-                type="text"
+                type="password"
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-full text-md"
-                defaultValue={"coba"}
+                onChange={(e) => {
+                  meta.action.setKPasswordBaru(e);
+                }}
               />
             </div>
           </div>
