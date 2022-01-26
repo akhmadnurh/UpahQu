@@ -40,40 +40,63 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">Detail Kehadiran</a>
-    <nav class="font-sans w-full mb-3 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Presensi</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>List Kehadiran</li>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>Detail Kehadiran</li>
-        </li>
-      </ol>
-    </nav>
-    <div class="mt-4 w-full filter drop-shadow-sm bg-white p-3 rounded space-y-3">
+    <div class="flex items-center space-x-4">
+      <div>
+        <button
+          type="submit"
+          class="bg-white hover:border-gray-200 border-2 border-transparent duration-300 text-black text-sm font-bold rounded-full flex items-center filter drop-shadow-sm justify-center w-8 h-8"
+          onClick={() => {
+            history.back();
+          }}
+        >
+          <span>
+            <faicon iconName="arrowLeft" />
+          </span>
+        </button>
+      </div>
+      <div>
+        <span class="text-xl font-bold">Detail Kehadiran</span>
+        <nav class="font-normal text-gray-500 w-full mt-2">
+          <ol class="list-reset flex text-xs space-x-3">
+            <li>Presensi</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>List Kehadiran</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>
+              <li>Detail Kehadiran</li>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="mt-7 w-full filter drop-shadow-sm bg-white p-3 rounded space-y-3">
       <div class={`flex self-stretch items-center justify-start`}>
-        <div class="flex flex-1 justify-start space-x-2">
-          <span class="text-sm font-semibold flex items-center justify-center">
-            Tanggal{" "}
-            {meta.presensi.hari +
-              "/" +
-              meta.presensi.bulan +
-              "/" +
-              meta.presensi.tahun}
-          </span>
-          <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
-            {meta.details.length}
-          </span>
+        <div class="space-y-3">
+          <div class="flex flex-1 justify-start space-x-2">
+            <span class="text-sm font-semibold flex items-center justify-center">
+              Tanggal{" "}
+              {meta.presensi.hari +
+                "/" +
+                meta.presensi.bulan +
+                "/" +
+                meta.presensi.tahun}
+            </span>
+            <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
+              {meta.details.length}
+            </span>
+          </div>
+          <div class="flex flex-1 justify-start space-x-2">
+            <span class="text-sm font-semibold flex items-center justify-center">
+              Kode :
+            </span>
+            <span class="text-sm font-semibold bg-gray-200 p-1.5 rounded-sm flex items-center justify-center">
+              {meta.presensi.token}
+            </span>
+          </div>
         </div>
         <div class="flex flex-1 items-center justify-end">
           <input
@@ -101,27 +124,27 @@
             selector: (row) => row.status_presensi.status,
             sortable: true,
           },
-          {
-            name: "Action",
-            button: true,
-            cell: (row, index) => (
-              <>
-                <div class="space-x-2">
-                  <button
-                    class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
-                    onClick={() => {
-                      navigate(
-                        "/admin/list-kehadiran/detail/karyawan/" +
-                          row.id_presensi
-                      );
-                    }}
-                  >
-                    <faicon iconName="show" class="" />
-                  </button>
-                </div>
-              </>
-            ),
-          },
+          // {
+          //   name: "Action",
+          //   button: true,
+          //   cell: (row, index) => (
+          //     <>
+          //       <div class="space-x-2">
+          //         <button
+          //           class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+          //           onClick={() => {
+          //             navigate(
+          //               "/admin/list-kehadiran/detail/karyawan/" +
+          //                 row.id_presensi
+          //             );
+          //           }}
+          //         >
+          //           <faicon iconName="show" class="" />
+          //         </button>
+          //       </div>
+          //     </>
+          //   ),
+          // },
         ]}
         data={meta.details}
       />
