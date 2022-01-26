@@ -56,12 +56,10 @@
     // }}
   />
   <>
-    <a class="text-xl font-bold">Data Karyawan</a>
-    <nav class="font-sans w-full mb-7 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Karyawan</a>
-        </li>
+    <span class="text-xl font-bold">Data Karyawan</span>
+    <nav class="font-normal text-gray-500 w-full mb-7 mt-2">
+      <ol class="list-reset flex text-xs space-x-3">
+        <li>Karyawan</li>
         <li>
           <faicon iconName="arrowRight" />
         </li>
@@ -70,7 +68,7 @@
         </li>
       </ol>
     </nav>
-    <div class={`flex self-stretch items-center justify-start`}>
+    <div class={`flex self-stretch items-center justify-start w-full`}>
       <div class="flex flex-1 justify-start">
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md"
@@ -121,11 +119,13 @@
       <datatable
         // title={"Data Karyawan"}
         pagination={true}
+        striped={true}
         column={[
           {
             name: "No",
             selector: (row, index) => ++index,
             sortable: true,
+            width: "70px",
           },
           {
             name: "Nama Karyawan",

@@ -288,9 +288,13 @@
               </button>
             </div>
             <div class="flex flex-1 space-x-3 items-center justify-end px-5">
-              <button class="text-xs font-medium text-white py-1 px-3 rounded-xl bg-indigo-900">
-                Halo, {window.user.name}
-              </button>
+              <div class="flex justify-center">
+                <div class="dropdown relative">
+                  <button class="text-xs font-medium text-white py-1 px-3 rounded bg-indigo-900 duration-300">
+                    {window.user.name}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

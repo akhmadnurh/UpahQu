@@ -12,6 +12,7 @@
           },
         },
       },
+      action: {},
     }}
     run={async () => {
       // Get userdata
@@ -39,16 +40,43 @@
         }
       };
 
-      // var s = document.getElementById("s");
-      // s.onclick = function () {
-      //   if (document.getElementById("s").checked) {
-      //     document
-      //       .getElementById("input-parameter")
-      //       .setAttribute("value", s.value);
-      //   } else {
-      //     document.getElementById("input-parameter").setAttribute("value", "");
-      //   }
-      // };
+      meta.action = {
+        changeButtonAction: () => {
+          document.getElementById("btn-add").classList.toggle("hidden");
+          document.getElementById("btn-cancel").classList.toggle("hidden");
+          document.getElementById("btn-edit").classList.toggle("hidden");
+          document.getElementById("btn-delete1").classList.toggle("hidden");
+          document.getElementById("btn-delete2").classList.toggle("hidden");
+        },
+      };
+
+      const tab = document.querySelectorAll(".tab");
+      const panel = document.querySelectorAll(".tab-content");
+
+      function onTabClick(event) {
+        // deactivate existing active tabs and panel
+
+        for (let i = 0; i < tab.length; i++) {
+          tab[i].classList.remove("active");
+        }
+
+        for (let i = 0; i < panel.length; i++) {
+          panel[i].classList.remove("active");
+        }
+
+        // activate new tabs and panel
+        event.target.classList.add("active");
+        let classString = event.target.getAttribute("data-target");
+        console.log(classString);
+        document
+          .getElementById("panels")
+          .getElementsByClassName(classString)[0]
+          .classList.add("active");
+      }
+
+      for (let i = 0; i < tab.length; i++) {
+        tab[i].addEventListener("click", onTabClick, false);
+      }
     }}
   />
   <>
@@ -99,85 +127,63 @@
               {meta.userdata.jabatan.nama_jabatan}
             </div>
           </div>
-          <div class="flex flex-col space-y-1 items-start justify-center">
-            <div class="text-sm font-bold text-black">Parameter Penggajian</div>
-            <div class="flex flex-row space-x-4">
-              <div>
-                <input
-                  type="text"
-                  class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
-                  id="input-parameter"
-                  readOnly
-                />
+          <div class="flex flex-col space-y-1 items-start justify-center w-full">
+            <div class="flex w-full">
+              <div class="text-sm font-bold text-black w-full">
+                Parameter Penggajian
               </div>
-              <div class="flex items-center justify-center">
-                <div>
-                  <div class="dropdown flex flex-row relative space-x-4">
-                    <div>
-                      <button
-                        class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
-                        onClick={() => {
-                          document
-                            .getElementById("dropdown-menu")
-                            .classList.toggle("hidden");
-                        }}
-                      >
-                        <faicon iconName="edit" class="" />
-                      </button>
-                    </div>
-                    <div class="">
-                      <div
-                        class="dropdown-menu absolute hidden text-gray-700 p-2 bg-white rounded w-max -top-3"
-                        id="dropdown-menu"
-                      >
-                        <div class="">
-                          <div class="space-y-2">
-                            <div>
-                              <label class="inline-flex items-center w-full h-full bg-gray-200 p-2 hover:bg-gray-300 rounded">
-                                <input
-                                  type="checkbox"
-                                  id="s1"
-                                  class="form-checkbox"
-                                  value="1"
-                                  onClick={() => {
-                                    if (document.getElementById("s1").checked) {
-                                      document
-                                        .getElementById("input-parameter")
-                                        .setAttribute("value", s1.value);
-                                    } else {
-                                      document
-                                        .getElementById("input-parameter")
-                                        .setAttribute("value", "");
-                                    }
-                                  }}
-                                />
-                                <span class="ml-2">Default</span>
-                              </label>
-                            </div>
-                            {/*<div>*/}
-                            {/*<label class="inline-flex items-center w-full h-full bg-gray-200 p-2 hover:bg-gray-300 rounded">*/}
-                            {/*<input*/}
-                            {/*type="checkbox"*/}
-                            {/*class="form-checkbox"*/}
-                            {/*defaultChecked*/}
-                            {/*/>*/}
-                            {/*<span class="ml-2">Default</span>*/}
-                            {/*</label>*/}
-                            {/*</div>*/}
-                            <div>
-                              <button class="inline-flex items-center w-full h-full bg-blue-200 p-2 hover:bg-blue-300 rounded">
-                                <span class="font-bold text-sm">
-                                  Tambah Parameter
-                                </span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="flex space-x-1.5">
+                <button
+                  class="bg-green-200 hover:bg-green-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"
+                  id="btn-add"
+                  onClick={() => {
+                    document.getElementById("modal").style.display = "block";
+                  }}
+                >
+                  <faicon iconName="plus" class="" />
+                </button>
+                <button
+                  class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"
+                  id="btn-cancel"
+                  onClick={() => {
+                    meta.action.changeButtonAction();
+                  }}
+                >
+                  <faicon iconName="cancel" class="" />
+                </button>
+                <button
+                  class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
+                  id="btn-edit"
+                  onClick={() => {
+                    meta.action.changeButtonAction();
+                  }}
+                >
+                  <faicon iconName="edit" class="" />
+                </button>
               </div>
+            </div>
+
+            <div class="flex justify-center w-full">
+              <ul class="bg-white border-t border-l border-r border-gray-300 text-gray-900 w-full mt-2">
+                <li class="px-4 py-2 border-b border-gray-300 w-full flex">
+                  <span class="w-full">An item</span>
+                  <button
+                    class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"
+                    id="btn-delete1"
+                  >
+                    <faicon iconName="delete" class="" />
+                  </button>
+                </li>
+                <li class="px-4 py-2 border-b border-gray-300 w-full flex">
+                  <span class="w-full">An item</span>
+                  <button
+                    class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"
+                    id="btn-delete2"
+                  >
+                    <faicon iconName="delete" class="" />
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -211,9 +217,10 @@
         </div>
       </div>
     </div>
-    <div class="modal" id="modal">
+
+    <div class="modal z-20" id="modal">
       <form class="modal-content w-max flex flex-col items-center justify-center">
-        <div class="flex flex-col bg-white rounded">
+        <div class="flex flex-col bg-white rounded w-full">
           <div class="flex items-end justify-end rounded">
             <button
               class="bg-gray-100 hover:bg-gray-200 text-black text-sm w-8 h-8 rounded inline-flex items-center justify-center"
@@ -224,33 +231,165 @@
               <faicon iconName="cancel" class="" />
             </button>
           </div>
-          <div class="space-y-5 px-14 pb-14 pt-6">
-            <div class="space-y-2">
-              <div class="text-left text-sm font-bold">Nama Parameter</div>
-              <input
-                type="text"
-                placeholder="Masukkan nama parameter"
-                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
-                id="nama_parameter"
-                required
+
+          <div class="w-full flex justify-center mb-3">
+            <div class="w-1/2">
+              <nav class="tabs flex w-full rounded space-x-3">
+                <button
+                  data-target="panel-1"
+                  class="tab text-sm font-bold bg-gray-200 hover:bg-gray-300 py-1 w-full rounded active"
+                >
+                  Default
+                </button>
+                <button
+                  data-target="panel-2"
+                  class="tab text-sm font-bold bg-gray-200 py-1 w-full rounded hover:bg-gray-300"
+                >
+                  Baru
+                </button>
+              </nav>
+            </div>
+          </div>
+
+          <div id="panels">
+            <div class="panel-1 tab-content py-5 px-9 active">
+              <datatable
+                pagination={true}
+                dense={true}
+                column={[
+                  {
+                    name: "Nama Parameter",
+                    selector: (row) => row.nama_parameter,
+                    sortable: true,
+                  },
+                  {
+                    name: "Pendapatan",
+                    selector: (row) => row.pendapatan,
+                    sortable: true,
+                  },
+                  {
+                    name: "Action",
+                    sortable: true,
+                    center: true,
+                    cell: (row, index) => (
+                      <>
+                        <input
+                          type="checkbox"
+                          class="form-checkbox"
+                          id={"check"}
+                          defaultChecked={true}
+                          onChange={() => {}}
+                        />
+                      </>
+                    ),
+                  },
+                ]}
+                data={[
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                  {
+                    nama_parameter: "golongan 1",
+                    pendapatan: "1000000",
+                  },
+                ]}
               />
             </div>
-            <div class="space-y-2">
-              <div class="text-left text-sm font-bold">Pendapatan</div>
-              <input
-                type="number"
-                placeholder="Masukkan pendapatan"
-                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
-                id="pendapatan"
-                required
-              />
+            <div class="panel-2 tab-content mt-5">
+              <div class="space-y-5 px-14 pb-14">
+                <div class="space-y-2">
+                  <div class="text-left text-sm font-bold">Nama Parameter</div>
+                  <input
+                    type="text"
+                    placeholder="Masukkan nama parameter"
+                    class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                    id="nama_parameter"
+                    required
+                  />
+                </div>
+                <div class="space-y-2">
+                  <div class="text-left text-sm font-bold">Pendapatan</div>
+                  <input
+                    type="number"
+                    placeholder="Masukkan pendapatan"
+                    class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
+                    id="pendapatan"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded items-center filter drop-shadow-sm justify-center w-full"
+                >
+                  <span>Submit</span>
+                </button>
+              </div>
             </div>
-            <button
-              type="submit"
-              class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded items-center filter drop-shadow-sm justify-center w-full"
-            >
-              <span>Submit</span>
-            </button>
           </div>
         </div>
       </form>
