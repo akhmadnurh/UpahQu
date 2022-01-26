@@ -1,7 +1,18 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      penggajian: [],
+      total: 0,
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/informasi-gaji", {}).then((res) => {
+          meta.penggajian = res.penggajian;
+          meta.total = res.total;
+        });
+      };
+      getData();
+
       if (document.readyState === "complete") {
         document.getElementById("gaji").classList.toggle("bg-indigo-900");
         document.getElementById("gaji").classList.remove("hover:bg-gray-200");
@@ -55,7 +66,7 @@
             Semua Gaji
           </span>
           <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
-            20
+            {meta.penggajian.length}
           </span>
         </div>
         <div class="flex flex-1 items-center justify-end">
@@ -69,7 +80,7 @@
       <div class={`flex self-stretch items-center justify-start`}>
         <div class="flex flex-1 justify-start space-x-2">
           <span class="text-sm font-semibold flex items-center justify-center">
-            Total Pengeluaran : Rp120.000.000,00
+            Total Pengeluaran : Rp {meta.total}
           </span>
         </div>
       </div>
@@ -83,22 +94,22 @@
           },
           {
             name: "Nama Karyawan",
-            selector: (row) => row.nama,
+            selector: (row) => row.pengguna.nama_pengguna,
             sortable: true,
           },
           {
             name: "Divisi",
-            selector: (row) => row.divisi,
+            selector: (row) => row.pengguna.jabatan.departemen.nama_departemen,
             sortable: true,
           },
           {
             name: "Jabatan",
-            selector: (row) => row.jabatan,
+            selector: (row) => row.pengguna.jabatan.nama_jabatan,
             sortable: true,
           },
           {
             name: "Jumlah Gaji",
-            selector: (row) => row.jumlah_gaji,
+            selector: (row) => "Rp " + row.nominal,
             sortable: true,
           },
           {
@@ -110,7 +121,9 @@
                   <button
                     class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      navigate("/admin/informasi-gaji/detail/");
+                      navigate(
+                        "/admin/informasi-gaji/detail/" + row.id_penggajian
+                      );
                     }}
                   >
                     <faicon iconName="show" class="" />
@@ -120,22 +133,7 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            nama: "Bejo",
-            divisi: "Pegiriman",
-            jabatan: "Driver",
-            jumlah_gaji: "2.500.000",
-          },
-          {
-            id: 1,
-            nama: "Bejo",
-            divisi: "Pegiriman",
-            jabatan: "Driver",
-            jumlah_gaji: "2.500.000",
-          },
-        ]}
+        data={meta.penggajian}
       />
     </div>
   </>

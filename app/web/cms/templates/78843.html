@@ -1,7 +1,35 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      penggajian: [],
+      month_now: "",
+      year_now: "",
+      months: [],
+      years: [],
+      action: {},
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/riwayat-penggajian").then((res) => {
+          meta.penggajian = res.penggajian;
+          meta.months = res.penggajian_bulan;
+          meta.years = res.penggajian_tahun;
+          meta.month_now = res.month;
+          meta.year_now = res.year;
+        });
+      };
+      getData();
+      const refreshPenggajian = (month, year) => {
+        api("/api/riwayat-penggajian", { month: month, year: year }).then(
+          (res) => {
+            meta.penggajian = res.penggajian;
+            meta.months = res.penggajian_bulan;
+            meta.years = res.penggajian_tahun;
+            meta.month_now = res.month;
+            meta.year_now = res.year;
+          }
+        );
+      };
       if (document.readyState === "complete") {
         document.getElementById("gaji").classList.toggle("bg-indigo-900");
         document.getElementById("gaji").classList.remove("hover:bg-gray-200");
@@ -16,6 +44,16 @@
         var content = document.getElementById("gaji").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      meta.action = {
+        setMonth: (e) => {
+          meta.month = e.target.value;
+          refreshPenggajian(meta.month, meta.year);
+        },
+        setYear: (e) => {
+          meta.year = e.target.value;
+          refreshPenggajian(meta.month, meta.year);
+        },
+      };
     }}
   />
   <>
@@ -53,22 +91,19 @@
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
               id="presensi_bulan"
               onChange={(e) => {
-                // meta.action.setMonth(e);
+                meta.action.setMonth(e);
               }}
             >
-              {/*{meta.presensi_bulan.map((val, index) => (*/}
-              <option
-              // value={val.bulan}
-              // selected={
-              //   parseInt(val.bulan) == parseInt(meta.month) ? true : false
-              // }
-              >
-                desember
-                {/*{val.nama_bulan}*/}
-              </option>
-              {/*))}*/}
-
-              {/*<option value="#">Februari</option>*/}
+              {meta.months.map((val, index) => (
+                <option
+                  value={val.bulan}
+                  selected={
+                    parseInt(val.bulan) == parseInt(meta.month) ? true : false
+                  }
+                >
+                  {val.nama_bulan}
+                </option>
+              ))}
             </select>
           </div>
           <div class="relative inline-block w-max text-gray-700">
@@ -76,26 +111,23 @@
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm"
               id="presensi_tahun"
               onChange={(e) => {
-                // meta.action.setYear(e);
+                meta.action.setYear(e);
               }}
             >
-              {/*{meta.presensi_tahun.map((val, index) => (*/}
-              <option
-              // value={val.tahun}
-              // selected={
-              //   parseInt(val.tahun) == parseInt(meta.year) ? true : false
-              // }
-              >
-                {/*{val.tahun}*/}
-                2020
-              </option>
-              {/*))}*/}
-
-              {/*<option value="#">Februari</option>*/}
+              {meta.years.map((val, index) => (
+                <option
+                  value={val.tahun}
+                  selected={
+                    parseInt(val.tahun) == parseInt(meta.year) ? true : false
+                  }
+                >
+                  {val.tahun}
+                </option>
+              ))}
             </select>
           </div>
           <span class="text-sm font-semibold bg-gray-200 px-1.5 rounded-sm flex items-center justify-center">
-            {/*{meta.presensi.length}*/}20
+            {meta.penggajian.length}
           </span>
         </div>
         <div class="flex flex-1 items-center justify-end">
@@ -116,22 +148,22 @@
           },
           {
             name: "Nama Karyawan",
-            selector: (row) => row.nama,
+            selector: (row) => row.pengguna.nama_pengguna,
             sortable: true,
           },
           {
             name: "Divisi",
-            selector: (row) => row.divisi,
+            selector: (row) => row.pengguna.jabatan.departemen.nama_departemen,
             sortable: true,
           },
           {
             name: "Jabatan",
-            selector: (row) => row.jabatan,
+            selector: (row) => row.pengguna.jabatan.nama_jabatan,
             sortable: true,
           },
           {
             name: "Jumlah Gaji",
-            selector: (row) => row.jumlah_gaji,
+            selector: (row) => "Rp " + row.nominal,
             sortable: true,
           },
           {
@@ -153,22 +185,7 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            nama: "Bejo",
-            divisi: "Pegiriman",
-            jabatan: "Driver",
-            jumlah_gaji: "2.500.000",
-          },
-          {
-            id: 1,
-            nama: "Bejo",
-            divisi: "Pegiriman",
-            jabatan: "Driver",
-            jumlah_gaji: "2.500.000",
-          },
-        ]}
+        data={meta.penggajian}
       />
     </div>
   </>

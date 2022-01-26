@@ -28,6 +28,7 @@ model detail_absen {
   id_absen         Int      @db.SmallInt
   waktu            DateTime @db.Time(6)
   tanggal          DateTime @db.Date
+
   @@ignore
 }
 
@@ -53,6 +54,7 @@ model jabatan {
 model jenis_absen {
   id_jenis   Int
   nama_jenis String @db.VarChar(30)
+
   @@ignore
 }
 
@@ -95,6 +97,7 @@ model pengguna {
   role                          role                            @relation(fields: [id_role], references: [id_role])
   karyawan_parameter_penggajian karyawan_parameter_penggajian[]
   karyawan_presensi             karyawan_presensi[]
+  penggajian                    penggajian[]
   perizinan                     perizinan[]
 }
 
@@ -137,4 +140,32 @@ model status_presensi {
   id_status         Int                 @id @default(autoincrement()) @db.SmallInt
   status            String              @db.VarChar(30)
   karyawan_presensi karyawan_presensi[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model detail_penggajian {
+  id_penggajian Int
+  id_parameter  Int
+  nominal       Int
+  potongan      Int
+  id_detail     Int @id @default(autoincrement())
+
+  @@ignore
+}
+
+model penggajian {
+  id_penggajian     Int               @id @default(autoincrement())
+  id_pengguna       Int
+  nominal           Int
+  bulan             String            @db.VarChar(2)
+  tahun             String            @db.VarChar(4)
+  id_status         Int
+  pengguna          pengguna          @relation(fields: [id_pengguna], references: [id_pengguna])
+  status_penggajian status_penggajian @relation(fields: [id_status], references: [id_status])
+}
+
+model status_penggajian {
+  id_status         Int          @id @default(autoincrement())
+  status_penggajian String       @db.VarChar(15)
+  penggajian        penggajian[]
 }
