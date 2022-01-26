@@ -46,27 +46,40 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">Detail Parameter Penggajian</a>
-    <nav class="font-sans w-full mb-7 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Karyawan</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>Parameter Penggajian</li>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>Detail</li>
-        </li>
-      </ol>
-    </nav>
-    <div class={`flex self-stretch items-center justify-start`}>
+    <div class="flex items-center space-x-4">
+      <div>
+        <button
+          type="submit"
+          class="bg-white hover:border-gray-200 border-2 border-transparent duration-300 text-black text-sm font-bold rounded-full flex items-center filter drop-shadow-sm justify-center w-8 h-8"
+          onClick={() => {
+            history.back();
+          }}
+        >
+          <span>
+            <faicon iconName="arrowLeft" />
+          </span>
+        </button>
+      </div>
+      <div>
+        <span class="text-xl font-bold">Default Parameter</span>
+        <nav class="font-normal text-gray-500 w-full mt-2">
+          <ol class="list-reset flex text-xs space-x-3">
+            <li>Karyawan</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>Parameter Penggajian</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>
+              <li>Default Parameter</li>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class={`flex self-stretch items-center justify-start mt-7`}>
       <div class="flex flex-1 justify-start space-x-2">
         {/*<button class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md">*/}
         {/*<span>Default Parameter</span>*/}

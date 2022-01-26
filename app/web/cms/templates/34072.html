@@ -196,27 +196,40 @@
     }}
   />
   <>
-    <a class="text-xl font-bold">Tambah Divisi</a>
-    <nav class="font-sans w-full mb-7 mt-2">
-      <ol class="list-reset flex text-grey-dark text-xs space-x-3">
-        <li>
-          <a href="#">Karyawan</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <a href="#">Divisi</a>
-        </li>
-        <li>
-          <faicon iconName="arrowRight" />
-        </li>
-        <li>
-          <li>Tambah Divisi</li>
-        </li>
-      </ol>
-    </nav>
-    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8">
+    <div class="flex items-center space-x-4">
+      <div>
+        <button
+          type="submit"
+          class="bg-white hover:border-gray-200 border-2 border-transparent duration-300 text-black text-sm font-bold rounded-full flex items-center filter drop-shadow-sm justify-center w-8 h-8"
+          onClick={() => {
+            history.back();
+          }}
+        >
+          <span>
+            <faicon iconName="arrowLeft" />
+          </span>
+        </button>
+      </div>
+      <div>
+        <span class="text-xl font-bold">Tambah Divisi</span>
+        <nav class="font-normal text-gray-500 w-full mt-2">
+          <ol class="list-reset flex text-xs space-x-3">
+            <li>Karyawan</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>Divisi</li>
+            <li>
+              <faicon iconName="arrowRight" />
+            </li>
+            <li>
+              <li>Tambah Divisi</li>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="flex flex-col items-start justify-start bg-white filter drop-shadow-sm rounded w-full p-8 mt-7">
       <div class="w-full">
         <form
           onSubmit={(e) => {
