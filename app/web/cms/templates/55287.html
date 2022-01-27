@@ -1,14 +1,41 @@
 <>
   <effect
     meta={{
+      gaji: [],
+      years: [],
+      year_now: "",
       action: {},
     }}
     run={async () => {
+      const getData = () => {
+        api("/api/user/gaji", { id_pengguna: user.id_pengguna }).then((res) => {
+          meta.gaji = res.gaji;
+          meta.years = res.years;
+          meta.year_now = res.year_now;
+        });
+      };
+      const refreshData = (year) => {
+        api("/api/user/gaji", {
+          year: year,
+          id_pengguna: user.id_pengguna,
+        }).then((res) => {
+          meta.gaji = res.gaji;
+          meta.years = res.years;
+          meta.year_now = res.year_now;
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("gaji").classList.toggle("bg-indigo-900");
         document.getElementById("gaji").classList.remove("hover:bg-gray-200");
         document.getElementById("text-gaji").classList.toggle("text-white");
       }
+      meta.action = {
+        setYear: (e) => {
+          meta.year_now = e.target.value;
+          refreshData(meta.year_now);
+        },
+      };
     }}
   />
   <>
@@ -29,7 +56,14 @@
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm px-1.5"
               id="gaji_tahun"
             >
-              <option value="#">2021</option>
+              {meta.years.map((val, index) => (
+                <option
+                  defaultValue={val.tahun}
+                  selected={val.tahun == meta.year_now}
+                >
+                  {val.tahun}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -51,12 +85,12 @@
           },
           {
             name: "Bulan",
-            selector: (row) => row.bulan,
+            selector: (row) => row.nama_bulan,
             sortable: true,
           },
           {
             name: "Jumlah Gaji",
-            selector: (row) => row.jumlah_gaji,
+            selector: (row) => "Rp " + row.nominal,
             sortable: true,
           },
           {
@@ -68,7 +102,7 @@
                   <button
                     class="bg-gray-200 hover:bg-gray-300 duration-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      navigate("/user/gaji/detail");
+                      navigate("/user/gaji/detail/" + row.id_penggajian);
                     }}
                   >
                     <faicon iconName="show" class="" />
@@ -78,18 +112,7 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            bulan: "Februari",
-            jumlah_gaji: "Rp12.000.000,00",
-          },
-          {
-            id: 2,
-            bulan: "Februari",
-            jumlah_gaji: "Rp12.000.000,00",
-          },
-        ]}
+        data={meta.gaji}
       />
     </div>
   </>

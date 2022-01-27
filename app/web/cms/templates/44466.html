@@ -1,7 +1,33 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      gaji: [],
+      years: [],
+      year_now: "",
+      hadir: 0,
+      sakit: 0,
+      izin: 0,
+      tidak_hadir: 0,
+      cuti: 0,
+      token: "",
+      action: {},
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/user/dashboard", { id_pengguna: user.id_pengguna }).then(
+          (res) => {
+            meta.gaji = res.gaji;
+            meta.years = res.years;
+            meta.year_now = res.year_now;
+            meta.hadir = res.hadir;
+            meta.tidak_hadir = res.tidak_hadir;
+            meta.izin = res.izin;
+            meta.cuti = res.cuti;
+            meta.sakit = res.sakit;
+          }
+        );
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("dashboard").classList.toggle("bg-indigo-900");
         document
@@ -17,6 +43,19 @@
         if (event.target == modal) {
           modal.style.display = "none";
         }
+      };
+      meta.action = {
+        setToken: (e) => {
+          meta.token = e.target.value;
+        },
+        submitAttendance: () => {
+          api("/api/user/presensi", {
+            token: meta.token,
+            id_karyawan: user.id_pengguna,
+          }).then((res) => {
+            navigate("/user/list-kehadiran");
+          });
+        },
       };
     }}
   />
@@ -40,31 +79,37 @@
       </div>
       <div class="flex flex-1 items-center justify-end">
         <div class="w-full flex flex-col space-y-2">
-          <div class="text-sm font-bold">Absen Hari Ini</div>
+          <div class="text-sm font-bold">Absen Bulan Ini</div>
           <div class="flex flex-row space-x-2 border-solid">
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-green-600">Hadir</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm">{meta.hadir}</div>
             </div>
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-blue-600">Sakit</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm">{meta.sakit}</div>
             </div>
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-purple-600">Izin</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm">{meta.izin}</div>
             </div>
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-yellow-300">Cuti</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm">{meta.cuti}</div>
             </div>
             <div class="w-full flex flex-col">
               <div class="text-xs text-red-600">Tidak Absen</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm">{meta.tidak_hadir}</div>
             </div>
             <div class="w-full flex flex-col text-right">
-              <div class="text-xs text-yellow-700">Total Karyawan</div>
-              <div class="text-sm">90</div>
+              <div class="text-xs text-yellow-700">Total Absensi</div>
+              <div class="text-sm">
+                {meta.hadir +
+                  meta.sakit +
+                  meta.izin +
+                  meta.cuti +
+                  meta.tidak_hadir}
+              </div>
             </div>
           </div>
         </div>
@@ -77,12 +122,12 @@
             Semua Gaji
           </span>
           <div class="relative inline-block w-max text-gray-700">
-            <select
+            <div
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 rounded text-sm px-1.5"
               id="gaji_tahun"
             >
-              <option value="#">2021</option>
-            </select>
+              {meta.year_now}
+            </div>
           </div>
         </div>
         <div class="flex flex-1 items-center justify-end">
@@ -103,12 +148,12 @@
           },
           {
             name: "Bulan",
-            selector: (row) => row.bulan,
+            selector: (row) => row.nama_bulan,
             sortable: true,
           },
           {
             name: "Jumlah Gaji",
-            selector: (row) => row.jumlah_gaji,
+            selector: (row) => "Rp " + row.nominal,
             sortable: true,
           },
           {
@@ -130,22 +175,17 @@
             ),
           },
         ]}
-        data={[
-          {
-            id: 1,
-            bulan: "Februari",
-            jumlah_gaji: "Rp12.000.000,00",
-          },
-          {
-            id: 2,
-            bulan: "Februari",
-            jumlah_gaji: "Rp12.000.000,00",
-          },
-        ]}
+        data={meta.gaji}
       />
     </div>
     <div class="modal z-20" id="modal">
-      <form class="modal-content w-max flex flex-col items-center justify-center">
+      <form
+        class="modal-content w-max flex flex-col items-center justify-center"
+        onSubmit={(e) => {
+          meta.action.submitAttendance();
+          e.preventDefault();
+        }}
+      >
         <div class="flex flex-col bg-white rounded">
           <div class="flex items-end justify-end rounded">
             <button
@@ -164,6 +204,7 @@
               <input
                 type="text"
                 placeholder="ASA3543GD"
+                onChange={(e) => meta.action.setToken(e)}
                 class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded w-96 text-md"
                 id="kode-absensi"
                 required
