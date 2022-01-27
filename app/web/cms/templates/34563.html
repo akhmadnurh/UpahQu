@@ -139,10 +139,7 @@
           },
           {
             name: "Keterangan",
-            selector: (row) =>
-              row.karyawan_presensi.length > 0
-                ? row.karyawan_presensi[0].status_presensi.status
-                : "?",
+            selector: (row) => row.karyawan_presensi[0].status_presensi.status,
             sortable: true,
           },
         ]}
