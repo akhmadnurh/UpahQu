@@ -1,6 +1,8 @@
 <>
   <effect
     meta={{
+      parameter_karyawan: [],
+      parameter: [],
       userdata: {
         nama_pengguna: "",
         nomor_hp: "",
@@ -16,9 +18,14 @@
     }}
     run={async () => {
       // Get userdata
-      api("/api/detail-karyawan", { id_pengguna: params.id }).then((res) => {
-        meta.userdata = res.userdata;
-      });
+      const getData = () => {
+        api("/api/detail-karyawan", { id_pengguna: params.id }).then((res) => {
+          meta.userdata = res.userdata;
+          meta.parameter_karyawan = res.parameter_karyawan;
+          meta.parameter = res.parameter;
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("karyawan").classList.toggle("bg-indigo-900");
         document.getElementById("karyawan").classList.toggle("active");
@@ -47,6 +54,19 @@
           document.getElementById("btn-edit").classList.toggle("hidden");
           document.getElementById("btn-delete1").classList.toggle("hidden");
           document.getElementById("btn-delete2").classList.toggle("hidden");
+        },
+        setParameter: (index) => {
+          api("/api/check-parameter", {
+            id_parameter: meta.parameter[index].id_parameter,
+            id_pengguna: params.id,
+            prev_checked: meta.parameter[index.checked],
+          }).then((res) => {
+            if (res.status == "success") {
+              getData();
+            } else {
+              console.log(res.status);
+            }
+          });
         },
       };
 
@@ -178,24 +198,23 @@
 
             <div class="flex justify-center w-full">
               <ul class="bg-white border-t border-l border-r border-gray-300 text-gray-900 w-full mt-2">
-                <li class="px-4 py-2 border-b border-gray-300 w-full flex">
-                  <span class="w-full">An item</span>
-                  <button
-                    class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"
-                    id="btn-delete1"
-                  >
-                    <faicon iconName="delete" class="" />
-                  </button>
-                </li>
-                <li class="px-4 py-2 border-b border-gray-300 w-full flex">
-                  <span class="w-full">An item</span>
-                  <button
-                    class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"
-                    id="btn-delete2"
-                  >
-                    <faicon iconName="delete" class="" />
-                  </button>
-                </li>
+                {/*<li class="px-4 py-2 border-b border-gray-300 w-full flex">*/}
+                {/*<span class="w-full">An item</span>*/}
+                {/*<button*/}
+                {/*class="bg-red-200 hover:bg-red-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center hidden"*/}
+                {/*id="btn-delete1"*/}
+                {/*>*/}
+                {/*<faicon iconName="delete" class="" />*/}
+                {/*</button>*/}
+                {/*</li>*/}
+
+                {meta.parameter_karyawan.map((val) => (
+                  <li class="px-4 py-2 border-b border-gray-300 w-full flex">
+                    <span class="w-full">
+                      {val.parameter_penggajian.nama_parameter}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -245,24 +264,24 @@
             </button>
           </div>
 
-          <div class="w-full flex justify-center mb-3">
-            <div class="w-1/2">
-              <nav class="tabs flex w-full rounded space-x-3">
-                <button
-                  data-target="panel-1"
-                  class="tab text-sm font-bold bg-gray-200 hover:bg-gray-300 py-1 w-full rounded active"
-                >
-                  Default
-                </button>
-                <button
-                  data-target="panel-2"
-                  class="tab text-sm font-bold bg-gray-200 py-1 w-full rounded hover:bg-gray-300"
-                >
-                  Baru
-                </button>
-              </nav>
-            </div>
-          </div>
+          {/*<div class="w-full flex justify-center mb-3">*/}
+          {/*<div class="w-1/2">*/}
+          {/*<nav class="tabs flex w-full rounded space-x-3">*/}
+          {/*<button*/}
+          {/*data-target="panel-1"*/}
+          {/*class="tab text-sm font-bold bg-gray-200 hover:bg-gray-300 py-1 w-full rounded active"*/}
+          {/*>*/}
+          {/*Default*/}
+          {/*</button>*/}
+          {/*<button*/}
+          {/*data-target="panel-2"*/}
+          {/*class="tab text-sm font-bold bg-gray-200 py-1 w-full rounded hover:bg-gray-300"*/}
+          {/*>*/}
+          {/*Baru*/}
+          {/*</button>*/}
+          {/*</nav>*/}
+          {/*</div>*/}
+          {/*</div>*/}
 
           <div id="panels">
             <div class="panel-1 tab-content py-5 px-9 active">
@@ -289,88 +308,17 @@
                         <input
                           type="checkbox"
                           class="form-checkbox"
-                          id={"check"}
-                          defaultChecked={true}
-                          onChange={() => {}}
+                          id={"check" + row.id_parameter}
+                          defaultChecked={row.checked}
+                          onChange={() => {
+                            meta.action.setParameter(index);
+                          }}
                         />
                       </>
                     ),
                   },
                 ]}
-                data={[
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                  {
-                    nama_parameter: "golongan 1",
-                    pendapatan: "1000000",
-                  },
-                ]}
+                data={meta.parameter}
               />
             </div>
             <div class="panel-2 tab-content mt-5">
