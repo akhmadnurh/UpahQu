@@ -1,7 +1,33 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      gaji_pokok: {},
+      potongan: {},
+      tambahan: {},
+      pengguna: {},
+      presensi: [],
+      hadir: 0,
+      tidak_hadir: 0,
+      sakit: 0,
+      cuti: 0,
+      izin: 0,
+      action: {},
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/detail-gaji", { id_penggajian: params.id }).then((res) => {
+          meta.gaji_pokok = res.gaji_pokok;
+          meta.potongan = res.potongan;
+          meta.tambahan = res.tambahan;
+          meta.pengguna = res.pengguna;
+          meta.hadir = res.hadir;
+          meta.sakit = res.sakit;
+          meta.tidak_hadir = res.tidak_hadir;
+          meta.cuti = res.cuti;
+          meta.izin = res.izin;
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("gaji").classList.toggle("bg-indigo-900");
         document.getElementById("gaji").classList.remove("hover:bg-gray-200");
@@ -58,7 +84,7 @@
           <div class="flex flex-col space-y-5 items-start justify-start w-full">
             <div class="flex flex-col space-y-2 items-start justify-center w-full">
               <div class="text-sm font-bold text-black">Nama Karyawan</div>
-              <span class="text-sm">Coba</span>
+              <span class="text-sm">{meta.pengguna.nama_pengguna}</span>
             </div>
             <div class="flex items-center w-full">
               <div class="w-full flex flex-col space-y-2">
@@ -66,41 +92,62 @@
                 <div class="flex flex-row space-x-2 border-solid">
                   <div class="w-1/2 flex flex-col border-r">
                     <div class="text-xs text-green-600">Hadir</div>
-                    <div class="text-sm">90</div>
+                    <div class="text-sm">{meta.hadir}</div>
                   </div>
                   <div class="w-1/2 flex flex-col border-r">
                     <div class="text-xs text-blue-600">Sakit</div>
-                    <div class="text-sm">90</div>
+                    <div class="text-sm">{meta.sakit}</div>
                   </div>
                   <div class="w-1/2 flex flex-col border-r">
                     <div class="text-xs text-purple-600">Izin</div>
-                    <div class="text-sm">90</div>
+                    <div class="text-sm">{meta.izin}</div>
                   </div>
                   <div class="w-1/2 flex flex-col border-r">
                     <div class="text-xs text-yellow-300">Cuti</div>
-                    <div class="text-sm">90</div>
+                    <div class="text-sm">{meta.cuti}</div>
                   </div>
                   <div class="w-full flex flex-col">
                     <div class="text-xs text-red-600">Tidak Absen</div>
-                    <div class="text-sm">90</div>
+                    <div class="text-sm">{meta.tidak_hadir}</div>
                   </div>
                   <div class="w-full flex flex-col text-right">
-                    <div class="text-xs text-yellow-700">Total Karyawan</div>
-                    <div class="text-sm">20</div>
+                    <div class="text-xs text-yellow-700">Total Kehadiran</div>
+                    <div class="text-sm">
+                      {meta.hadir +
+                        meta.sakit +
+                        meta.izin +
+                        meta.cuti +
+                        meta.tidak_hadir}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black flex flex-row w-full">
-                <div class="w-full">Parameter Penggajian</div>
+                <div class="w-full">Gaji Pokok</div>
+                {/*<div>*/}
+                {/*<button*/}
+                {/*class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"*/}
+                {/*onClick={() => {*/}
+                {/*navigate(*/}
+                {/*"/admin/informasi-gaji/detail/edit-gaji-pokok/" +*/}
+                {/*meta.gaji_pokok.id_detail*/}
+                {/*);*/}
+                {/*}}*/}
+                {/*>*/}
+                {/*<faicon iconName="edit" />*/}
+                {/*</button>*/}
+                {/*</div>*/}
               </div>
               <table class="border-collapse border border-gray-300 w-full">
                 <tbody>
                   <tr class="text-sm">
-                    <td class="border border-gray-300 p-2 w-1/2">Golongan 1</td>
                     <td class="border border-gray-300 p-2 w-1/2">
-                      Rp 2.000.000
+                      {meta.gaji_pokok.keterangan}
+                    </td>
+                    <td class="border border-gray-300 p-2 w-1/2">
+                      Rp {meta.gaji_pokok.nominal}
                     </td>
                   </tr>
                 </tbody>
@@ -109,15 +156,28 @@
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black flex flex-row w-full">
                 <div class="w-full">Tambahan Gaji</div>
+                {/*<div>*/}
+                {/*<button*/}
+                {/*class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"*/}
+                {/*onClick={() => {*/}
+                {/*navigate(*/}
+                {/*"/admin/informasi-gaji/detail/edit-tambahan/" +*/}
+                {/*meta.tambahan.id_detail*/}
+                {/*);*/}
+                {/*}}*/}
+                {/*>*/}
+                {/*<faicon iconName="edit" />*/}
+                {/*</button>*/}
+                {/*</div>*/}
               </div>
               <table class="border-collapse border border-gray-300 w-full">
                 <tbody>
                   <tr class="text-sm">
                     <td class="border border-gray-300 p-2 w-1/2">
-                      Bonus Target
+                      {meta.tambahan.keterangan}
                     </td>
                     <td class="border border-gray-300 p-2 w-1/2">
-                      Rp 2.000.000
+                      Rp {meta.tambahan.nominal}
                     </td>
                   </tr>
                 </tbody>
@@ -126,13 +186,28 @@
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black flex flex-row w-full">
                 <div class="w-full">Potongan Gaji</div>
+                {/*<div>*/}
+                {/*<button*/}
+                {/*class="bg-blue-200 hover:bg-blue-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"*/}
+                {/*onClick={() => {*/}
+                {/*navigate(*/}
+                {/*"/admin/informasi-gaji/detail/edit-potongan/" +*/}
+                {/*meta.potongan.id_detail*/}
+                {/*);*/}
+                {/*}}*/}
+                {/*>*/}
+                {/*<faicon iconName="edit" />*/}
+                {/*</button>*/}
+                {/*</div>*/}
               </div>
               <table class="border-collapse border border-gray-300 w-full">
                 <tbody>
                   <tr class="text-sm">
-                    <td class="border border-gray-300 p-2 w-1/2">PPH</td>
                     <td class="border border-gray-300 p-2 w-1/2">
-                      Rp 2.000.000
+                      {meta.potongan.keterangan}
+                    </td>
+                    <td class="border border-gray-300 p-2 w-1/2">
+                      Rp {meta.potongan.nominal}
                     </td>
                   </tr>
                 </tbody>
@@ -140,18 +215,27 @@
             </div>
             <div class="flex flex-col space-y-2 items-start justify-center rounded-lg w-full">
               <div class="text-sm font-bold text-black">
-                Total Gaji Rp 10.000.000
+                Total Gaji Rp{" "}
+                {meta.gaji_pokok.nominal +
+                  meta.tambahan.nominal -
+                  meta.potongan.nominal}
               </div>
             </div>
           </div>
         </div>
-        <div class="flex items-center justify-center">
-          <button
-            type="submit"
-            class="bg-black text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
-          >
-            <span>Cetak Slip</span>
-          </button>
+        <div class="flex items-center justify-center space-x-2">
+          {/*<button*/}
+          {/*type="submit"*/}
+          {/*class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"*/}
+          {/*>*/}
+          {/*<span>Simpan Perubahan</span>*/}
+          {/*</button>*/}
+          {/*<button*/}
+          {/*type="submit"*/}
+          {/*class="bg-black text-white text-xs font-bold mt-6 py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"*/}
+          {/*>*/}
+          {/*<span>Cetak Slip</span>*/}
+          {/*</button>*/}
         </div>
       </div>
     </div>

@@ -1,1 +1,1 @@
-{"content":{"type":"Page","structure":"","figma":{}},"title":"detail-riwayat-gaji","type":"cms-template","lang":"","status":"SYSTEM","parent_id":"07087","slug":"/admin/riwayat-gaji/detail","site":"*","id":"68467"}
+{"content":{"type":"Page","structure":"","figma":{}},"title":"detail-riwayat-gaji","type":"cms-template","lang":"","status":"SYSTEM","parent_id":"07087","slug":"/admin/riwayat-gaji/detail/[id]","site":"*","id":"68467"}

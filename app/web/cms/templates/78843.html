@@ -167,6 +167,11 @@
             sortable: true,
           },
           {
+            name: "Status",
+            selector: (row) => row.status_penggajian.status_penggajian,
+            sortable: true,
+          },
+          {
             name: "Action",
             button: true,
             cell: (row, index) => (
@@ -175,7 +180,9 @@
                   <button
                     class="bg-gray-200 hover:bg-gray-300 text-black text-xs font-bold w-7 h-6 rounded inline-flex items-center justify-center"
                     onClick={() => {
-                      navigate("/admin/riwayat-gaji/detail/");
+                      navigate(
+                        "/admin/riwayat-gaji/detail/" + row.id_penggajian
+                      );
                     }}
                   >
                     <faicon iconName="show" class="" />

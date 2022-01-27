@@ -2,6 +2,12 @@
   <effect
     meta={{
       total_karyawan: 0,
+      hadir: 0,
+      tidak_hadir: 0,
+      izin: 0,
+      sakit: 0,
+      cuti: 0,
+      transaksi_terakhir: [],
       action: {},
     }}
     run={async () => {
@@ -9,8 +15,19 @@
       const getData = () => {
         api("/api/dashboard-admin").then((res) => {
           meta.total_karyawan = res.total_karyawan;
+          meta.hadir = res.hadir;
+          meta.tidak_hadirs = res.tidak_hadir;
+          meta.izin = res.izin;
+          meta.sakit = res.sakit;
+          meta.cuti = res.cuti;
+          meta.transaksi_terakhir = res.transaksi_terakhir;
           document.getElementById("total_karyawan").innerText =
             res.total_karyawan;
+          document.getElementById("hadir").innerText = res.hadir;
+          document.getElementById("sakit").innerText = res.sakit;
+          document.getElementById("izin").innerText = res.izin;
+          document.getElementById("cuti").innerText = res.cuti;
+          document.getElementById("tidak_hadir").innerText = res.tidak_hadir;
         });
       };
       getData();
@@ -35,23 +52,33 @@
           <div class="flex flex-row space-x-2 border-solid">
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-green-600">Hadir</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm" id="hadir">
+                90
+              </div>
             </div>
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-blue-600">Sakit</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm" id="sakit">
+                90
+              </div>
             </div>
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-purple-600">Izin</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm" id="izin">
+                90
+              </div>
             </div>
             <div class="w-1/2 flex flex-col border-r">
               <div class="text-xs text-yellow-300">Cuti</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm" id="cuti">
+                90
+              </div>
             </div>
             <div class="w-full flex flex-col">
               <div class="text-xs text-red-600">Tidak Absen</div>
-              <div class="text-sm">90</div>
+              <div class="text-sm" id="tidak_hadir">
+                90
+              </div>
             </div>
             <div class="w-full flex flex-col text-right">
               <div class="text-xs text-yellow-700">Total Karyawan</div>
@@ -68,40 +95,32 @@
             pagination={false}
             column={[
               {
-                name: "ID Karyawan",
-                selector: (row) => row.id,
+                name: "ID Transaksi",
+                selector: (row) => row.id_penggajian,
                 // sortable: true,
               },
               {
                 name: "Transaksi",
-                selector: (row) => row.trans,
+                selector: (row) => row.status_penggajian.status_penggajian,
                 // sortable: true,
               },
               {
                 name: "Tanggal",
-                selector: (row) => row.tgl,
+                selector: (row) =>
+                  (("" + row.bulan).length > 0
+                    ? "" + row.bulan
+                    : "0" + row.bulan) +
+                  "/" +
+                  row.tahun,
                 // sortable: true,
               },
               {
                 name: "Jumlah",
-                selector: (row) => row.jml,
+                selector: (row) => "Rp " + row.nominal,
                 // sortable: true,
               },
             ]}
-            data={[
-              {
-                id: 1,
-                trans: "Berhasil",
-                tgl: "10/09/21",
-                jml: "Rp. 3.000.000,-",
-              },
-              {
-                id: 2,
-                trans: "Berhasil",
-                tgl: "10/09/21",
-                jml: "Rp. 3.000.000,-",
-              },
-            ]}
+            data={meta.transaksi_terakhir}
           />
         </div>
       </div>
@@ -116,9 +135,7 @@
           <span>Buat Absensi Hari Ini</span>
         </button>
       </div>
-      <div class="w-11/12">
-        <line_chart />
-      </div>
+      <div class="w-11/12">{/*<line_chart />*/}</div>
     </div>
   </>
 </>

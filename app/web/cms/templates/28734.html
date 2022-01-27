@@ -31,7 +31,7 @@
       meta.action = {
         kirimGaji: () => {
           api("/api/kirim-gaji").then((res) => {
-            if (res.status == "success") {
+            if (res.status) {
               navigate("/admin/riwayat-gaji");
             } else {
               console.log(res.status);
@@ -129,6 +129,11 @@
           {
             name: "Jumlah Gaji",
             selector: (row) => "Rp " + row.nominal,
+            sortable: true,
+          },
+          {
+            name: "Status",
+            selector: (row) => row.status_penggajian.status_penggajian,
             sortable: true,
           },
           {
