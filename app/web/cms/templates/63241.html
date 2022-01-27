@@ -1,7 +1,16 @@
 <>
   <effect
-    meta={{}}
+    meta={{
+      detail: {},
+      action: {},
+    }}
     run={async () => {
+      const getData = () => {
+        api("/api/r-edit-gaji", { id_detail: params.id }).then((res) => {
+          meta.detail = res.detail;
+        });
+      };
+      getData();
       if (document.readyState === "complete") {
         document.getElementById("gaji").classList.toggle("bg-indigo-900");
         document.getElementById("gaji").classList.remove("hover:bg-gray-200");
@@ -17,7 +26,23 @@
         content.style.maxHeight = content.scrollHeight + "px";
       }
       meta.action = {
-        potonganGaji: () => {
+        tambahGaji: () => {
+          <div class="flex flex-col space-y-5">
+            <div class="flex flex-col space-y-2 text-sm font-bold text-black">
+              Keterangan
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded text-md"
+              />
+            </div>
+            <div class="flex flex-col space-y-2 text-sm font-bold text-black">
+              Nominal
+              <input
+                type="text"
+                class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded text-md"
+              />
+            </div>
+          </div>;
           var div1 = document.createElement("div");
           var div2 = document.createElement("div");
           var div3 = document.createElement("div");
@@ -66,7 +91,24 @@
           div3.appendChild(inputNom);
           div1.appendChild(div2);
           div1.appendChild(div3);
-          document.getElementById("potongan-gaji").appendChild(div1);
+          document.getElementById("tambah-gaji").appendChild(div1);
+        },
+        setKeterangan: (e) => {
+          meta.detail.keterangan = e.target.value;
+        },
+        setNominal: (e) => {
+          meta.detail.nominal = e.target.value;
+        },
+        submitData: () => {
+          if (meta.detail.keterangan != "" && meta.detail.nominal != "") {
+            api("/api/u-gaji", { detail: meta.detail }).then((res) => {
+              if (res.status == "success") {
+                history.back();
+              } else {
+                console.log(res.status);
+              }
+            });
+          }
         },
       };
     }}
@@ -118,36 +160,47 @@
             Keterangan
             <input
               type="text"
+              defaultValue={meta.detail.keterangan}
+              onChange={(e) => {
+                meta.action.setKeterangan(e);
+              }}
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded text-md"
             />
           </div>
           <div class="flex flex-col space-y-2 text-sm font-bold text-black">
             Nominal
             <input
-              type="text"
+              type="number"
+              defaultValue={meta.detail.nominal}
+              onChange={(e) => {
+                meta.action.setNominal(e);
+              }}
               class="border focus:outline-none focus:border-indigo-900 border-gray-300 py-1.5 px-3 rounded text-md"
             />
           </div>
         </div>
-        <div id="potongan-gaji" class="space-y-5"></div>
-        <button
-          class="bg-gray-200 hover:bg-gray-300 text-gray-900 text-xs font-medium py-1 px-2 rounded inline-flex items-center"
-          onClick={() => {
-            meta.action.potonganGaji();
-          }}
-        >
-          <faicon iconName="Plus" class="mr-2" />
-          <span>Tambah Potongan Gaji</span>
-        </button>
+        <div id="tambah-gaji" class="space-y-5"></div>
+        {/*<button*/}
+        {/*class="bg-gray-200 hover:bg-gray-300 text-gray-900 text-xs font-medium py-1 px-2 rounded inline-flex items-center"*/}
+        {/*onClick={() => {*/}
+        {/*meta.action.tambahGaji();*/}
+        {/*}}*/}
+        {/*>*/}
+        {/*<faicon iconName="Plus" class="mr-2" />*/}
+        {/*<span>Tambah Tambahan Gaji</span>*/}
+        {/*</button>*/}
         <div class="flex items-center justify-center space-x-2">
           <button
-            type="submit"
+            type="button"
             class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold  py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
+            onClick={() => {
+              meta.action.submitData();
+            }}
           >
             <span>Simpan Perubahan</span>
           </button>
           <button
-            type="submit"
+            type="button"
             class="bg-black text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-sm justify-center w-full"
             onClick={() => {
               history.back();

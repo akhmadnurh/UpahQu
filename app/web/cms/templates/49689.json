@@ -1,0 +1,1 @@
+{"content":{"type":"API","structure":"","server_on_load":"async ({\n  template,\n  params,\n  render,\n  db,\n  req,\n  reply,\n  user,\n  log,\n  ext,\n  isDev,\n}: Server) => {\n  reply.send({\n    hello: \"world\",\n  })\n}","figma":{}},"title":"kirim-gaji","type":"cms-template","lang":"","status":"SYSTEM","parent_id":"07087","slug":"/api/kirim-gaji","site":"*","id":"49689"}

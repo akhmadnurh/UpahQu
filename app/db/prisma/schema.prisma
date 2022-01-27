@@ -145,12 +145,10 @@ model status_presensi {
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model detail_penggajian {
   id_penggajian Int
-  id_parameter  Int
+  keterangan    String @db.VarChar(30)
   nominal       Int
-  potongan      Int
-  id_detail     Int @id @default(autoincrement())
-
-  @@ignore
+  jenis         String @db.VarChar(10)
+  id_detail     Int    @id @default(autoincrement())
 }
 
 model penggajian {

@@ -3,6 +3,7 @@
     meta={{
       penggajian: [],
       total: 0,
+      action: {},
     }}
     run={async () => {
       const getData = () => {
@@ -27,6 +28,17 @@
         var content = document.getElementById("gaji").nextElementSibling;
         content.style.maxHeight = content.scrollHeight + "px";
       }
+      meta.action = {
+        kirimGaji: () => {
+          api("/api/kirim-gaji").then((res) => {
+            if (res.status == "success") {
+              navigate("/admin/riwayat-gaji");
+            } else {
+              console.log(res.status);
+            }
+          });
+        },
+      };
     }}
   />
   <>
@@ -44,16 +56,23 @@
         </ol>
       </nav>
       <div class="flex w-full justify-end space-x-2">
-        <button
-          class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-m justify-center"
-          onClick={() => {}}
-        >
-          <span>Cetak Data</span>
-        </button>
+        {/*<button*/}
+        {/*class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-m justify-center"*/}
+        {/*onClick={() => {}}*/}
+        {/*>*/}
+        {/*<span>Cetak Data</span>*/}
+        {/*</button>*/}
 
         <button
           class="bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold py-2 px-4 rounded inline-flex items-center filter drop-shadow-md justify-center"
-          onClick={() => {}}
+          onClick={() => {
+            let conf = confirm(
+              "Apakah kamu yakin? Gaji yang belum dikirim pada bulan sebelumnya akan dikirim terlebih dahulu."
+            );
+            if (conf) {
+              meta.action.kirimGaji();
+            }
+          }}
         >
           <span>Kirim Ke Karyawan</span>
         </button>
